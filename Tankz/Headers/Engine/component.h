@@ -5,9 +5,8 @@
 
 class Component : public Printable
 {
-protected:
-	std::string _name;
 public:
+	std::string name;
 	Component();
 	Component(std::string name);
 	virtual std::string Print() const = 0;

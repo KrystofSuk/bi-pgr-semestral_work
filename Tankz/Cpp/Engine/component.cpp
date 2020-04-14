@@ -1,10 +1,10 @@
 #include "..\..\Headers\Engine\component.h"
 
-Component::Component() : _name("Unnamed")
+Component::Component() : name("Unnamed")
 {
 }
 
-Component::Component(std::string name) : _name(name)
+Component::Component(std::string name) : name(name)
 {
 }
 

@@ -164,7 +164,11 @@
     <ClCompile Include="Cpp\Engine\Components\transform.cpp" />
     <ClCompile Include="Cpp\Engine\debug.cpp" />
     <ClCompile Include="Cpp\Engine\game_object.cpp" />
+    <ClCompile Include="Cpp\Engine\material.cpp" />
+    <ClCompile Include="Cpp\Engine\material_cache.cpp" />
+    <ClCompile Include="Cpp\Engine\mesh_cache.cpp" />
     <ClCompile Include="Cpp\Engine\shader.cpp" />
+    <ClCompile Include="Cpp\Engine\shader_cache.cpp" />
     <ClCompile Include="Tankz.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -173,8 +177,12 @@
     <ClInclude Include="Headers\Engine\Components\transform.h" />
     <ClInclude Include="Headers\Engine\debug.h" />
     <ClInclude Include="Headers\Engine\game_object.h" />
+    <ClInclude Include="Headers\Engine\material.h" />
+    <ClInclude Include="Headers\Engine\material_cache.h" />
+    <ClInclude Include="Headers\Engine\mesh_cache.h" />
     <ClInclude Include="Headers\Engine\printable.h" />
     <ClInclude Include="Headers\Engine\shader.h" />
+    <ClInclude Include="Headers\Engine\shader_cache.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Data\LightPerVertex.frag" />

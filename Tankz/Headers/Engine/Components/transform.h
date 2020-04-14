@@ -18,7 +18,7 @@ public:
 	void Move(const glm::vec3& v);
 	void Rotate(const glm::vec3& v);
 
-	const glm::vec3 GetPost() const;
+	const glm::vec3 GetPos() const;
 	const glm::vec3 GetScale() const;
 	const glm::vec3 GetRotation() const;
 

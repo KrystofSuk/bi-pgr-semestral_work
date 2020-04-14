@@ -3,9 +3,11 @@
 in vec3 position;
 uniform vec4 input_color;
 
+uniform mat4 PVMmatrix; 
+
 out vec4 color;
 
 void main() {
-  gl_Position = vec4(position+vec3(0,0,0), 1.0f);
+  gl_Position = PVMmatrix * vec4(position, 1);
   color = input_color;
 }

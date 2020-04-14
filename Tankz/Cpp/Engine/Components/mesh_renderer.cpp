@@ -1,22 +1,60 @@
 ﻿#include "..\..\..\Headers\Engine\Components\mesh_renderer.h"
 
-Mesh::Mesh(float* verts, float size, Shader* shader)
-{
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, size, verts, GL_STATIC_DRAW);
+//**************************************************************************************************
+/// Checks whether vector is zero-length or not.
+bool isVectorNull(const glm::vec3& vect) {
 
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
-	glEnableVertexAttribArray(shader->GetLocation("position"));
-	glVertexAttribPointer(shader->GetLocation("position"), 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-	vert = size;
+	return !vect.x && !vect.y && !vect.z;
 }
 
-Mesh::Mesh(const aiScene* scene, Shader* shader)
+//**************************************************************************************************
+/// Align (rotate and move) current coordinate system to given parameters.
+/**
+ This function works similarly to \ref gluLookAt, however it is used for object transform
+ rather than view transform. The current coordinate system is moved so that origin is moved
+ to the \a position. Object's local front (-Z) direction is rotated to the \a front and
+ object's local up (+Y) direction is rotated so that angle between its local up direction and
+ \a up vector is minimum.
+
+ \param[in]  position           Position of the origin.
+ \param[in]  front              Front direction.
+ \param[in]  up                 Up vector.
+ */
+glm::mat4 alignObject(const glm::vec3& position, const glm::vec3& front, const glm::vec3& up) {
+
+	glm::vec3 z = -glm::normalize(front);
+
+	if (isVectorNull(z))
+		z = glm::vec3(0.0, 0.0, 1.0);
+
+	glm::vec3 x = glm::normalize(glm::cross(up, z));
+
+	if (isVectorNull(x))
+		x = glm::vec3(1.0, 0.0, 0.0);
+
+	glm::vec3 y = glm::cross(z, x);
+	//mat4 matrix = mat4(1.0f);
+	glm::mat4 matrix = glm::mat4(
+		x.x, x.y, x.z, 0.0,
+		y.x, y.y, y.z, 0.0,
+		z.x, z.y, z.z, 0.0,
+		position.x, position.y, position.z, 1.0
+	);
+
+	return matrix;
+}
+
+
+Mesh::Mesh(const std::string& filename, Shader* shader)
 {
+	Assimp::Importer imp;
+	imp.SetPropertyInteger(AI_CONFIG_PP_PTV_NORMALIZE, 1);
+	const aiScene* scene = imp.ReadFile(filename.c_str(), 0 | aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_PreTransformVertices | aiProcess_JoinIdenticalVertices);
+	if (!scene)
+	{
+		std::cout << "Error loading mesh: " << filename << std::endl << "Error: " << imp.GetErrorString() << std::endl;
+		return;
+	}
 
 	const aiMesh* loadedMesh = scene->mMeshes[0];
 
@@ -104,29 +142,8 @@ Mesh::Mesh(const aiScene* scene, Shader* shader)
 	glBindVertexArray(0);
 
 #pragma endregion
-}
 
-
-MeshRenderer::MeshRenderer(float* verts, float size, Shader* shader)
-{
-	_mesh = new Mesh(verts, size, shader);
-	CHECK_GL_ERROR();
-	_shader = shader;
-}
-
-MeshRenderer::MeshRenderer(const std::string& filename, Shader* shader)
-{
-	Assimp::Importer imp;
-	imp.SetPropertyInteger(AI_CONFIG_PP_PTV_NORMALIZE, 1);
-	const aiScene* scene = imp.ReadFile(filename.c_str(), 0 | aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_PreTransformVertices | aiProcess_JoinIdenticalVertices);
-	if (!scene)
-	{
-		std::cout << "Error loading mesh: " << filename << std::endl << "Error: " << imp.GetErrorString() << std::endl;
-		return;
-	}
-
-	_mesh = new Mesh(scene, shader);
-	_shader = shader;
+#pragma region Tex
 
 	const aiMaterial* materal = scene->mMaterials[scene->mMeshes[0]->mMaterialIndex];
 
@@ -146,27 +163,44 @@ MeshRenderer::MeshRenderer(const std::string& filename, Shader* shader)
 		_texture = pgr::createTexture(name);
 	}
 
-	CHECK_GL_ERROR();
-	std::cout << "Loaded mesh: " << filename << std::endl;
+#pragma endregion
 }
 
-void MeshRenderer::Draw()
+
+MeshRenderer::MeshRenderer(Mesh* mesh, Material* material) : Component("MeshRenderer")
 {
-	_shader->Use();
-	_shader->SetFloat4f("input_color", glm::vec4(1.0, 1.0, 0.0, 1.0));
-	glBindVertexArray(_mesh -> vao);
-	glDrawElements(GL_TRIANGLES, _mesh -> faces * 3, GL_UNSIGNED_INT, 0);
+	_mesh = mesh;
+	_material = material;
+}
+
+void MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, Transform* t)
+{
+	glm::mat4 m = glm::translate(glm::mat4(1.0f), t->GetPos());
+	m = glm::rotate(m, glm::radians(t->GetRotation()[0]), glm::vec3(1, 0, 0));
+	m = glm::rotate(m, glm::radians(t->GetRotation()[1]), glm::vec3(0, 1, 0));
+	m = glm::rotate(m, glm::radians(t->GetRotation()[2]), glm::vec3(0, 0, 1));
+	m = glm::scale(m, t->GetScale());
+
+	glm::mat4 PVM = p * v * m;
+
+	Shader* shader = _material->shader;
+
+	shader->Use();
+	shader->SetFloat4f("input_color", glm::vec4(_material->diffuse, 1.0));
+	shader->SetFloatMatrix4f("PVMmatrix", PVM);
+
+	glBindVertexArray(_mesh->vao);
+	glDrawElements(GL_TRIANGLES, _mesh->faces * 3, GL_UNSIGNED_INT, 0);
 }
 
 
 std::string MeshRenderer::Print() const
 {
-	return std::string();
+	return name;
 }
 
 MeshRenderer::~MeshRenderer()
 {
-	delete _mesh;
 }
 
 std::ostream& operator<<(std::ostream& out, const MeshRenderer& renderer)
@@ -174,4 +208,7 @@ std::ostream& operator<<(std::ostream& out, const MeshRenderer& renderer)
 	out << renderer.Print() << std::endl;
 	return out;
 }
+
+
+
 

@@ -4,25 +4,24 @@
 #include "../component.h"
 #include "transform.h"
 #include "../shader.h"
+#include "../material.h"
 
 class Mesh {
 public:
 	GLuint vao, vbo, ebo;
+	GLuint _texture;
 	unsigned int faces, vert;
-	Mesh(float* verts, float size, Shader * shader);
-	Mesh(const aiScene* scene, Shader * shader);
+	Mesh(const std::string& fileName, Shader * shader);
 };
 
 class MeshRenderer : public Component {
 private:
-	Shader * _shader;
-	GLuint _texture;
+	Material * _material;
 	Mesh * _mesh;
 public:
-	MeshRenderer(float * verts, float size, Shader * shader);
-	MeshRenderer(const std::string& scene, Shader * shader);
+	MeshRenderer(Mesh* mesh, Material* material);
 
-	void Draw();
+	void Draw(const glm::mat4& p, const glm::mat4& v, Transform* t);
 		
 	std::string Print() const;
 
