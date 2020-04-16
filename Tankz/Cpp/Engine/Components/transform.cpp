@@ -2,52 +2,61 @@
 
 Transform::Transform() : Component("Transform")
 {
-	_pos = glm::vec3(5.0f, 0.0f, 0.0f);
-	_rot = glm::vec3(0.0f, 0.0f, 0.0f);
-	_scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	position = glm::vec3(0.0f, 0.0f, 0.0f);
+	rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+	size = glm::vec3(1.0f, 1.0f, 1.0f);
 }
 
 Transform::Transform(const glm::vec3& p, const glm::vec3& r, const glm::vec3& s) : Component("Transform")
 {
-	_pos = p;
-	_rot = r;
-	_scale = s;
+	position = p;
+	rotation = r;
+	size = s;
 }
 
 void Transform::Scale(const glm::vec3& v)
 {
-	_scale += v;
+	size += v;
 }
 
 void Transform::Move(const glm::vec3& v)
 {
-	_pos += v;
+	position += v;
 }
 
 void Transform::Rotate(const glm::vec3& v)
 {
-	_rot += v;
+	rotation += v;
+	std::cout << Print() << std::endl;
 }
 
-const glm::vec3 Transform::GetPos() const
+
+glm::vec3 Transform::Front() const
 {
-	return _pos;
+	glm::vec3 front;
+	front.x = cos(glm::radians(rotation[1])) * cos(glm::radians(rotation[0]));
+	front.y = sin(glm::radians(rotation[0]));
+	front.z = sin(glm::radians(rotation[1])) * cos(glm::radians(rotation[0]));
+	return glm::normalize(front);
 }
 
-const glm::vec3 Transform::GetScale() const
+
+glm::vec3 Transform::Up() const
 {
-	return _scale;
+	return glm::cross(Front(), Right());
 }
 
-const glm::vec3 Transform::GetRotation() const
+
+glm::vec3 Transform::Right() const
 {
-	return _rot;
+	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+	return glm::normalize(glm::cross(up, Front()));
 }
 
 std::string Transform::Print() const
 {
 	std::stringstream s;
-	s << name << std::endl << "P:  " << _pos.x << "," << _pos.y << "," << _pos.z << std::endl << "S:  " << _scale.x << "," << _scale.y << "," << _scale.z << std::endl << "R:  " << _rot.x << "," << _rot.y << "," << _rot.z;
+	s << name << std::endl << "P:  " << position.x << "," << position.y << "," << position.z << std::endl << "S:  " << size.x << "," << size.y << "," << size.z << std::endl << "R:  " << rotation.x << "," << rotation.y << "," << rotation.z;
 	return s.str();
 }
 

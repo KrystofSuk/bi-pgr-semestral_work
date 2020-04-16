@@ -17,6 +17,8 @@ public:
 
 	void Use() const;
 
+
+	void SetFloat3f(const std::string& name, const glm::vec3& value);
 	void SetFloat4f(const std::string& name, const glm::vec4& value);
 	void SetFloatMatrix4f(const std::string& name, const glm::mat4& value);
 	void SetFloat(const std::string& name, const float& value);

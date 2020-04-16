@@ -5,12 +5,11 @@
 #include "pgr.h"
 
 
-class Transform : public Component {
-private:
-	glm::vec3 _pos;
-	glm::vec3 _rot;
-	glm::vec3 _scale;
-public:
+struct Transform : public Component {
+	glm::vec3 position;
+	glm::vec3 rotation;
+	glm::vec3 size;
+
 	Transform();
 	Transform(const glm::vec3& p, const glm::vec3& r, const glm::vec3& s);
 
@@ -18,9 +17,9 @@ public:
 	void Move(const glm::vec3& v);
 	void Rotate(const glm::vec3& v);
 
-	const glm::vec3 GetPos() const;
-	const glm::vec3 GetScale() const;
-	const glm::vec3 GetRotation() const;
+	glm::vec3 Front() const;
+	glm::vec3 Up() const;
+	glm::vec3 Right() const;
 
 	std::string Print() const;
 

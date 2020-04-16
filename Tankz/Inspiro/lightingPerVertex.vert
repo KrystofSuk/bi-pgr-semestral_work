@@ -67,7 +67,14 @@ vec4 spotLight(Light light, Material material, vec3 vertexPosition, vec3 vertexN
 vec4 directionalLight(Light light, Material material, vec3 vertexPosition, vec3 vertexNormal) {
 
   vec3 ret = vec3(0.0);
-
+  vec3 L = normalize(light.position);
+  vec3 R = reflect(-L, vertexNormal);
+  vec3 V = normalize(-vertexPosition);
+  float NdotL = max(0.0, dot(L, vertexNormal));
+  float RdotV = max(0.0, dot(R, V));
+  ret += material.ambient * light.ambient;
+  ret += material.diffuse * light.diffuse * NdotL;
+  ret += material.specular * light.specular * pow(RdotV, material.shininess);
   // use the material and light structures to obtain the surface and light properties
   // the vertexPosition and vertexNormal variables contain transformed surface position and normal
   // store the ambient, diffuse and specular terms to the ret variable

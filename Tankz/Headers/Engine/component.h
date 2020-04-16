@@ -6,6 +6,7 @@
 class Component : public Printable
 {
 public:
+	void* gameObject;
 	std::string name;
 	Component();
 	Component(std::string name);

@@ -8,6 +8,7 @@ GameObject::GameObject(const std::string& name) : name(name)
 
 void GameObject::AddComponent(Component* component)
 {
+	component->gameObject = this;
 	_components[component->name] = component;
 }
 

@@ -3,8 +3,7 @@
 #include <string>
 #include "shader.h"
 
-class Material {
-public:
+struct Material {
 	std::string name;
 
 	Shader* shader;
@@ -19,6 +18,8 @@ public:
 	bool diffuseMap;
 
 	float specularAmount;
+
+	bool useDirectionLight;
 
 	Material(const std::string& name, Shader * shader);
 	~Material();
