@@ -1,4 +1,5 @@
-#include "..\..\Headers\Engine\debug.h"
+#include "Engine/Utils/debug.h"
+
 
 void Debug::Log(const std::string& s)
 {

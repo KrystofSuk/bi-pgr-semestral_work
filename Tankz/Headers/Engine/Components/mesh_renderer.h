@@ -1,13 +1,14 @@
 #pragma once
+
 #include <vector>
 #include <string>
 
-#include "../component.h"
-#include "transform.h"
-#include "../shader.h"
-#include "../material.h"
-#include "../mesh.h"
-#include "light.h"
+#include "Engine/Core/component.h"
+#include "Engine/Components/transform.h"
+#include "Engine/Core/shader.h"
+#include "Engine/Core/material.h"
+#include "Engine/Core/mesh.h"
+#include "Engine/Components/light.h"
 
 class MeshRenderer : public Component {
 private:

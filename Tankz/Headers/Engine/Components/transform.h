@@ -1,8 +1,9 @@
 #pragma once
+
 #include <sstream>
 
-#include "../component.h"
 #include "pgr.h"
+#include "Engine/Core/component.h"
 
 
 struct Transform : public Component {

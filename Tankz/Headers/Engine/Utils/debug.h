@@ -1,8 +1,9 @@
 #pragma once
 #include <string>
 #include <iostream>
-#include "component.h"
-#include "printable.h"
+
+#include "Engine/Core/component.h"
+#include "Engine/Utils/printable.h"
 
 struct Debug {
 	static void Log(const std::string& s);

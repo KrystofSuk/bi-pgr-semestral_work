@@ -24,40 +24,10 @@
     <ClCompile Include="Cpp\Engine\Components\transform.cpp">
       <Filter>Zdrojové soubory</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\Engine\component.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Engine\debug.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Engine\shader.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Engine\game_object.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Engine\shader_cache.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Engine\material.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Engine\mesh_cache.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Engine\material_cache.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Engine\resources.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
     <ClCompile Include="Cpp\Engine\Components\light.cpp">
       <Filter>Zdrojové soubory</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Engine\Components\skybox.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Engine\mesh.cpp">
       <Filter>Zdrojové soubory</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Engine\Components\direction_light.cpp">
@@ -69,6 +39,36 @@
     <ClCompile Include="Cpp\Engine\Components\spot_light.cpp">
       <Filter>Zdrojové soubory</Filter>
     </ClCompile>
+    <ClCompile Include="Cpp\Engine\Core\component.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Engine\Utils\debug.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Engine\Core\game_object.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Engine\Core\material.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Engine\Core\mesh.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Engine\Core\resources.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Engine\Core\shader.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Engine\Utils\shader_cache.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Engine\Utils\material_cache.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Engine\Utils\mesh_cache.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Engine\Components\mesh_renderer.h">
@@ -77,43 +77,10 @@
     <ClInclude Include="Headers\Engine\Components\transform.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\Engine\component.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Engine\debug.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Engine\game_object.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Engine\printable.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Engine\shader.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Engine\shader_cache.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Engine\material.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Engine\mesh_cache.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Engine\material_cache.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Engine\resources.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
     <ClInclude Include="Headers\Engine\Components\light.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
     <ClInclude Include="Headers\Engine\Components\skybox.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Engine\mesh.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
     <ClInclude Include="Headers\Engine\Components\direction_light.h">
@@ -123,6 +90,39 @@
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
     <ClInclude Include="Headers\Engine\Components\spot_light.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Engine\Utils\debug.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Engine\Core\component.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Engine\Core\game_object.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Engine\Core\material.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Engine\Utils\material_cache.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Engine\Core\mesh.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Engine\Utils\mesh_cache.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Engine\Utils\printable.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Engine\Core\resources.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Engine\Core\shader.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Engine\Utils\shader_cache.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
   </ItemGroup>

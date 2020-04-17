@@ -1,9 +1,10 @@
 #pragma once
 
-#include "material.h"
-#include "shader.h"
 #include <unordered_map>
 #include <string>
+
+#include "Engine/Core/material.h"
+#include "Engine/Core/shader.h"
 
 class MaterialCache {
 private:

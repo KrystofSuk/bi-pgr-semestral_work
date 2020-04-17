@@ -1,10 +1,11 @@
 #pragma once
 
-#include "../component.h"
-#include <pgr.h>
 #include <filesystem>
-#include "../shader.h"
-#include "transform.h"
+
+#include "pgr.h"
+#include "Engine/Core/component.h"
+#include "Engine/Core/shader.h"
+#include "Engine/Components/transform.h"
 
 class Skybox : public Component {
 public:

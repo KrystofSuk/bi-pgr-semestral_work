@@ -1,7 +1,9 @@
 #pragma once
+
 #include <pgr.h>
 #include <iostream>
-#include "shader.h"
+
+#include "Engine/Core/shader.h"
 
 struct Mesh {
 	GLuint vao, vbo, ebo;

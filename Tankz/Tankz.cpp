@@ -2,15 +2,15 @@
 #include <string>
 
 #include "pgr.h"
-#include "Headers/Engine/debug.h"
-#include "Headers/Engine/game_object.h"
-#include "Headers/Engine/Components/transform.h"
-#include "Headers/Engine/Components/direction_light.h"
-#include "Headers/Engine/Components/mesh_renderer.h"
-#include "Headers/Engine/resources.h"
-#include "Headers/Engine/Components/point_light.h"
-#include "Headers/Engine/Components/spot_light.h"
-#include "Headers/Engine/Components/skybox.h"
+#include "Engine/Utils/debug.h"
+#include "Engine/Core/game_object.h"
+#include "Engine/Components/transform.h"
+#include "Engine/Components/direction_light.h"
+#include "Engine/Components/mesh_renderer.h"
+#include "Engine/Core/resources.h"
+#include "Engine/Components/point_light.h"
+#include "Engine/Components/spot_light.h"
+#include "Engine/Components/skybox.h"
 
 const int WIN_WIDTH = 1600;
 const int WIN_HEIGHT = 900;

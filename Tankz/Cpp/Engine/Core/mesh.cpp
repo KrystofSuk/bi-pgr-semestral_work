@@ -1,4 +1,5 @@
-#include "..\..\Headers\Engine\mesh.h"
+#include "Engine/Core/mesh.h"
+
 
 Mesh::Mesh(const std::string& filename, Shader* shader)
 {

@@ -1,4 +1,5 @@
-#include "..\..\Headers\Engine\game_object.h"
+#include "Engine/Core/game_object.h"
+
 
 GameObject::GameObject(const std::string& name) : name(name)
 {

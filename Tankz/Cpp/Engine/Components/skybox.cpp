@@ -1,8 +1,7 @@
-#include "..\..\..\Headers\Engine\Components\skybox.h"
+#include "Engine/Components/skybox.h"
 
 Skybox::Skybox(const std::string filePath, Shader* shader) : Component("Skybox"), shader(shader)
 {
-
 	float skyboxVertices[] = {      
 		-1.0f,  1.0f, -1.0f,
 		-1.0f, -1.0f, -1.0f,
@@ -47,8 +46,6 @@ Skybox::Skybox(const std::string filePath, Shader* shader) : Component("Skybox")
 		 1.0f, -1.0f,  1.0f
 	};
 
-
-	// buffer for far plane renderingglGenVertexArrays(1, &skyboxVAO);
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
@@ -60,7 +57,6 @@ Skybox::Skybox(const std::string filePath, Shader* shader) : Component("Skybox")
 	CHECK_GL_ERROR();
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	CHECK_GL_ERROR();
-
 
 	glActiveTexture(GL_TEXTURE0);
 
@@ -90,10 +86,8 @@ Skybox::Skybox(const std::string filePath, Shader* shader) : Component("Skybox")
 	glTexParameterf(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 	glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
 
-	// unbind the texture (just in case someone will mess up with texture calls later)
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	CHECK_GL_ERROR();
-
 }
 
 void Skybox::Draw(const glm::mat4& p, const glm::mat4& v, Transform* c)

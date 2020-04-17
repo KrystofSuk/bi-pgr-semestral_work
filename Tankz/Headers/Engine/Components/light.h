@@ -1,8 +1,9 @@
 #pragma once
-#include "../component.h"
 #include <string>
+
 #include "pgr.h"
-#include "../shader.h"
+#include "Engine/Core/component.h"
+#include "Engine/Core/shader.h"
 
 struct Light : public Component {
 	glm::vec3 diffuse;

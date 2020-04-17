@@ -1,8 +1,8 @@
 #pragma once
 
-#include "shader_cache.h"
-#include "mesh_cache.h"
-#include "material_cache.h"
+#include "Engine/Utils/shader_cache.h"
+#include "Engine/Utils/mesh_cache.h"
+#include "Engine/Utils/material_cache.h"
 
 class Resources {
 private:

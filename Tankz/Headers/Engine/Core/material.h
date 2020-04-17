@@ -1,7 +1,8 @@
 #pragma once
 
 #include <string>
-#include "shader.h"
+
+#include "Engine/Core/shader.h"
 
 struct Material {
 	std::string name;
@@ -14,13 +15,12 @@ struct Material {
 	glm::vec3 specular;
 	glm::vec3 emission;
 
+	//Floats
+	float shininess;
+
 	//Maps
 	bool diffuseMap;
-
-	float specularAmount;
-
-	bool useDirectionLight;
-
+	
 	Material(const std::string& name, Shader * shader);
 	~Material();
 };

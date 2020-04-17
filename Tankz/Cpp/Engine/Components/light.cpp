@@ -1,4 +1,4 @@
-#include "..\..\..\Headers\Engine\Components\light.h"
+#include "Engine/Components/light.h"
 
 Light::Light() :Component("Light")
 {

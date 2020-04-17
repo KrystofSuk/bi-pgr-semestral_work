@@ -159,7 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Cpp\Engine\component.cpp" />
+    <ClCompile Include="Cpp\Engine\Core\component.cpp" />
     <ClCompile Include="Cpp\Engine\Components\direction_light.cpp" />
     <ClCompile Include="Cpp\Engine\Components\light.cpp" />
     <ClCompile Include="Cpp\Engine\Components\mesh_renderer.cpp" />
@@ -167,19 +167,19 @@
     <ClCompile Include="Cpp\Engine\Components\skybox.cpp" />
     <ClCompile Include="Cpp\Engine\Components\spot_light.cpp" />
     <ClCompile Include="Cpp\Engine\Components\transform.cpp" />
-    <ClCompile Include="Cpp\Engine\debug.cpp" />
-    <ClCompile Include="Cpp\Engine\game_object.cpp" />
-    <ClCompile Include="Cpp\Engine\material.cpp" />
-    <ClCompile Include="Cpp\Engine\material_cache.cpp" />
-    <ClCompile Include="Cpp\Engine\mesh.cpp" />
-    <ClCompile Include="Cpp\Engine\mesh_cache.cpp" />
-    <ClCompile Include="Cpp\Engine\resources.cpp" />
-    <ClCompile Include="Cpp\Engine\shader.cpp" />
-    <ClCompile Include="Cpp\Engine\shader_cache.cpp" />
+    <ClCompile Include="Cpp\Engine\Utils\debug.cpp" />
+    <ClCompile Include="Cpp\Engine\Core\game_object.cpp" />
+    <ClCompile Include="Cpp\Engine\Core\material.cpp" />
+    <ClCompile Include="Cpp\Engine\Utils\material_cache.cpp" />
+    <ClCompile Include="Cpp\Engine\Core\mesh.cpp" />
+    <ClCompile Include="Cpp\Engine\Utils\mesh_cache.cpp" />
+    <ClCompile Include="Cpp\Engine\Core\resources.cpp" />
+    <ClCompile Include="Cpp\Engine\Core\shader.cpp" />
+    <ClCompile Include="Cpp\Engine\Utils\shader_cache.cpp" />
     <ClCompile Include="Tankz.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Headers\Engine\component.h" />
+    <ClInclude Include="Headers\Engine\Core\component.h" />
     <ClInclude Include="Headers\Engine\Components\direction_light.h" />
     <ClInclude Include="Headers\Engine\Components\light.h" />
     <ClInclude Include="Headers\Engine\Components\mesh_renderer.h" />
@@ -187,16 +187,16 @@
     <ClInclude Include="Headers\Engine\Components\skybox.h" />
     <ClInclude Include="Headers\Engine\Components\spot_light.h" />
     <ClInclude Include="Headers\Engine\Components\transform.h" />
-    <ClInclude Include="Headers\Engine\debug.h" />
-    <ClInclude Include="Headers\Engine\game_object.h" />
-    <ClInclude Include="Headers\Engine\material.h" />
-    <ClInclude Include="Headers\Engine\material_cache.h" />
-    <ClInclude Include="Headers\Engine\mesh.h" />
-    <ClInclude Include="Headers\Engine\mesh_cache.h" />
-    <ClInclude Include="Headers\Engine\printable.h" />
-    <ClInclude Include="Headers\Engine\resources.h" />
-    <ClInclude Include="Headers\Engine\shader.h" />
-    <ClInclude Include="Headers\Engine\shader_cache.h" />
+    <ClInclude Include="Headers\Engine\Utils\debug.h" />
+    <ClInclude Include="Headers\Engine\Core\game_object.h" />
+    <ClInclude Include="Headers\Engine\Core\material.h" />
+    <ClInclude Include="Headers\Engine\Utils\material_cache.h" />
+    <ClInclude Include="Headers\Engine\Core\mesh.h" />
+    <ClInclude Include="Headers\Engine\Utils\mesh_cache.h" />
+    <ClInclude Include="Headers\Engine\Utils\printable.h" />
+    <ClInclude Include="Headers\Engine\Core\resources.h" />
+    <ClInclude Include="Headers\Engine\Core\shader.h" />
+    <ClInclude Include="Headers\Engine\Utils\shader_cache.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Data\Shaders\per_fragment.frag" />

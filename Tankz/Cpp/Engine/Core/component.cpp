@@ -1,4 +1,5 @@
-#include "..\..\Headers\Engine\component.h"
+#include "Engine/Core/component.h"
+
 
 Component::Component() : name("Unnamed")
 {

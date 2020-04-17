@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 #include <iostream>
-#include "printable.h"
+
+#include "Engine/Utils/printable.h"
 
 class Component : public Printable
 {

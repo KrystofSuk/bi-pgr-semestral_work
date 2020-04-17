@@ -1,5 +1,5 @@
-#include "..\..\..\Headers\Engine\Components\spot_light.h"
-#include "../../../Headers/Engine/game_object.h"
+#include "Engine/Components/spot_light.h"
+#include "Engine/Core/game_object.h"
 
 void SpotLight::ProcessLight(Shader* shader, const std::string& index)
 {

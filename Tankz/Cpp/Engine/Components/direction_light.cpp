@@ -1,5 +1,6 @@
-#include "..\..\..\Headers\Engine\Components\direction_light.h"
-#include "../../../Headers/Engine/game_object.h"
+#include "Engine/Components/direction_light.h"
+#include "Engine/Core/game_object.h"
+
 
 void DirectionLight::ProcessLight(Shader* shader, const std::string& index)
 {

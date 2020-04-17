@@ -3,8 +3,8 @@
 #include <string>
 #include <unordered_map>
 
-#include "component.h"
-#include "Components/transform.h"
+#include "Engine/Core/component.h"
+#include "Engine/Components/transform.h"
 
 class GameObject {
 private:

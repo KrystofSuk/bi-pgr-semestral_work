@@ -1,5 +1,5 @@
-#include "..\..\..\Headers\Engine\Components\point_light.h"
-#include "../../../Headers/Engine/game_object.h"
+#include "Engine/Components/point_light.h"
+#include "Engine/Core/game_object.h"
 
 void PointLight::ProcessLight(Shader* shader, const std::string& index)
 {
