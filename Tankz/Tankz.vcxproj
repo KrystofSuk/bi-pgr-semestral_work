@@ -89,7 +89,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(PGR_FRAMEWORK_ROOT)include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\CVUT-PGR\Tankz\Tankz\Headers;$(PGR_FRAMEWORK_ROOT)include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>Headers/pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -106,7 +106,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(PGR_FRAMEWORK_ROOT)include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\CVUT-PGR\Tankz\Tankz\Headers;$(PGR_FRAMEWORK_ROOT)include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>Headers/pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -125,7 +125,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(PGR_FRAMEWORK_ROOT)include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\CVUT-PGR\Tankz\Tankz\Headers;$(PGR_FRAMEWORK_ROOT)include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>Headers/pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -146,7 +146,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(PGR_FRAMEWORK_ROOT)include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\CVUT-PGR\Tankz\Tankz\Headers;$(PGR_FRAMEWORK_ROOT)include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>Headers/pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -163,7 +163,9 @@
     <ClCompile Include="Cpp\Engine\Components\direction_light.cpp" />
     <ClCompile Include="Cpp\Engine\Components\light.cpp" />
     <ClCompile Include="Cpp\Engine\Components\mesh_renderer.cpp" />
+    <ClCompile Include="Cpp\Engine\Components\point_light.cpp" />
     <ClCompile Include="Cpp\Engine\Components\skybox.cpp" />
+    <ClCompile Include="Cpp\Engine\Components\spot_light.cpp" />
     <ClCompile Include="Cpp\Engine\Components\transform.cpp" />
     <ClCompile Include="Cpp\Engine\debug.cpp" />
     <ClCompile Include="Cpp\Engine\game_object.cpp" />
@@ -181,7 +183,9 @@
     <ClInclude Include="Headers\Engine\Components\direction_light.h" />
     <ClInclude Include="Headers\Engine\Components\light.h" />
     <ClInclude Include="Headers\Engine\Components\mesh_renderer.h" />
+    <ClInclude Include="Headers\Engine\Components\point_light.h" />
     <ClInclude Include="Headers\Engine\Components\skybox.h" />
+    <ClInclude Include="Headers\Engine\Components\spot_light.h" />
     <ClInclude Include="Headers\Engine\Components\transform.h" />
     <ClInclude Include="Headers\Engine\debug.h" />
     <ClInclude Include="Headers\Engine\game_object.h" />
@@ -201,6 +205,8 @@
   <ItemGroup>
     <None Include="Data\Shaders\default.frag" />
     <None Include="Data\Shaders\default.vert" />
+    <None Include="Data\Shaders\skybox.frag" />
+    <None Include="Data\Shaders\skybox.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,6 @@
 #pragma once
 #include "./light.h"
 
-struct DirectionLight : public Light {
+struct PointLight : public Light {
 	void ProcessLight(Shader* shader, const std::string& index = "");
 };

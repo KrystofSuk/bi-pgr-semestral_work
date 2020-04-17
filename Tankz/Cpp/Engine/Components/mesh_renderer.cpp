@@ -73,11 +73,16 @@ void MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, Transform* t, st
 	shader->SetFloatMatrix4f("M", m);
 	shader->SetFloatMatrix4f("NM", normalMatrix);
 
-	shader->SetFloat3f("viewPos", c->position);
 
-	for(auto &i : lights)
-	{
-		i->ProcessLight(shader);
+	shader->SetInt("point", 2);
+	shader->SetInt("spot", 1);
+
+	lights[0]->ProcessLight(shader);
+	for (int i = 0; i < 2; i++) {
+		lights[i + 1]->ProcessLight(shader, std::to_string(i));
+	}
+	for (int i = 0; i < 1; i++) {
+		lights[i + 3]->ProcessLight(shader, std::to_string(i));
 	}
 
 	if (_mesh->texture != 0) {
@@ -88,6 +93,7 @@ void MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, Transform* t, st
 
 	glBindVertexArray(_mesh->vao);
 	glDrawElements(GL_TRIANGLES, _mesh->faces * 3, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
 }
 
 

@@ -63,6 +63,12 @@
     <ClCompile Include="Cpp\Engine\Components\direction_light.cpp">
       <Filter>Zdrojové soubory</Filter>
     </ClCompile>
+    <ClCompile Include="Cpp\Engine\Components\point_light.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Engine\Components\spot_light.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Engine\Components\mesh_renderer.h">
@@ -113,6 +119,12 @@
     <ClInclude Include="Headers\Engine\Components\direction_light.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
+    <ClInclude Include="Headers\Engine\Components\point_light.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Engine\Components\spot_light.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Data\Shaders\per_fragment.vert" />
@@ -121,5 +133,7 @@
   <ItemGroup>
     <None Include="Data\Shaders\default.frag" />
     <None Include="Data\Shaders\default.vert" />
+    <None Include="Data\Shaders\skybox.frag" />
+    <None Include="Data\Shaders\skybox.vert" />
   </ItemGroup>
 </Project>

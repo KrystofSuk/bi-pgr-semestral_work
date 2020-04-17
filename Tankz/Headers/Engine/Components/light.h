@@ -14,7 +14,7 @@ struct Light : public Component {
 		
 	Light();
 
-	virtual void ProcessLight(Shader* shader) = 0;
+	virtual void ProcessLight(Shader* shader, const std::string& index = "") = 0;
 
 	virtual std::string Print() const;
 	friend std::ostream& operator<<(std::ostream& out, const Light& light);

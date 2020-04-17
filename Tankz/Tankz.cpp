@@ -8,6 +8,9 @@
 #include "Headers/Engine/Components/direction_light.h"
 #include "Headers/Engine/Components/mesh_renderer.h"
 #include "Headers/Engine/resources.h"
+#include "Headers/Engine/Components/point_light.h"
+#include "Headers/Engine/Components/spot_light.h"
+#include "Headers/Engine/Components/skybox.h"
 
 const int WIN_WIDTH = 1600;
 const int WIN_HEIGHT = 900;
@@ -19,8 +22,14 @@ GameObject* asteroid;
 GameObject* asteroid2;
 
 GameObject* directionLight;
+GameObject* pointLight;
+GameObject* pointLight2;
+
+GameObject* spotLight;
 
 GameObject* camera;
+
+Skybox* s;
 
 std::vector<Light*> lights;
 
@@ -32,35 +41,70 @@ void init() {
 	glViewport(0, 0, glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
 
 	//SHADER LOADING
-	//resources.AddShader("debug", "./Data/Shaders/default.vert", "./Data/Shaders/default.frag");
+	resources.AddShader("debug", "./Data/Shaders/default.vert", "./Data/Shaders/default.frag");
 	resources.AddShader("per_fragment", "./Data/Shaders/per_fragment.vert", "./Data/Shaders/per_fragment.frag");
+	resources.AddShader("skybox", "./Data/Shaders/skybox.vert", "./Data/Shaders/skybox.frag");
 
 	//MATERIAL LOADING
 	//resources.AddMaterial("Asteroid1", "debug");
 	resources.AddMaterial("Asteroid2", "per_fragment");
-	resources.AddMaterial("Asteroid3", "per_fragment");
+	resources.AddMaterial("Asteroid3", "debug");
 	resources.GetMaterial("Asteroid2")->diffuse = glm::vec3(0.0f, 1.0f, 0.0f);
 	resources.GetMaterial("Asteroid3")->diffuse = glm::vec3(1.0f, 0.0f, 1.0f);
 
 	//MESH LOADING
-	resources.AddMesh("Asteroid_Mesh", "./Data/asteroid.obj", "per_fragment");
+	resources.AddMesh("Asteroid_Mesh", "./Data/asteroid.obj", "debug");
 	resources.AddMesh("Terrain_Grass", "./Data/Models/Terrain_Grass.obj", "per_fragment");
 	//resources.AddMesh("hoverboard_smoothed", "./Data/hoverboard_smoothed.obj", "per_fragment"); 
 	resources.AddMesh("hoverboard_smoothed", "./Data/strom1.obj", "per_fragment");
 
 
 	//GAMEOBJECTS LOADING
+	s = new Skybox("./Data/Textures/CloudyCrown_Midday", resources.GetShader("skybox"));
+
 	camera = new GameObject("Camera");
 	camera->transform->Move(glm::vec3(-2.0f, 0.0f, 0.0f));
 
 	directionLight = new GameObject("Direction Light");
 	directionLight->transform->Move(glm::vec3(-10.0f, 5.0f, 10.0f));
 	directionLight->transform->Scale(glm::vec3(-0.9f, -0.9f, -0.9f));
-	MeshRenderer* ms3 = new MeshRenderer(resources.GetMesh("Asteroid_Mesh"), resources.GetMaterial("Asteroid2"));
+	MeshRenderer* ms3 = new MeshRenderer(resources.GetMesh("Asteroid_Mesh"), resources.GetMaterial("Asteroid3"));
 	DirectionLight* dl = new DirectionLight();
 	directionLight->AddComponent(dl);
 	directionLight->AddComponent(ms3);
 	lights.emplace_back(dl);
+
+	pointLight = new GameObject("Point Light");
+	pointLight->transform->Move(glm::vec3(0.0f, -3.0f, 0.0f));
+	pointLight->transform->Scale(glm::vec3(-0.9f, -0.9f, -0.9f));
+	MeshRenderer* ms4 = new MeshRenderer(resources.GetMesh("Asteroid_Mesh"), resources.GetMaterial("Asteroid3"));
+	PointLight* dl2 = new PointLight();
+	dl2->intensity = 1.0f;
+	pointLight->AddComponent(dl2);
+	pointLight->AddComponent(ms4);
+	lights.emplace_back(dl2);
+
+
+	pointLight2 = new GameObject("Point Light");
+	pointLight2->transform->Move(glm::vec3(18.0f, -2.0f, 9.0f));
+	pointLight2->transform->Scale(glm::vec3(-0.9f, -0.9f, -0.9f));
+	MeshRenderer* ms5 = new MeshRenderer(resources.GetMesh("Asteroid_Mesh"), resources.GetMaterial("Asteroid3"));
+	PointLight* dl3 = new PointLight();
+	dl3->intensity = 1.0f;
+	pointLight2->AddComponent(dl3);
+	pointLight2->AddComponent(ms5);
+	lights.emplace_back(dl3);
+
+	spotLight = new GameObject("Spot Light");
+	spotLight->transform->Move(glm::vec3(30.0f, -2.0f, 9.0f));
+	spotLight->transform->Rotate(glm::vec3(-30.0f, 0.0f, 0.0f));
+	spotLight->transform->Scale(glm::vec3(-0.9f, -0.9f, -0.9f));
+	MeshRenderer* ms6 = new MeshRenderer(resources.GetMesh("Asteroid_Mesh"), resources.GetMaterial("Asteroid3"));
+	SpotLight* dl4 = new SpotLight();
+	dl4->intensity = 1.0f;
+	spotLight->AddComponent(dl4);
+	spotLight->AddComponent(ms6);
+	lights.emplace_back(dl4);
 
 	asteroid = new GameObject("Terrain_Grass");
 	asteroid->transform->Move(glm::vec3(0.0f, 0.0f, 0.0f));
@@ -105,10 +149,17 @@ void draw() {
 
 	projectionMatrix = glm::perspective(glm::radians(60.0f), WIN_WIDTH / (float)WIN_HEIGHT, 0.1f, 100.0f);
 
+	s->Draw(projectionMatrix, viewMatrix, camera->transform);
+
 
 	asteroid->GetComponent<MeshRenderer>()->Draw(projectionMatrix, viewMatrix, asteroid->transform, lights, camera->transform);
 	asteroid2->GetComponent<MeshRenderer>()->Draw(projectionMatrix, viewMatrix, asteroid2->transform, lights, camera->transform);
-	directionLight->GetComponent<MeshRenderer>()->Draw(projectionMatrix, viewMatrix, directionLight->transform, lights, camera->transform);
+	//directionLight->GetComponent<MeshRenderer>()->Draw(projectionMatrix, viewMatrix, directionLight->transform, lights, camera->transform);
+	pointLight->GetComponent<MeshRenderer>()->Draw(projectionMatrix, viewMatrix, pointLight->transform, lights, camera->transform);
+	pointLight2->GetComponent<MeshRenderer>()->Draw(projectionMatrix, viewMatrix, pointLight2->transform, lights, camera->transform);
+	spotLight->GetComponent<MeshRenderer>()->Draw(projectionMatrix, viewMatrix, spotLight->transform, lights, camera->transform);
+
+
 
 	glutSwapBuffers();
 }
@@ -189,9 +240,7 @@ int main(int argc, char** argv) {
 		pgr::dieWithError("pgr init failed, required OpenGL not supported?");
 
 	init();
-	std::cout << *asteroid->GetComponent<Transform>() << std::endl;
 
-	std::cout << "Hello triangle!" << std::endl;
 
 	glutMainLoop();
 
