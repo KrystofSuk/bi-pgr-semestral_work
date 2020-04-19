@@ -3,10 +3,9 @@
 #include <sstream>
 
 #include "pgr.h"
-#include "Engine/Core/component.h"
 
 
-struct Transform : public Component {
+struct Transform{
 	glm::vec3 position;
 	glm::vec3 rotation;
 	glm::vec3 size;
@@ -21,10 +20,6 @@ struct Transform : public Component {
 	glm::vec3 Front() const;
 	glm::vec3 Up() const;
 	glm::vec3 Right() const;
-
-	std::string Print() const;
-
-	friend std::ostream& operator<<(std::ostream& out, const Transform& transform);
 
 	~Transform();
 };

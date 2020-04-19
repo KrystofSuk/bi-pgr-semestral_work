@@ -16,26 +16,6 @@ Shader::Shader(const std::string& vertPath, const std::string& fragPath)
 	GetAttribLocation("position");
 	GetAttribLocation("normal");
 	GetAttribLocation("texCoord");
-
-	GLint i;
-	GLint count;
-
-	GLint size; // size of the variable
-	GLenum type; // type of the variable (float, vec3 or mat4, etc)
-
-	GLsizei bufSize;
-	glGetProgramiv(_id, GL_ACTIVE_UNIFORM_MAX_LENGTH, &bufSize);
-	GLchar name[20]; // variable name in GLSL
-	GLsizei length; // name length
-	glGetProgramiv(_id, GL_ACTIVE_UNIFORMS, &count);
-	printf("Active Uniforms: %d\n", count);
-
-	for (i = 0; i < count; i++)
-	{
-		glGetActiveUniform(_id, (GLuint)i, bufSize, &length, &size, &type, name);
-
-		printf("Uniform #%d Type: %u Name: %s\n", i, type, name);
-	}
 }
 
 void Shader::Use() const

@@ -1,10 +1,15 @@
 #include "Engine/Components/spot_light.h"
 #include "Engine/Core/game_object.h"
 
+SpotLight::SpotLight()
+{
+	type = 2;
+}
+
 void SpotLight::ProcessLight(Shader* shader, const std::string& index)
 {
-	glm::vec3 pos = static_cast<GameObject*>(gameObject)->transform->position;
-	glm::vec3 dir = static_cast<GameObject*>(gameObject)->transform->Front();
+	glm::vec3 pos = transform->position;//static_cast<GameObject*>(gameObject)->transform->position;
+	glm::vec3 dir = transform->Front();
 
 	shader->SetFloat3f("spo[" + index + "].diffuse", diffuse * intensity);
 	shader->SetFloat3f("spo[" + index + "].ambient", ambient * intensity);

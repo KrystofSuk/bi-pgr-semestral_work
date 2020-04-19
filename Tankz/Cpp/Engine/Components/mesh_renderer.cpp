@@ -52,13 +52,13 @@ MeshRenderer::MeshRenderer(Mesh* mesh, Material* material) : Component("MeshRend
 	_material = material;
 }
 
-void MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, Transform* t, std::vector<Light*> lights, Transform* c)
+void MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, std::vector<Light*> lights)
 {
-	glm::mat4 m = glm::translate(glm::mat4(1.0f), t->position);
-	m = glm::rotate(m, glm::radians(t->rotation[0]), glm::vec3(1, 0, 0));
-	m = glm::rotate(m, glm::radians(t->rotation[1]), glm::vec3(0, 1, 0));
-	m = glm::rotate(m, glm::radians(t->rotation[2]), glm::vec3(0, 0, 1));
-	m = glm::scale(m, t->size);
+	glm::mat4 m = glm::translate(glm::mat4(1.0f), transform->position);
+	m = glm::rotate(m, glm::radians(transform->rotation[0]), glm::vec3(1, 0, 0));
+	m = glm::rotate(m, glm::radians(transform->rotation[1]), glm::vec3(0, 1, 0));
+	m = glm::rotate(m, glm::radians(transform->rotation[2]), glm::vec3(0, 0, 1));
+	m = glm::scale(m, transform->size);
 
 	glm::mat4 PVM = p * v * m;
 
@@ -75,16 +75,32 @@ void MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, Transform* t, st
 	shader->SetFloatMatrix4f("NM", normalMatrix);
 
 
-	shader->SetInt("point", 2);
-	shader->SetInt("spot", 1);
 
-	lights[0]->ProcessLight(shader);
-	for (int i = 0; i < 2; i++) {
-		lights[i + 1]->ProcessLight(shader, std::to_string(i));
+
+	int point = 0;
+	int spot = 0;
+
+	for (auto& l : lights) {
+		if (l->type == 0)
+			l->ProcessLight(shader);
+		if (l->type == 1) {
+			l->ProcessLight(shader, std::to_string(point));
+			point++;
+		}
+		if (l->type == 2) {
+			l->ProcessLight(shader, std::to_string(spot));
+			spot++;
+		}
 	}
-	for (int i = 0; i < 1; i++) {
-		lights[i + 3]->ProcessLight(shader, std::to_string(i));
-	}
+	
+	shader->SetInt("point", point);
+	shader->SetInt("spot", spot);
+
+	shader->SetFloat3f("mat.ambient", _material->emission);
+	shader->SetFloat3f("mat.diffuse", _material->diffuse);
+	shader->SetFloat3f("mat.specular", _material->specular);
+	shader->SetFloat("mat.shininess", _material->shininess);
+	shader->SetInt("mat.diffTex", _material->diffuseMap);
 
 	if (_mesh->texture != 0) {
 		shader->SetInt("texSampler", 0);

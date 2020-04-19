@@ -27,7 +27,7 @@ void main() {
   gl_Position = PVM * vec4(position, 1.0);
   
   frag_v = (V * M * vec4(position, 1.0)).xyz;
-  normal_v = (V * NM * vec4(normal, 0.0)).xyz;
+  normal_v = normalize((NM * vec4(normal, 0.0)).xyz);
 
   frag_m = (M * vec4(position, 1.0)).xyz;
   normal_m = (NM * vec4(normal, 0.0)).xyz;

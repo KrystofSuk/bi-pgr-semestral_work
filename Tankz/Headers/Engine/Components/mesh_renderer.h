@@ -4,7 +4,7 @@
 #include <string>
 
 #include "Engine/Core/component.h"
-#include "Engine/Components/transform.h"
+#include "Engine/Core/transform.h"
 #include "Engine/Core/shader.h"
 #include "Engine/Core/material.h"
 #include "Engine/Core/mesh.h"
@@ -17,7 +17,7 @@ private:
 public:
 	MeshRenderer(Mesh* mesh, Material* material);
 
-	void Draw(const glm::mat4& p, const glm::mat4& v, Transform* t, std::vector<Light *> lights, Transform* c);
+	void Draw(const glm::mat4& p, const glm::mat4& v, std::vector<Light *> lights);
 		
 	std::string Print() const;
 

@@ -21,9 +21,6 @@
     <ClCompile Include="Cpp\Engine\Components\mesh_renderer.cpp">
       <Filter>Zdrojové soubory</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\Engine\Components\transform.cpp">
-      <Filter>Zdrojové soubory</Filter>
-    </ClCompile>
     <ClCompile Include="Cpp\Engine\Components\light.cpp">
       <Filter>Zdrojové soubory</Filter>
     </ClCompile>
@@ -69,12 +66,18 @@
     <ClCompile Include="Cpp\Engine\Utils\mesh_cache.cpp">
       <Filter>Zdrojové soubory</Filter>
     </ClCompile>
+    <ClCompile Include="Cpp\Engine\Core\scene.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Engine\Core\loader.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Engine\Core\transform.cpp">
+      <Filter>Zdrojové soubory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Engine\Components\mesh_renderer.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Engine\Components\transform.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
     <ClInclude Include="Headers\Engine\Components\light.h">
@@ -125,15 +128,33 @@
     <ClInclude Include="Headers\Engine\Utils\shader_cache.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
+    <ClInclude Include="Headers\Engine\Core\scene.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\ThirdParty\json.hpp">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Engine\Core\loader.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Engine\Core\transform.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Engine\Core\app_data.h">
+      <Filter>Hlavičkové soubory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Data\Shaders\per_fragment.vert" />
     <Text Include="Data\Shaders\per_fragment.frag" />
+    <Text Include="Data\scene_config.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\Shaders\default.frag" />
     <None Include="Data\Shaders\default.vert" />
     <None Include="Data\Shaders\skybox.frag" />
     <None Include="Data\Shaders\skybox.vert" />
+    <None Include="Data\resources_config.json" />
+    <None Include="Data\app_config.json" />
   </ItemGroup>
 </Project>

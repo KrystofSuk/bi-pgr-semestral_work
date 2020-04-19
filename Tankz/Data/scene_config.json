@@ -1,0 +1,108 @@
+{
+	"GameObjects": [
+		{
+			"name": "Camera",
+			"position": "-2.0, 0.0, 0.0",
+			"rotation": "0.0, -30.0, 0.0",
+			"scale": "0.0, 0.0, 0.0",
+			"components": []
+		},
+		{
+			"name": "Direction Light",
+			"position": "-10.0, 5.0, 10.0",
+			"rotation": "0.0, 0.0, 0.0",
+			"scale": "-0.9, -0.9, -0.9",
+			"components": [
+				{
+					"name": "MeshRenderer",
+					"mesh": "light_sphere",
+					"material": "light_material"
+				},
+				{
+					"name": "DirectionLight",
+					"diffuse": "0.996, 1.0, 0.854",
+					"specular": "0.996, 1.0, 0.854",
+					"ambient": "0.1, 0.1, 0.1",
+					"shininess": 0.0,
+					"intensity": 1.0
+				}
+			]
+		},
+		{
+			"name": "Point Light 1",
+			"position": "0.0, -3.0, 0.0",
+			"rotation": "0.0, 0.0, 0.0",
+			"scale": "-0.9, -0.9, -0.9",
+			"components": [
+				{
+					"name": "MeshRenderer",
+					"mesh": "light_sphere",
+					"material": "light_material"
+				},
+				{
+					"name": "PointLight",
+					"diffuse": "1.0, 1.0, 0.0",
+					"specular": "1.0, 1.0, 0.0",
+					"ambient": "0.1, 0.1, 0.1",
+					"shininess": 10.0,
+					"intensity": 1.0
+				}
+			]
+		},
+		{
+			"name": "Point Light 2",
+			"position": "18.0, -2.0, 9.0",
+			"rotation": "0.0, 0.0, 0.0",
+			"scale": "-0.9, -0.9, -0.9",
+			"components": [
+				{
+					"name": "MeshRenderer",
+					"mesh": "light_sphere",
+					"material": "light_material"
+				},
+				{
+					"name": "PointLight",
+					"diffuse": "0.0, 1.0, 1.0",
+					"specular": "0.0, 1.0, 1.0",
+					"ambient": "0.1, 0.1, 0.1",
+					"shininess": 50.0,
+					"intensity": 0.6
+				}
+			]
+		},
+		{
+			"name": "Spot Light",
+			"position": "30.0, -2.0, 9.0",
+			"rotation": "-30.0, 0.0, 0.0",
+			"scale": "-0.9, -0.9, -0.9",
+			"components": [
+				{
+					"name": "MeshRenderer",
+					"mesh": "light_sphere",
+					"material": "light_material"
+				},
+				{
+					"name": "SpotLight",
+					"diffuse": "0.3, 1.0, 0.3",
+					"specular": "0.3, 1.0, 0.3",
+					"ambient": "0.1, 0.1, 0.1",
+					"shininess": 90.0,
+					"intensity": 1.4
+				}
+			]
+		},
+		{
+			"name": "Terrain Grass",
+			"position": "0.0, 0.0, 0.0",
+			"rotation": "0.0, 0.0, 0.0",
+			"scale": "100.0, 100.0, 100.0",
+			"components": [
+				{
+					"name": "MeshRenderer",
+					"mesh": "terrain_grass",
+					"material": "test_material"
+				}
+			]
+		}
+	]
+}

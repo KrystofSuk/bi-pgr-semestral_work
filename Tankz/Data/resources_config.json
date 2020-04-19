@@ -1,0 +1,51 @@
+{
+	"Shaders": {
+		"debug": {
+			"name": "debug",
+			"vert": "./Data/Shaders/default.vert",
+			"frag": "./Data/Shaders/default.frag"
+		},
+		"per_fragment": {
+			"name": "per_fragment",
+			"vert": "./Data/Shaders/per_fragment.vert",
+			"frag": "./Data/Shaders/per_fragment.frag"
+		},
+		"skybox": {
+			"name": "skybox",
+			"vert": "./Data/Shaders/skybox.vert",
+			"frag": "./Data/Shaders/skybox.frag"
+		}
+	},
+	"Materials": {
+		"test_material": {
+			"name": "test_material",
+			"shader": "per_fragment",
+			"diffuse": "1.0, 1.0, 1.0",
+			"specular": "1.0, 1.0, 1.0",
+			"emission": "0.0, 0.0, 0.0",
+			"shininess": "0.0",
+			"diffuseMap": "true"
+		},
+		"light_material" :{
+			"name": "light_material",
+			"shader": "per_fragment",
+			"diffuse": "1.0, 1.0, 1.0",
+			"specular": "1.0, 1.0, 1.0",
+			"emission": "1.0, 1.0, 1.0",
+			"shininess": "0.0",
+			"diffuseMap": "true"
+		}
+	},
+	"Meshes": {
+		"light_sphere": {
+			"name": "light_sphere",
+			"path": "./Data/Models/sphere.obj",
+			"shader": "debug"
+		},
+		"terrain_grass": {
+			"name": "terrain_grass",
+			"path": "./Data/Models/Terrain_Grass.obj",
+			"shader": "per_fragment"
+		}
+	}
+}

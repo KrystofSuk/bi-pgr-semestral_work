@@ -4,12 +4,13 @@
 GameObject::GameObject(const std::string& name) : name(name)
 {
 	transform = new Transform();
-	AddComponent(transform);
 }
 
 void GameObject::AddComponent(Component* component)
 {
 	component->gameObject = this;
+	component->transform = transform;
+
 	_components[component->name] = component;
 }
 

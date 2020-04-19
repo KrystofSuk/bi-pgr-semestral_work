@@ -166,7 +166,9 @@
     <ClCompile Include="Cpp\Engine\Components\point_light.cpp" />
     <ClCompile Include="Cpp\Engine\Components\skybox.cpp" />
     <ClCompile Include="Cpp\Engine\Components\spot_light.cpp" />
-    <ClCompile Include="Cpp\Engine\Components\transform.cpp" />
+    <ClCompile Include="Cpp\Engine\Core\transform.cpp" />
+    <ClCompile Include="Cpp\Engine\Core\loader.cpp" />
+    <ClCompile Include="Cpp\Engine\Core\scene.cpp" />
     <ClCompile Include="Cpp\Engine\Utils\debug.cpp" />
     <ClCompile Include="Cpp\Engine\Core\game_object.cpp" />
     <ClCompile Include="Cpp\Engine\Core\material.cpp" />
@@ -179,6 +181,7 @@
     <ClCompile Include="Tankz.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Headers\Engine\Core\app_data.h" />
     <ClInclude Include="Headers\Engine\Core\component.h" />
     <ClInclude Include="Headers\Engine\Components\direction_light.h" />
     <ClInclude Include="Headers\Engine\Components\light.h" />
@@ -186,7 +189,9 @@
     <ClInclude Include="Headers\Engine\Components\point_light.h" />
     <ClInclude Include="Headers\Engine\Components\skybox.h" />
     <ClInclude Include="Headers\Engine\Components\spot_light.h" />
-    <ClInclude Include="Headers\Engine\Components\transform.h" />
+    <ClInclude Include="Headers\Engine\Core\transform.h" />
+    <ClInclude Include="Headers\Engine\Core\loader.h" />
+    <ClInclude Include="Headers\Engine\Core\scene.h" />
     <ClInclude Include="Headers\Engine\Utils\debug.h" />
     <ClInclude Include="Headers\Engine\Core\game_object.h" />
     <ClInclude Include="Headers\Engine\Core\material.h" />
@@ -197,12 +202,16 @@
     <ClInclude Include="Headers\Engine\Core\resources.h" />
     <ClInclude Include="Headers\Engine\Core\shader.h" />
     <ClInclude Include="Headers\Engine\Utils\shader_cache.h" />
+    <ClInclude Include="Headers\ThirdParty\json.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Data\scene_config.json" />
     <Text Include="Data\Shaders\per_fragment.frag" />
     <Text Include="Data\Shaders\per_fragment.vert" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Data\app_config.json" />
+    <None Include="Data\resources_config.json" />
     <None Include="Data\Shaders\default.frag" />
     <None Include="Data\Shaders\default.vert" />
     <None Include="Data\Shaders\skybox.frag" />
@@ -211,4 +220,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

@@ -1,13 +1,13 @@
-﻿#include "Engine/Components/transform.h"
+﻿#include "Engine/Core/transform.h"
 
-Transform::Transform() : Component("Transform")
+Transform::Transform()
 {
 	position = glm::vec3(0.0f, 0.0f, 0.0f);
 	rotation = glm::vec3(0.0f, 0.0f, 0.0f);
 	size = glm::vec3(1.0f, 1.0f, 1.0f);
 }
 
-Transform::Transform(const glm::vec3& p, const glm::vec3& r, const glm::vec3& s) : Component("Transform")
+Transform::Transform(const glm::vec3& p, const glm::vec3& r, const glm::vec3& s)
 {
 	position = p;
 	rotation = r;
@@ -27,7 +27,6 @@ void Transform::Move(const glm::vec3& v)
 void Transform::Rotate(const glm::vec3& v)
 {
 	rotation += v;
-	std::cout << Print() << std::endl;
 }
 
 
@@ -53,19 +52,7 @@ glm::vec3 Transform::Right() const
 	return glm::normalize(glm::cross(up, Front()));
 }
 
-std::string Transform::Print() const
-{
-	std::stringstream s;
-	s << name << std::endl << "P:  " << position.x << "," << position.y << "," << position.z << std::endl << "S:  " << size.x << "," << size.y << "," << size.z << std::endl << "R:  " << rotation.x << "," << rotation.y << "," << rotation.z;
-	return s.str();
-}
-
 Transform::~Transform()
 {
 }
 
-std::ostream& operator<<(std::ostream& out, const Transform& transform)
-{
-	out << transform.Print() << std::endl;
-	return out;
-}

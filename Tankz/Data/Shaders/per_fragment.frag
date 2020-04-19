@@ -8,7 +8,13 @@ in vec3 frag_v;
 in vec3 normal_m;
 in vec3 frag_m;
 
-
+struct Material{
+  vec3  ambient;
+  vec3  diffuse;
+  vec3  specular;
+  float shininess;
+  int diffTex;
+};
 
 struct Light_D {
   vec3  ambient;
@@ -53,6 +59,7 @@ uniform Light_S[4] spo;
 uniform int point;
 uniform int spot;
 
+uniform Material mat;
 
 in vec4 color;
 out vec4 result_color;
@@ -65,10 +72,13 @@ vec4 Direction_Light(){
 
     vec3 V = normalize(-frag_v);
     vec3 R = reflect(-L, normal_n);  
+    
+    float specular = 0;
+    if(dir.shininess > 0){
+        specular = pow(max(dot(V, R), 0.0), dir.shininess);
+    }
 
-    float specular = pow(max(dot(V, R), 0.0), dir.shininess);
-
-    return vec4(dir.ambient + dir.diffuse * diffuse + dir.specular * specular, 1.0);
+    return vec4(dir.ambient + mat.diffuse * dir.diffuse * diffuse + mat.specular * dir.specular * specular, 1.0);
 }
 
 vec4 Point_Light(int i){
@@ -86,7 +96,7 @@ vec4 Point_Light(int i){
     float distance = length(poi[i].pos - frag_m);
     float attenuation = 1.0 / (poi[i].constant + poi[i].linear * distance + poi[i].quadratic * (distance * distance));    
 
-    return vec4(poi[i].ambient * attenuation + diffuse * attenuation + specular * attenuation, 1.0);
+    return vec4(poi[i].ambient * attenuation + mat.diffuse * diffuse * attenuation + mat.specular * specular * attenuation, 1.0);
 }
 
 vec4 Spot_Light(int i){
@@ -110,7 +120,7 @@ vec4 Spot_Light(int i){
     float distance = length(spo[i].pos - frag_m);
     float attenuation = 1.0 / (spo[i].constant + spo[i].linear * distance + spo[i].quadratic * (distance * distance));    
 
-    return vec4(spo[i].ambient * attenuation + diffuse * attenuation + specular * attenuation, 1.0);
+    return vec4(spo[i].ambient * attenuation + mat.diffuse * diffuse * attenuation + mat.specular * specular * attenuation, 1.0);
 }
 
 
@@ -124,5 +134,13 @@ void main() {
         col += Spot_Light(i);
     }
     col += Direction_Light();
-    result_color = col;//texture(texSampler, texCoord_v) * vec4(dir_v.ambient + dir_v.diffuse * diffuse + dir_v.specular * specular, 1.0);
+
+    col += vec4(mat.ambient,1.0);
+
+    if(mat.diffTex == 1){
+        result_color = texture(texSampler, texCoord_v) * col;
+    }
+    else{
+        result_color = col;
+    }
 }

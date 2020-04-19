@@ -6,6 +6,8 @@
 #include "Engine/Core/shader.h"
 
 struct Light : public Component {
+	unsigned type = 0;
+
 	glm::vec3 diffuse;
 	glm::vec3 ambient;
 	glm::vec3 specular;

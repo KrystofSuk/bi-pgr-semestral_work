@@ -5,7 +5,7 @@
 #include "pgr.h"
 #include "Engine/Core/component.h"
 #include "Engine/Core/shader.h"
-#include "Engine/Components/transform.h"
+#include "Engine/Core/transform.h"
 
 class Skybox : public Component {
 public:
