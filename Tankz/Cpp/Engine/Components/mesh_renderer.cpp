@@ -1,6 +1,6 @@
 ﻿#include "Engine/Components/mesh_renderer.h"
-
-
+#include "Engine/Core/app_data.h"
+extern float time;
 //**************************************************************************************************
 /// Checks whether vector is zero-length or not.
 bool isVectorNull(const glm::vec3& vect) {
@@ -52,7 +52,7 @@ MeshRenderer::MeshRenderer(Mesh* mesh, Material* material) : Component("MeshRend
 	_material = material;
 }
 
-void MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, std::vector<Light*> lights)
+void MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, const LightData & lightData)
 {
 	glm::mat4 m = glm::translate(glm::mat4(1.0f), transform->position);
 	m = glm::rotate(m, glm::radians(transform->rotation[0]), glm::vec3(1, 0, 0));
@@ -74,13 +74,12 @@ void MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, std::vector<Ligh
 	shader->SetFloatMatrix4f("M", m);
 	shader->SetFloatMatrix4f("NM", normalMatrix);
 
-
-
+	shader->SetFloat("time", 0.001f * (float)glutGet(GLUT_ELAPSED_TIME));
 
 	int point = 0;
 	int spot = 0;
 
-	for (auto& l : lights) {
+	for (auto& l : lightData.lights) {
 		if (l->type == 0)
 			l->ProcessLight(shader);
 		if (l->type == 1) {
@@ -101,6 +100,16 @@ void MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, std::vector<Ligh
 	shader->SetFloat3f("mat.specular", _material->specular);
 	shader->SetFloat("mat.shininess", _material->shininess);
 	shader->SetInt("mat.diffTex", _material->diffuseMap);
+
+
+	shader->SetFloat3f("fog.color", lightData.fogColor);
+	shader->SetFloat("fog.inte", lightData.fogIntensity);
+	shader->SetFloat("fog.ramp", lightData.fogRamp);
+	shader->SetFloat("fog.inte_h", lightData.fogHeightIntensity);
+	shader->SetFloat("fog.ramp_h", lightData.fogHeightRamp);
+	shader->SetFloat("fog.amount", lightData.fogAmount);
+
+	shader->SetFloat("dir_amou", lightData.dirAmount);
 
 	if (_mesh->texture != 0) {
 		shader->SetInt("texSampler", 0);

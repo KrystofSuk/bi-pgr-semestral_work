@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include <string>
-
 #include <Windows.h>
+#include <time.h>
 
 #include "pgr.h"
 #include "Engine/Core/loader.h"
@@ -14,6 +14,7 @@
 #include "Engine/Components/point_light.h"
 #include "Engine/Components/spot_light.h"
 #include "Engine/Components/skybox.h"
+#include <Engine\Components\Custom\day_night.h>
 
 const int WIN_WIDTH = 1600;
 const int WIN_HEIGHT = 900;
@@ -23,11 +24,29 @@ Resources resources;
 Scene scene;
 AppData appData;
 
-Skybox* s;
+Skybox* s = nullptr;
 
 std::vector<Light*> lights;
-
 bool pressedKeys[255];
+
+void SceneInit() {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	std::cout << "---------SCENE INIT---------" << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+
+	scene.Clear();
+
+	//GAMEOBJECTS LOADING
+	Loader::LoadScene("./Data/scene_config.json", scene, resources);
+
+	if (s != nullptr)
+		delete s;
+	s = new Skybox("./Data/Textures/CloudyCrown_Midday", resources.GetShader("skybox"));
+
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+	std::cout << "---------INIT DONE---------" << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+}
 
 void init() {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
@@ -41,12 +60,15 @@ void init() {
 	//RESOURCES LOADING
 	Loader::LoadResources("./Data/resources_config.json", resources);
 
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+	std::cout << "---------INIT DONE---------" << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	SceneInit();
 
-	//GAMEOBJECTS LOADING
-	Loader::LoadScene("./Data/scene_config.json", scene, resources);
-
-	s = new Skybox("./Data/Textures/CloudyCrown_Midday", resources.GetShader("skybox"));
+	appData.freeCamera = true;
 }
+
+
 
 void draw() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -61,7 +83,7 @@ void draw() {
 		scene.camera->transform->Up()
 	);
 
-	projectionMatrix = glm::perspective(glm::radians(60.0f), appData.width / (float)appData.height, 0.1f, 100.0f);
+	projectionMatrix = glm::perspective(glm::radians(60.0f), appData.width / (float)appData.height, 0.1f, 1000.0f);
 
 	s->Draw(projectionMatrix, viewMatrix, scene.camera->transform);
 
@@ -83,18 +105,25 @@ void keyboardCallback(unsigned char keyPressed, int mouseX, int mouseY) {
 
 void keyboardCallback(int keyPressed, int mouseX, int mouseY) {
 
-	pressedKeys[keyPressed] = true;
-
-	switch (keyPressed) {
-	case 27:
-		glutLeaveMainLoop();
-		break;
-	}
 }
 
 void keyboardUpCallback(int keyReleased, int mouseX, int mouseY) {
-
 	pressedKeys[keyReleased] = false;
+
+	if (keyReleased == 1) {
+		glutWarpPointer(appData.width / 2, appData.height / 2);
+		appData.freeCamera = true;
+	}
+	if (keyReleased == 2) {
+		scene.camera->transform->SetPos(scene.GetGameObject("Static Pos 1")->transform->position);
+		scene.camera->transform->SetRot(scene.GetGameObject("Static Pos 1")->transform->rotation);
+		appData.freeCamera = false;
+	}
+	if (keyReleased == 3) {
+		scene.camera->transform->SetPos(scene.GetGameObject("Static Pos 2")->transform->position);
+		scene.camera->transform->SetRot(scene.GetGameObject("Static Pos 2")->transform->rotation);
+		appData.freeCamera = false;
+	}
 }
 
 void keyboardUpCallback(unsigned char keyReleased, int mouseX, int mouseY) {
@@ -104,18 +133,27 @@ void keyboardUpCallback(unsigned char keyReleased, int mouseX, int mouseY) {
 
 void timerCallback(int) {
 
-	if (pressedKeys['a'] == true)
-		scene.camera->transform->Move(scene.camera->transform->Right() * 0.1f);
-	if (pressedKeys['d'] == true)
-		scene.camera->transform->Move(scene.camera->transform->Right() * -0.1f);
-	if (pressedKeys['w'] == true)
-		scene.camera->transform->Move(scene.camera->transform->Front() * 0.1f);
-	if (pressedKeys['s'] == true)
-		scene.camera->transform->Move(scene.camera->transform->Front() * -0.1f);
-	if (pressedKeys['q'] == true)
-		scene.camera->transform->Move(scene.camera->transform->Up() * 0.1f);
-	if (pressedKeys['z'] == true)
-		scene.camera->transform->Move(scene.camera->transform->Up() * -0.1f);
+
+	if (pressedKeys['r'] == true) {
+		SceneInit();
+	}
+
+	if (appData.freeCamera) {
+		if (pressedKeys['a'] == true)
+			scene.camera->transform->Move(scene.camera->transform->Right() * 0.1f);
+		if (pressedKeys['d'] == true)
+			scene.camera->transform->Move(scene.camera->transform->Right() * -0.1f);
+		if (pressedKeys['w'] == true)
+			scene.camera->transform->Move(scene.camera->transform->Front() * 0.1f);
+		if (pressedKeys['s'] == true)
+			scene.camera->transform->Move(scene.camera->transform->Front() * -0.1f);
+		if (pressedKeys['q'] == true)
+			scene.camera->transform->Move(scene.camera->transform->Up() * 0.1f);
+		if (pressedKeys['z'] == true)
+			scene.camera->transform->Move(scene.camera->transform->Up() * -0.1f);
+	}
+
+	scene.Update();
 
 	glutTimerFunc(8, timerCallback, 0);
 	glutPostRedisplay();
@@ -123,6 +161,46 @@ void timerCallback(int) {
 
 void glutMotionCallback(int x, int y) {
 }
+
+void MenuProcess(int i) {
+	if (i == 1) {
+		glutWarpPointer(appData.width / 2, appData.height / 2);
+		appData.freeCamera = true;
+	}
+	if (i == 2) {
+		scene.camera->transform->SetPos(scene.GetGameObject("Static Pos 1")->transform->position);
+		scene.camera->transform->SetRot(scene.GetGameObject("Static Pos 1")->transform->rotation);
+		appData.freeCamera = false;
+	}
+	if (i == 3) {
+		scene.camera->transform->SetPos(scene.GetGameObject("Static Pos 2")->transform->position);
+		scene.camera->transform->SetRot(scene.GetGameObject("Static Pos 2")->transform->rotation);
+		appData.freeCamera = false;
+	}
+	if (i == 4) {
+		scene.GetGameObject("Direction Light")->GetComponent<DayNight>()->use = !scene.GetGameObject("Direction Light")->GetComponent<DayNight>()->use;
+	}
+	if (i == 99) {
+		glutLeaveMainLoop();
+	}
+}
+
+void createMenu() {
+	int cameraSub = glutCreateMenu(MenuProcess);
+	glutAddMenuEntry("Free", 1);
+	glutAddMenuEntry("Static 1.", 2);
+	glutAddMenuEntry("Static 2.", 3);
+
+	int lightningSub = glutCreateMenu(MenuProcess);
+	glutAddMenuEntry("Day Night Cycle", 4);
+
+	glutCreateMenu(MenuProcess);
+	glutAddSubMenu("Camera", cameraSub);
+	glutAddSubMenu("Lightning", lightningSub);
+	glutAddMenuEntry("Exit", 99);
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
+
 
 void glutPassiveMotionCallback(int x, int y) {
 
@@ -134,9 +212,17 @@ void glutPassiveMotionCallback(int x, int y) {
 		deltaY = 0;
 
 
-	scene.camera->transform->Rotate(glm::vec3(1.0f * -deltaY, 1.0f * deltaX, 0.0f));
+	if (appData.freeCamera) {
+		scene.camera->transform->Rotate(glm::vec3(1.0f * -deltaY, 1.0f * deltaX, 0.0f));
+		if (scene.camera->transform->rotation[0] > 89.0) {
+			scene.camera->transform->SetRot(glm::vec3(89.0, scene.camera->transform->rotation[1], scene.camera->transform->rotation[2]));
+		}
+		if (scene.camera->transform->rotation[0] < -89.0) {
+			scene.camera->transform->SetRot(glm::vec3(-89.0, scene.camera->transform->rotation[1], scene.camera->transform->rotation[2]));
+		}
 
-	glutWarpPointer(appData.width / 2, appData.height / 2);
+		glutWarpPointer(appData.width / 2, appData.height / 2);
+	}
 	glutPostRedisplay();
 }
 
@@ -171,6 +257,7 @@ int main(int argc, char** argv) {
 		pgr::dieWithError("pgr init failed, required OpenGL not supported?");
 
 	init();
+	createMenu();
 	//glutFullScreen();
 
 

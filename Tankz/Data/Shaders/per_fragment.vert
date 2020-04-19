@@ -19,9 +19,11 @@ out vec3 frag_v;
 out vec3 normal_m;
 out vec3 frag_m;
 
+
 out vec4 color;
 
 out vec2 texCoord_v;
+
 
 void main() {
   gl_Position = PVM * vec4(position, 1.0);

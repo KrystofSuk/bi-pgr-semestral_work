@@ -15,6 +15,8 @@ public:
 
 	GameObject(const std::string & name);
 
+	void Update();
+
 	void AddComponent(Component * component);
 
 	template <typename T>

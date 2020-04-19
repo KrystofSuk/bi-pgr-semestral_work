@@ -9,6 +9,7 @@
 #include "Engine/Core/material.h"
 #include "Engine/Core/mesh.h"
 #include "Engine/Components/light.h"
+#include <Engine\Core\light_data.h>
 
 class MeshRenderer : public Component {
 private:
@@ -17,7 +18,7 @@ private:
 public:
 	MeshRenderer(Mesh* mesh, Material* material);
 
-	void Draw(const glm::mat4& p, const glm::mat4& v, std::vector<Light *> lights);
+	void Draw(const glm::mat4& p, const glm::mat4& v, const LightData& lightData);
 		
 	std::string Print() const;
 

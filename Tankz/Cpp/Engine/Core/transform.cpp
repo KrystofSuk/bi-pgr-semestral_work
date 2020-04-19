@@ -29,6 +29,21 @@ void Transform::Rotate(const glm::vec3& v)
 	rotation += v;
 }
 
+void Transform::SetSize(const glm::vec3& v)
+{
+	size = v;
+}
+
+void Transform::SetPos(const glm::vec3& v)
+{
+	position = v;
+}
+
+void Transform::SetRot(const glm::vec3& v)
+{
+	rotation = v;
+}
+
 
 glm::vec3 Transform::Front() const
 {

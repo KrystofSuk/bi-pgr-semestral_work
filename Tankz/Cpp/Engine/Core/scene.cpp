@@ -19,20 +19,41 @@ void Scene::AddRenderer(MeshRenderer* renderer)
 
 void Scene::AddLight(Light* light)
 {
-	_lights.emplace_back(light);
+	lightData.lights.emplace_back(light);
+}
+
+GameObject* Scene::GetGameObject(const std::string& name) const
+{
+	return _gameObjects.at(name);
+}
+
+void Scene::Clear()
+{
+	for (auto& it : _gameObjects)
+		delete it.second;
+
+	_renderers.clear();
+	lightData.lights.clear();
+}
+
+void Scene::Update()
+{
+	for (auto& go : _gameObjects)
+	{
+		go.second->Update();
+	}
 }
 
 void Scene::Render(const glm::mat4& p, const glm::mat4& v)
 {
 	for (auto& rndr : _renderers)
 	{
-		rndr->Draw(p, v, _lights);
+		rndr->Draw(p, v, lightData);
 	}
 }
 
 Scene::~Scene()
 {
-	for (auto& it : _gameObjects) 
-		delete it.second;
+	Clear();
 }
 

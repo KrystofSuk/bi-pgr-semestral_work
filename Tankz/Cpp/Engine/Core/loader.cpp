@@ -4,6 +4,7 @@
 #include "Engine\Components\direction_light.h"
 #include "Engine\Components\point_light.h"
 #include "Engine\Components\spot_light.h"
+#include <Engine\Components\Custom\day_night.h>
 
 using json = nlohmann::json;
 
@@ -46,7 +47,7 @@ void Loader::LoadApp(const std::string& appPath, AppData& data)
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 }
 
-void Loader::LoadResources(const std::string& configPath, Resources & resources)
+void Loader::LoadResources(const std::string& configPath, Resources& resources)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 	std::cout << "---------LOADING RESOURCES---------" << std::endl;
@@ -96,7 +97,7 @@ void Loader::LoadResources(const std::string& configPath, Resources & resources)
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 }
 
-void Loader::LoadScene(const std::string& scenePath, Scene& scene, Resources & resources)
+void Loader::LoadScene(const std::string& scenePath, Scene& scene, Resources& resources)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 	std::cout << "---------LOADING SCENE---------" << std::endl;
@@ -105,6 +106,17 @@ void Loader::LoadScene(const std::string& scenePath, Scene& scene, Resources & r
 	std::ifstream in(scenePath);
 	json conf;
 	in >> conf;
+
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+	std::cout << "---------LIGHTNNG---------" << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
+
+	scene.lightData.fogDefaultColor = CreateVec3(conf.at("Lightning").at("fog_color"));
+	scene.lightData.fogColor = CreateVec3(conf.at("Lightning").at("fog_color"));
+	scene.lightData.fogIntensity = CreateFloat(conf.at("Lightning").at("fog_intensity"));
+	scene.lightData.fogRamp = CreateFloat(conf.at("Lightning").at("fog_ramp"));
+	scene.lightData.fogHeightIntensity = CreateFloat(conf.at("Lightning").at("height_intensity"));
+	scene.lightData.fogHeightRamp = CreateFloat(conf.at("Lightning").at("height_ramp"));
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 	std::cout << "---------GAME OBJECTS---------" << std::endl;
@@ -152,6 +164,12 @@ void Loader::LoadScene(const std::string& scenePath, Scene& scene, Resources & r
 				c->intensity = (*it2).at("intensity");
 				gameObject->AddComponent(c);
 				scene.AddLight(c);
+			}
+			if (name == "DayNight") {
+				DayNight* c = new DayNight(scene);
+				c->speed = CreateVec3((*it2).at("speed"));
+				c->nightFogColor = CreateVec3((*it2).at("nightFogColor"));
+				gameObject->AddComponent(c);
 			}
 		}
 

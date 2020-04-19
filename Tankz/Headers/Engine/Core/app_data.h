@@ -9,4 +9,10 @@ struct AppData
 	int tickRate;
 	int drawRate;
 	std::string name;
+
+	bool freeCamera = true;
+	static float time;
+	static float GetTime() {
+		return time;
+	}
 };

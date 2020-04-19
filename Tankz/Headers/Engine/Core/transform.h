@@ -16,6 +16,9 @@ struct Transform{
 	void Scale(const glm::vec3& v);
 	void Move(const glm::vec3& v);
 	void Rotate(const glm::vec3& v);
+	void SetSize(const glm::vec3& v);
+	void SetPos(const glm::vec3& v);
+	void SetRot(const glm::vec3& v);
 
 	glm::vec3 Front() const;
 	glm::vec3 Up() const;

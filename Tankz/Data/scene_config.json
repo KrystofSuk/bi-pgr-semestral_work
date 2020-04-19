@@ -1,17 +1,38 @@
 {
+	"Lightning": {
+		"fog_color": "0.8, 0.85, 0.9",
+		"fog_intensity": "0.01",
+		"fog_ramp": "1.4",
+		"height_intensity": "8.0",
+		"height_ramp": "1.2"
+	},
 	"GameObjects": [
 		{
 			"name": "Camera",
-			"position": "-2.0, 0.0, 0.0",
+			"position": "-20.0, 0.0, 0.0",
 			"rotation": "0.0, -30.0, 0.0",
+			"scale": "0.0, 0.0, 0.0",
+			"components": []
+		},
+		{
+			"name": "Static Pos 1",
+			"position": "-28.7167, 19.8025, -27.3545",
+			"rotation": "-36.9, 54.7, 0.0",
+			"scale": "0.0, 0.0, 0.0",
+			"components": []
+		},
+		{
+			"name": "Static Pos 2",
+			"position": "25.0, 6.0, 25.0",
+			"rotation": "-35.0, -120.0, 0.0",
 			"scale": "0.0, 0.0, 0.0",
 			"components": []
 		},
 		{
 			"name": "Direction Light",
 			"position": "-10.0, 5.0, 10.0",
-			"rotation": "0.0, 0.0, 0.0",
-			"scale": "-0.9, -0.9, -0.9",
+			"rotation": "95.0, 33.0, 00.0",
+			"scale": "40, 40, 40",
 			"components": [
 				{
 					"name": "MeshRenderer",
@@ -19,9 +40,14 @@
 					"material": "light_material"
 				},
 				{
+					"name": "DayNight",
+					"speed": "0.2, 0.0, 0.0",
+					"nightFogColor": "0.3, 0.32, 0.36"
+				},
+				{
 					"name": "DirectionLight",
-					"diffuse": "0.996, 1.0, 0.854",
-					"specular": "0.996, 1.0, 0.854",
+					"diffuse": "0.996, 1.0, 0.996",
+					"specular": "0.996, 1.0, 0.996",
 					"ambient": "0.1, 0.1, 0.1",
 					"shininess": 0.0,
 					"intensity": 1.0

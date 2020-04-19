@@ -8,6 +8,6 @@ void DirectionLight::ProcessLight(Shader* shader, const std::string& index)
 	shader->SetFloat3f("dir.diffuse", diffuse * intensity);
 	shader->SetFloat3f("dir.ambient", ambient * intensity);
 	shader->SetFloat3f("dir.specular", specular * intensity);
-	shader->SetFloat3f("dir.pos", glm::vec3(-pos[1], pos[2], -pos[0]));
+	shader->SetFloat3f("dir.pos", pos);
 	shader->SetFloat("dir.shininess", shininess);
 }

@@ -6,21 +6,47 @@
 - [x] Input handeling mouse
 - [x] Input handeling keyboard
 - [ ] 10 Ruznych obj + materials
-- [ ] 2 x Static camera
-- [ ] 1 x Free camera
+- [x] 2 x Static camera
+- [x] 1 x Free camera
 - [ ] 1 x Dynamicka camera po krivce
 - [x] Svetelne zdroje uniform 5 param
 - [x] Materials uniform
 - [x] Load sceny + konfigu po startu
 - [x] Per pixel
-- [ ] NPR
 - [x] Textura
 - [x] Skybox relativni
 - [ ] Pohybujici se textura
 - [ ] Dynamicka textura
 - [ ] Pohyb po krivce
-- [ ] Fog + height fog
-- [ ] Fog texture
+- [x] Fog + height fog
 - [ ] Kolize
 - [ ] Interakce
 - [ ] Web
+- [ ] Namespace
+- [ ] Cleanup
+
+## Check List
+
+- [ ] 2. 3
+- [ ] 3. 3
+- [x] 4. 1
+- [ ] 5. 1
+- [ ] 6. 4
+- [x] 7. 3
+- [x] 8. 3
+- [x] 9. 2
+- [x] 11. 2
+- [x] 12. 3
+- [ ] 13. 4
+- [x] 14. 2
+- [ ] 15. 1
+- [ ] 16. 1
+- [ ] 17. 5
+- [ ] 18. 3
+- [x] 19. 1
+- [ ] 20. 3
+- [ ] 21. 1
+
+
+Celkem: 17
+Min:    25
