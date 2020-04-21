@@ -64,7 +64,7 @@ Skybox::Skybox(const std::string filePath, Shader* shader) : Component("Skybox")
 	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
 	CHECK_GL_ERROR();
 
-	const char* suffix[] = { "Front", "Back", "Down", "Up", "Left", "Right" };
+	const char* suffix[] = { "front", "back", "down", "up", "left", "right" };
 	GLuint targets[] = {
 		GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
 		GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
@@ -94,10 +94,10 @@ void Skybox::Draw(const glm::mat4& p, const glm::mat4& v, Transform* c)
 {
 	glDepthMask(GL_FALSE);
 	shader->Use();
-	glm::mat4 view = glm::mat4(glm::mat3(v)); // remove translation from the view matrix
+	glm::mat4 view = glm::mat4(glm::mat3(v));
 	shader->SetFloatMatrix4f("V", view);
 	shader->SetFloatMatrix4f("P", p);
-	// skybox cube
+
 	glBindVertexArray(vao);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);

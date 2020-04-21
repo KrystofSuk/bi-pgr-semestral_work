@@ -18,6 +18,8 @@ out vec3 frag_v;
 
 out vec3 normal_m;
 out vec3 frag_m;
+out mat4 v;
+out mat4 m;
 
 
 out vec4 color;
@@ -29,8 +31,9 @@ void main() {
   gl_Position = PVM * vec4(position, 1.0);
   
   frag_v = (V * M * vec4(position, 1.0)).xyz;
-  normal_v = normalize((NM * vec4(normal, 0.0)).xyz);
-
+  normal_v = normalize((V * NM * vec4(normal, 0.0)).xyz);
+  v = V;
+  m = M;
   frag_m = (M * vec4(position, 1.0)).xyz;
   normal_m = (NM * vec4(normal, 0.0)).xyz;
 

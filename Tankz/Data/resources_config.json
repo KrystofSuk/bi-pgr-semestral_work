@@ -23,17 +23,26 @@
 			"diffuse": "1.0, 1.0, 1.0",
 			"specular": "1.0, 1.0, 1.0",
 			"emission": "0.0, 0.0, 0.0",
-			"shininess": "0.0",
+			"shininess": "100.0",
+			"diffuseMap": "false"
+		},
+		"tank_material": {
+			"name": "tank_material",
+			"shader": "per_fragment",
+			"diffuse": "1.0, 1.0, 1.0",
+			"specular": "1.0, 1.0, 1.0",
+			"emission": "0.0, 0.0, 0.0",
+			"shininess": "100.0",
 			"diffuseMap": "true"
 		},
-		"light_material" :{
+		"light_material": {
 			"name": "light_material",
 			"shader": "per_fragment",
 			"diffuse": "1.0, 1.0, 1.0",
 			"specular": "1.0, 1.0, 1.0",
 			"emission": "1.0, 1.0, 1.0",
 			"shininess": "0.0",
-			"diffuseMap": "true"
+			"diffuseMap": "false"
 		}
 	},
 	"Meshes": {
@@ -41,6 +50,16 @@
 			"name": "light_sphere",
 			"path": "./Data/Models/sphere.obj",
 			"shader": "debug"
+		},
+		"asteroid": {
+			"name": "asteroid",
+			"path": "./Data/Models/asteroid.obj",
+			"shader": "per_fragment"
+		},
+		"tank_base": {
+			"name": "tank_base",
+			"path": "./Data/Models/Tank_Base.obj",
+			"shader": "per_fragment"
 		},
 		"terrain_grass": {
 			"name": "terrain_grass",

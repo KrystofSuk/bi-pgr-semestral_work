@@ -78,8 +78,8 @@ Mesh::Mesh(const std::string& filename, Shader* shader)
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
 	glEnableVertexAttribArray(shader->GetLocation("position"));
 	glVertexAttribPointer(shader->GetLocation("position"), 3, GL_FLOAT, GL_FALSE, 0, 0);

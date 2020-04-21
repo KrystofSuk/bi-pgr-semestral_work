@@ -1,4 +1,4 @@
-﻿#include <iostream>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              #include <iostream>
 #include <string>
 #include <Windows.h>
 #include <time.h>
@@ -41,7 +41,7 @@ void SceneInit() {
 
 	if (s != nullptr)
 		delete s;
-	s = new Skybox("./Data/Textures/CloudyCrown_Midday", resources.GetShader("skybox"));
+	s = new Skybox("./Data/Textures/bkg1", resources.GetShader("skybox"));
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
 	std::cout << "---------INIT DONE---------" << std::endl;
@@ -74,12 +74,10 @@ void draw() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glm::mat4 viewMatrix;
 	glm::mat4 projectionMatrix;
-
-	glm::vec3 cameraPos = scene.camera->transform->position;
-
+	
 	viewMatrix = glm::lookAt(
-		cameraPos,
-		cameraPos + scene.camera->transform->Front(),
+		scene.camera->transform->position,
+		scene.camera->transform->position + scene.camera->transform->Front(),
 		scene.camera->transform->Up()
 	);
 
@@ -93,8 +91,8 @@ void draw() {
 }
 
 void keyboardCallback(unsigned char keyPressed, int mouseX, int mouseY) {
-
-	pressedKeys[keyPressed] = true;
+	std::cout << tolower(keyPressed) << std::endl;
+	pressedKeys[tolower(keyPressed)] = true;
 
 	switch (keyPressed) {
 	case 27:
@@ -103,11 +101,11 @@ void keyboardCallback(unsigned char keyPressed, int mouseX, int mouseY) {
 	}
 }
 
-void keyboardCallback(int keyPressed, int mouseX, int mouseY) {
+void keyboardSpecialCallback(int keyPressed, int mouseX, int mouseY) {
 
 }
 
-void keyboardUpCallback(int keyReleased, int mouseX, int mouseY) {
+void keyboardSpecialUpCallback(int keyReleased, int mouseX, int mouseY) {
 	pressedKeys[keyReleased] = false;
 
 	if (keyReleased == 1) {
@@ -128,11 +126,10 @@ void keyboardUpCallback(int keyReleased, int mouseX, int mouseY) {
 
 void keyboardUpCallback(unsigned char keyReleased, int mouseX, int mouseY) {
 
-	pressedKeys[keyReleased] = false;
+	pressedKeys[tolower(keyReleased)] = false;
 }
 
 void timerCallback(int) {
-
 
 	if (pressedKeys['r'] == true) {
 		SceneInit();
@@ -246,8 +243,8 @@ int main(int argc, char** argv) {
 	glutReshapeFunc(OnReshape);
 	glutKeyboardFunc(keyboardCallback);
 	glutKeyboardUpFunc(keyboardUpCallback);
-	glutSpecialFunc(keyboardCallback);
-	glutSpecialFunc(keyboardUpCallback);
+	glutSpecialFunc(keyboardSpecialCallback);
+	glutSpecialFunc(keyboardSpecialUpCallback);
 	glutDisplayFunc(draw);
 	glutMotionFunc(glutMotionCallback);
 	glutPassiveMotionFunc(glutPassiveMotionCallback);
@@ -264,3 +261,4 @@ int main(int argc, char** argv) {
 	glutMainLoop();
 	return 0;
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         

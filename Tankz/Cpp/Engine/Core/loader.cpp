@@ -77,9 +77,10 @@ void Loader::LoadResources(const std::string& configPath, Resources& resources)
 		resources.GetMaterial(name)->specular = CreateVec3((*it).at("specular"));
 		resources.GetMaterial(name)->emission = CreateVec3((*it).at("emission"));
 		resources.GetMaterial(name)->shininess = CreateFloat((*it).at("shininess"));
-		if ((*it).at("diffuse") == "true")
+
+		if ((*it).at("diffuseMap") == "true")
 			resources.GetMaterial(name)->diffuseMap = true;
-		if ((*it).at("diffuse") == "false")
+		if ((*it).at("diffuseMap") == "false")
 			resources.GetMaterial(name)->diffuseMap = false;
 	}
 

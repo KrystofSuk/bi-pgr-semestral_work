@@ -18,14 +18,15 @@ void DayNight::Update()
 	transform->Move(transform->Front() * -500.0f);
 
 	float tod = 1.0f;
-	tod = clip(transform->rotation[0] - 180.0, 0.0, 180.0);
+	float rot = transform->rotation[0];
+	tod = clip(transform->rotation[0] - 180.0 - (floor((int)rot / 360) * 360), 0.0, 180.0);
 	tod -= 90;
 	tod = abs(tod);
-	float fog = 1.0f;
+	float fog = 0.8f;
 	float blend = 1.0f;
 	float intensity = 1.0f;
 	if (tod < 90 && tod > 60) {
-		fog = 1.0 - abs((90.0 - tod) / 30.0 * 0.7);
+		fog = 1.0 - abs((90.0 - tod) / 30.0 * 0.5 + 0.2);
 		blend = 1.0 - abs((90.0 - tod) / 30.0 * 1.0);
 	}
 	else if (tod < 90 - 30) {
@@ -36,7 +37,7 @@ void DayNight::Update()
 	if (tod < 90) {
 		intensity = 1.0 - abs((90.0 - tod) / 90.0 * 0.5);
 	}
-	scene.lightData.fogAmount = fog;
+	scene.lightData.fogAmount = 1-fog;
 
 	scene.lightData.dirAmount = intensity;
 	scene.lightData.fogColor = glm::mix(scene.lightData.fogDefaultColor, nightFogColor, blend);

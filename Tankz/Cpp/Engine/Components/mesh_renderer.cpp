@@ -55,14 +55,21 @@ MeshRenderer::MeshRenderer(Mesh* mesh, Material* material) : Component("MeshRend
 void MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, const LightData & lightData)
 {
 	glm::mat4 m = glm::translate(glm::mat4(1.0f), transform->position);
+	m = glm::scale(m, transform->size);
 	m = glm::rotate(m, glm::radians(transform->rotation[0]), glm::vec3(1, 0, 0));
 	m = glm::rotate(m, glm::radians(transform->rotation[1]), glm::vec3(0, 1, 0));
 	m = glm::rotate(m, glm::radians(transform->rotation[2]), glm::vec3(0, 0, 1));
-	m = glm::scale(m, transform->size);
 
 	glm::mat4 PVM = p * v * m;
 
-	glm::mat4 normalMatrix = glm::transpose(glm::inverse(glm::mat4(glm::mat3(m))));
+	const glm::mat4 modelRotationMatrix = glm::mat4(
+		m[0],
+		m[1],
+		m[2],
+		glm::vec4(0.0f, 0.0f, 0.0f, 1.0f)
+	);
+
+	glm::mat4 normalMatrix = glm::transpose(glm::inverse(modelRotationMatrix));
 
 
 	Shader* shader = _material->shader;
@@ -99,7 +106,10 @@ void MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, const LightData 
 	shader->SetFloat3f("mat.diffuse", _material->diffuse);
 	shader->SetFloat3f("mat.specular", _material->specular);
 	shader->SetFloat("mat.shininess", _material->shininess);
-	shader->SetInt("mat.diffTex", _material->diffuseMap);
+	if (_material->diffuseMap)
+		shader->SetInt("mat.diffTex", 1);
+	if (!_material->diffuseMap)
+		shader->SetInt("mat.diffTex", 0);
 
 
 	shader->SetFloat3f("fog.color", lightData.fogColor);

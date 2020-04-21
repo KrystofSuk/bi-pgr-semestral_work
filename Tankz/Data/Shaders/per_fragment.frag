@@ -74,56 +74,61 @@ uniform int spot;
 uniform Material mat;
 
 in vec4 color;
+in mat4 v;
 
 out vec4 result_color;
 
 vec4 Direction_Light(){
-    vec3 normal_n = normalize(normal_v);
+    vec3 pos = (v * vec4(dir.pos, 0.0)).xyz;
 
-    vec3 L = normalize(dir.pos); 
-    float diffuse = max(dot(L, normal_n), 0.0);
+    vec3 lightDir = normalize(pos);
+    float diff = max(dot(normal_v, lightDir), 0.0);
+    vec3 diffuse = dir.diffuse * diff;  
 
-    vec3 V = normalize(-frag_v);
-    vec3 R = reflect(-L, normal_n);  
+    vec3 viewDir = normalize(-frag_v);
+    vec3 reflectDir = reflect(-lightDir, normal_v);  
+    float spec = 0;
+    if(mat.shininess > 0.0)
+       spec = pow(max(dot(viewDir, reflectDir), 0.0), mat.shininess);
+    vec3 specular = dir.specular * spec; 
     
-    float specular = 0;
-    if(dir.shininess > 0){
-        specular = pow(max(dot(V, R), 0.0), dir.shininess);
-    }
 
-    return vec4(dir.ambient + mat.diffuse * dir.diffuse * diffuse + mat.specular * dir.specular * specular, 1.0);
+    return vec4(dir.ambient + mat.diffuse * diffuse + mat.specular * specular, 1.0);
 }
 
 vec4 Point_Light(int i){
-    vec3 normal_n = normalize(normal_m);
-    vec3 lightDir = normalize(poi[i].pos - frag_m);
-    float diff = max(dot(normal_n, lightDir), 0.0);
-    vec3 diffuse = poi[i].diffuse * diff;  
+    vec3 pos = (vec4(poi[i].pos, 0.0)).xyz - frag_m;
 
-    vec3 viewDir = normalize(normalize(-frag_v) - frag_m);
-    vec3 reflectDir = reflect(-lightDir, normal_n);  
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), poi[i].shininess);
-    vec3 specular = poi[i].specular * spec; 
+    vec3 lightDir = normalize(v * vec4(pos, 0.0)).xyz;
+    float diff = max(dot(normalize(normal_v), lightDir), 0.0);
+    vec3 diffuse = poi[i].diffuse * diff;  
     
+    vec3 viewDir = normalize(normalize(-frag_v));
+    vec3 reflectDir = reflect(-lightDir, normal_v);  
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), mat.shininess);
+    vec3 specular = poi[i].specular * spec; 
+
+
 
     float distance = length(poi[i].pos - frag_m);
     float attenuation = 1.0 / (poi[i].constant + poi[i].linear * distance + poi[i].quadratic * (distance * distance));    
 
-    return vec4(poi[i].ambient * attenuation + mat.diffuse * diffuse * attenuation + mat.specular * specular * attenuation, 1.0);
+    return vec4(poi[i].ambient * attenuation + mat.diffuse * diffuse * attenuation + mat.specular * specular * attenuation , 1.0);
 }
 
 vec4 Spot_Light(int i){
-    vec3 normal_n = normalize(normal_m);
-    vec3 lightDir = normalize(spo[i].pos - frag_m);
-    float diff = max(dot(normal_n, lightDir), 0.0);
-    vec3 diffuse = spo[i].diffuse * diff;  
+     vec3 pos = (vec4(spo[i].pos, 0.0)).xyz - frag_m;
 
-    vec3 viewDir = normalize(normalize(-frag_v) - frag_m);
-    vec3 reflectDir = reflect(-lightDir, normal_n);  
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), spo[i].shininess);
+    vec3 lightDir = normalize(v * vec4(pos, 0.0)).xyz;
+    float diff = max(dot(normalize(normal_v), lightDir), 0.0);
+    vec3 diffuse = spo[i].diffuse * diff;  
+    
+    vec3 viewDir = normalize(normalize(-frag_v));
+    vec3 reflectDir = reflect(-lightDir, normal_v);  
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), mat.shininess);
     vec3 specular = spo[i].specular * spec; 
 
-    float theta = dot(lightDir, normalize(-spo[i].dir)); 
+    float theta = dot(lightDir, normalize(-(v * vec4(spo[i].dir, 0.0)).xyz)); 
     float epsilon = (spo[i].cutOff - spo[i].outerCutOff);
     float intensity = clamp((theta - spo[i].outerCutOff) / epsilon, 0.0, 1.0);
     diffuse  *= intensity;
@@ -184,23 +189,19 @@ float Noise3D(vec3 coord, float wavelength)
 }
 
 vec4 CalculateFog(vec4 color){
-
     float fogFactor = 1.0;
     float d = length(frag_v);
     fogFactor = exp(-pow(d*fog.inte, fog.ramp));
 
     fogFactor = clamp(fogFactor, 0.0, 1.0);
 
-    float fogCoef = Noise3D((frag_m.xzx + time)/40.0, 0.3)/3.0 + Noise3D((frag_m.xzx- time)/40.0, 1.4)/3.0 + Noise3D((frag_m.xzx + time/4.0 - time/5.0)/40.0, 0.8)/3.0;
+    float fogCoef = -Noise3D((-frag_m.xzx + time*1)/40.0, 0.1)/3.0 + Noise3D((frag_m.xzx- time*3)/40.0, 1.4)/2.0 + Noise3D((frag_m.xzx + time/4.0 - time/5.0)/40.0, 0.8)/1.0;
     
-    float heightCoef = pow(-frag_m.y/fog.inte_h, fog.ramp_h); 
-    if(frag_m.y > 0){
-        heightCoef = 0;
-    }
-    heightCoef = clamp(heightCoef*fogCoef, 0.0, 1.0);
+    float heightCoef = pow((-frag_m.y - 1 )/fog.inte_h, fog.ramp_h); 
+    heightCoef = clamp(heightCoef*fogCoef*fog.amount, 0.0, 1.0);
 
     vec4 fog_col = mix(vec4(fog.color, 1.0), color, fogFactor);
-    fog_col = mix(fog_col, vec4(fog.color, 1.0), heightCoef*fog.amount);
+    fog_col = mix(fog_col, vec4(fog.color, 1.0), heightCoef);
 
     return fog_col;
 }
