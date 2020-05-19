@@ -167,6 +167,7 @@
     <ClCompile Include="Cpp\Engine\Components\point_light.cpp" />
     <ClCompile Include="Cpp\Engine\Components\skybox.cpp" />
     <ClCompile Include="Cpp\Engine\Components\spot_light.cpp" />
+    <ClCompile Include="Cpp\Engine\Core\spline.cpp" />
     <ClCompile Include="Cpp\Engine\Core\transform.cpp" />
     <ClCompile Include="Cpp\Engine\Core\loader.cpp" />
     <ClCompile Include="Cpp\Engine\Core\scene.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Headers\Engine\Components\skybox.h" />
     <ClInclude Include="Headers\Engine\Components\spot_light.h" />
     <ClInclude Include="Headers\Engine\Core\light_data.h" />
+    <ClInclude Include="Headers\Engine\Core\spline.h" />
     <ClInclude Include="Headers\Engine\Core\transform.h" />
     <ClInclude Include="Headers\Engine\Core\loader.h" />
     <ClInclude Include="Headers\Engine\Core\scene.h" />
@@ -229,7 +231,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Data_4resources_3config_1json__JsonSchema="http://json-schema.org/draft-04/schema" />
+      <UserProperties />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

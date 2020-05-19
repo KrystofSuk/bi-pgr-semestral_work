@@ -15,6 +15,7 @@
 #include "Engine/Components/spot_light.h"
 #include "Engine/Components/skybox.h"
 #include <Engine\Components\Custom\day_night.h>
+#include "Engine/Core/spline.h"
 
 const int WIN_WIDTH = 1600;
 const int WIN_HEIGHT = 900;
@@ -26,12 +27,27 @@ AppData appData;
 
 Skybox* s = nullptr;
 
+Spline* sp;
+
 std::vector<Light*> lights;
 bool pressedKeys[255];
 
 bool inMode = true;
 
 void SceneInit() {
+
+	std::vector<glm::vec3> v;
+	v.push_back(glm::vec3(0.0f, 0.0f, 0.0f));
+	v.push_back(glm::vec3(0.0f, 1.0f, 0.0f));
+	v.push_back(glm::vec3(1.0f, 1.0f, 0.0f));
+	v.push_back(glm::vec3(1.0f, 0.0f, 0.0f));
+	v.push_back(glm::vec3(1.0f, 2.0f, 1.0f));
+	v.push_back(glm::vec3(0.0f, 2.0f, 1.0f));
+	v.push_back(glm::vec3(1.0f, 2.0f, -1.0f));
+	v.push_back(glm::vec3(-1.0f, 0.0f, 0.0f));
+
+	sp = new Spline(v);
+
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 	std::cout << "---------SCENE INIT---------" << std::endl;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
@@ -135,6 +151,7 @@ void keyboardUpCallback(unsigned char keyReleased, int mouseX, int mouseY) {
 	pressedKeys[tolower(keyReleased)] = false;
 }
 
+
 void timerCallback(int) {
 
 	if (pressedKeys['r'] == true) {
@@ -157,6 +174,8 @@ void timerCallback(int) {
 	}
 
 	scene.Update();
+
+	scene.GetGameObject("Ico Sphere")->transform->position = sp->Evaluate(0.001f * (float)glutGet(GLUT_ELAPSED_TIME));
 
 	glutTimerFunc(8, timerCallback, 0);
 	glutPostRedisplay();

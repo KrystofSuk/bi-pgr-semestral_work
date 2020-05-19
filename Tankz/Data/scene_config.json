@@ -1,6 +1,6 @@
 {
 	"Lightning": {
-		"fog_color": "0.6, 0.45, 0.4",
+		"fog_color": "0.50, 0.58, 0.58",
 		"fog_intensity": "0.01",
 		"fog_ramp": "1.4",
 		"height_intensity": "3.0",
