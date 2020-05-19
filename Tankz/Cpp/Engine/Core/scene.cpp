@@ -22,6 +22,12 @@ void Scene::AddLight(Light* light)
 	lightData.lights.emplace_back(light);
 }
 
+void Scene::Click(const unsigned char& id)
+{
+	for (auto& it : _gameObjects)
+		it.second->OnClick(id);
+}
+
 GameObject* Scene::GetGameObject(const std::string& name) const
 {
 	return _gameObjects.at(name);
@@ -44,11 +50,26 @@ void Scene::Update()
 	}
 }
 
-void Scene::Render(const glm::mat4& p, const glm::mat4& v)
+void Scene::Render(const glm::mat4& p, const glm::mat4& v, bool inMode)
 {
-	for (auto& rndr : _renderers)
-	{
-		rndr->Draw(p, v, lightData);
+	if (inMode == true) {
+		for (auto& rndr : _renderers)
+		{
+			GameObject* t = (GameObject*)rndr->gameObject;
+			if (t->name != "Terrain")
+			{
+				rndr->Draw(p, v, lightData);
+			}
+		}
+	}
+	else {
+		for (auto& rndr : _renderers) {
+			GameObject* t = (GameObject*)rndr->gameObject;
+			if (t->name != "Room")
+			{
+				rndr->Draw(p, v, lightData);
+			}
+		}
 	}
 }
 

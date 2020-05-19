@@ -66,7 +66,6 @@ uniform Light_S[4] spo;
 
 uniform Fog fog;
 
-uniform float time;
 uniform float dir_amou;
 uniform int point;
 uniform int spot;
@@ -75,6 +74,7 @@ uniform Material mat;
 
 in vec4 color;
 in mat4 v;
+in float time_v;
 
 out vec4 result_color;
 
@@ -195,7 +195,7 @@ vec4 CalculateFog(vec4 color){
 
     fogFactor = clamp(fogFactor, 0.0, 1.0);
 
-    float fogCoef = -Noise3D((-frag_m.xzx + time*1)/40.0, 0.1)/3.0 + Noise3D((frag_m.xzx- time*3)/40.0, 1.4)/2.0 + Noise3D((frag_m.xzx + time/4.0 - time/5.0)/40.0, 0.8)/1.0;
+    float fogCoef = -Noise3D((-frag_m.xzx + time_v*1)/40.0, 0.1)/3.0 + Noise3D((frag_m.xzx- time_v*3)/40.0, 1.4)/2.0 + Noise3D((frag_m.xzx + time_v/4.0 - time_v/5.0)/40.0, 0.8)/1.0;
     
     float heightCoef = pow((-frag_m.y - 1 )/fog.inte_h, fog.ramp_h); 
     heightCoef = clamp(heightCoef*fogCoef*fog.amount, 0.0, 1.0);
@@ -217,7 +217,7 @@ void main() {
         col += Spot_Light(i);
         col = clamp(col, 0.0, 1.0);
     }
-    col += Direction_Light() * dir_amou;
+    //col += Direction_Light() * dir_amou;
     col = clamp(col, 0.0, 1.0);
     col += vec4(mat.ambient,1.0);
 

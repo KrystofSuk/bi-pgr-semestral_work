@@ -10,6 +10,16 @@
 			"vert": "./Data/Shaders/per_fragment.vert",
 			"frag": "./Data/Shaders/per_fragment.frag"
 		},
+		"per_fragment_nofog": {
+			"name": "per_fragment_nofog",
+			"vert": "./Data/Shaders/per_fragment_nofog.vert",
+			"frag": "./Data/Shaders/per_fragment_nofog.frag"
+		},
+		"per_fragment_noise_pos": {
+			"name": "per_fragment_noise_pos",
+			"vert": "./Data/Shaders/per_fragment_noise_pos.vert",
+			"frag": "./Data/Shaders/per_fragment_noise_pos.frag"
+		},
 		"skybox": {
 			"name": "skybox",
 			"vert": "./Data/Shaders/skybox.vert",
@@ -35,6 +45,24 @@
 			"shininess": "100.0",
 			"diffuseMap": "true"
 		},
+		"room_material": {
+			"name": "room_material",
+			"shader": "per_fragment_nofog",
+			"diffuse": "1.0, 1.0, 1.0",
+			"specular": "1.0, 1.0, 1.0",
+			"emission": "0.0, 0.0, 0.0",
+			"shininess": "100.0",
+			"diffuseMap": "true"
+		},
+		"ico_material": {
+			"name": "ico_material",
+			"shader": "per_fragment_noise_pos",
+			"diffuse": "0.5, 0.5, 0.8",
+			"specular": "1.0, 1.0, 1.0",
+			"emission": "0.05, 0.05, 0.1",
+			"shininess": "100.0",
+			"diffuseMap": "false"
+		},
 		"light_material": {
 			"name": "light_material",
 			"shader": "per_fragment",
@@ -51,20 +79,20 @@
 			"path": "./Data/Models/sphere.obj",
 			"shader": "debug"
 		},
-		"asteroid": {
-			"name": "asteroid",
-			"path": "./Data/Models/asteroid.obj",
-			"shader": "per_fragment"
+		"room": {
+			"name": "room",
+			"path": "./Data/Models/room.obj",
+			"shader": "per_fragment_nofog"
 		},
-		"tank_base": {
-			"name": "tank_base",
-			"path": "./Data/Models/Tank_Base.obj",
-			"shader": "per_fragment"
-		},
-		"terrain_grass": {
-			"name": "terrain_grass",
+		"terrain": {
+			"name": "terrain",
 			"path": "./Data/Models/Terrain_Grass.obj",
 			"shader": "per_fragment"
+		},
+		"ico": {
+			"name": "ico",
+			"path": "./Data/Models/icosphere.obj",
+			"shader": "per_fragment_noise_pos"
 		}
 	}
 }

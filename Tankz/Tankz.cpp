@@ -1,4 +1,4 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              #include <iostream>
+#include <iostream>
 #include <string>
 #include <Windows.h>
 #include <time.h>
@@ -28,6 +28,8 @@ Skybox* s = nullptr;
 
 std::vector<Light*> lights;
 bool pressedKeys[255];
+
+bool inMode = true;
 
 void SceneInit() {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
@@ -71,10 +73,11 @@ void init() {
 
 
 void draw() {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearStencil(0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glm::mat4 viewMatrix;
 	glm::mat4 projectionMatrix;
-	
+
 	viewMatrix = glm::lookAt(
 		scene.camera->transform->position,
 		scene.camera->transform->position + scene.camera->transform->Front(),
@@ -85,13 +88,16 @@ void draw() {
 
 	s->Draw(projectionMatrix, viewMatrix, scene.camera->transform);
 
-	scene.Render(projectionMatrix, viewMatrix);
-
+	glEnable(GL_STENCIL_TEST);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+	scene.Render(projectionMatrix, viewMatrix, inMode);
+	//std::cout << scene.camera->transform->position.x << " " << scene.camera->transform->position.y << " " << scene.camera->transform->position.z << std::endl;
+	//std::cout << scene.camera->transform->rotation.x << " " << scene.camera->transform->rotation.y << " " << scene.camera->transform->rotation.z << std::endl << std::endl;
 	glutSwapBuffers();
 }
 
 void keyboardCallback(unsigned char keyPressed, int mouseX, int mouseY) {
-	std::cout << tolower(keyPressed) << std::endl;
+	//std::cout << tolower(keyPressed) << std::endl;
 	pressedKeys[tolower(keyPressed)] = true;
 
 	switch (keyPressed) {
@@ -177,6 +183,9 @@ void MenuProcess(int i) {
 	if (i == 4) {
 		scene.GetGameObject("Direction Light")->GetComponent<DayNight>()->use = !scene.GetGameObject("Direction Light")->GetComponent<DayNight>()->use;
 	}
+	if (i == 98) {
+		inMode = !inMode;
+	}
 	if (i == 99) {
 		glutLeaveMainLoop();
 	}
@@ -194,6 +203,7 @@ void createMenu() {
 	glutCreateMenu(MenuProcess);
 	glutAddSubMenu("Camera", cameraSub);
 	glutAddSubMenu("Lightning", lightningSub);
+	glutAddMenuEntry("Mode", 98);
 	glutAddMenuEntry("Exit", 99);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
@@ -223,6 +233,25 @@ void glutPassiveMotionCallback(int x, int y) {
 	glutPostRedisplay();
 }
 
+void mouseCallback(int button, int state, int x, int y){
+
+	if (state != GLUT_DOWN)
+		return;
+
+	GLbyte color[4];
+	GLfloat depth;
+	GLuint index;
+
+	glReadPixels(x, appData.width - y - 1, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
+	glReadPixels(x, appData.height - y - 1, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+	glReadPixels(x, appData.height - y - 1, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
+
+	printf("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth %f, stencil index %u\n",
+		x, y, color[0], color[1], color[2], color[3], depth, index);
+
+	scene.Click(index);
+}
+
 void OnReshape(GLint newWidth, GLint newHeight) {
 	appData.width = newWidth;
 	appData.height = newHeight;
@@ -242,6 +271,7 @@ int main(int argc, char** argv) {
 
 	glutReshapeFunc(OnReshape);
 	glutKeyboardFunc(keyboardCallback);
+	glutMouseFunc(mouseCallback);
 	glutKeyboardUpFunc(keyboardUpCallback);
 	glutSpecialFunc(keyboardSpecialCallback);
 	glutSpecialFunc(keyboardSpecialUpCallback);
@@ -261,4 +291,3 @@ int main(int argc, char** argv) {
 	glutMainLoop();
 	return 0;
 }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         

@@ -20,11 +20,12 @@ public:
 	void AddGameObject(GameObject* gameObject);
 	void AddRenderer(MeshRenderer* renderer);
 	void AddLight(Light* light);
+	void Click(const unsigned char& id);
 
 	GameObject* GetGameObject(const std::string& name) const;
 
 	void Clear();
 	void Update();
-	void Render(const glm::mat4& p, const glm::mat4& v);
+	void Render(const glm::mat4& p, const glm::mat4& v, bool inMode);
 	~Scene();
 };

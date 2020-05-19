@@ -4,6 +4,7 @@
 #include <string>
 
 #include "Engine/Core/component.h"
+#include "Engine/Core/game_object.h"
 #include "Engine/Core/transform.h"
 #include "Engine/Core/shader.h"
 #include "Engine/Core/material.h"

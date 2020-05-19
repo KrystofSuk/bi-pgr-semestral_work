@@ -18,6 +18,10 @@ Light::~Light()
 {
 }
 
+void Light::OnClick() {
+	on = !on;
+}
+
 std::ostream& operator<<(std::ostream& out, const Light& light)
 {
 	out << light.Print() << std::endl;

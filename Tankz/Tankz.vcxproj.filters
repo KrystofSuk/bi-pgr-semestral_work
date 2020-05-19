@@ -165,5 +165,9 @@
     <None Include="Data\Shaders\skybox.vert" />
     <None Include="Data\resources_config.json" />
     <None Include="Data\app_config.json" />
+    <None Include="Data\Shaders\per_fragment_nofog.frag" />
+    <None Include="Data\Shaders\per_fragment_nofog.vert" />
+    <None Include="Data\Shaders\per_fragment_noise_pos.vert" />
+    <None Include="Data\Shaders\per_fragment_noise_pos.frag" />
   </ItemGroup>
 </Project>

@@ -124,3 +124,4 @@ Mesh::Mesh(const std::string& filename, Shader* shader)
 
 #pragma endregion
 }
+

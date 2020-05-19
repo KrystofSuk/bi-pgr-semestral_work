@@ -8,6 +8,8 @@
 struct Light : public Component {
 	unsigned type = 0;
 
+	bool on = true;
+
 	glm::vec3 diffuse;
 	glm::vec3 ambient;
 	glm::vec3 specular;
@@ -16,6 +18,7 @@ struct Light : public Component {
 	float shininess;
 		
 	Light();
+	void OnClick();
 
 	virtual void ProcessLight(Shader* shader, const std::string& index = "") = 0;
 

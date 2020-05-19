@@ -9,6 +9,10 @@ Component::Component(std::string name) : name(name)
 {
 }
 
+void Component::OnClick()
+{
+}
+
 void Component::Update()
 {
 }

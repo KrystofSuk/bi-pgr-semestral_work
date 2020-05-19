@@ -128,6 +128,10 @@ void MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, const LightData 
 	}
 
 	glBindVertexArray(_mesh->vao);
+
+	GameObject* go = (GameObject*)(gameObject);
+	glStencilFunc(GL_ALWAYS, go->id, -1);
+
 	glDrawElements(GL_TRIANGLES, _mesh->faces * 3, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
