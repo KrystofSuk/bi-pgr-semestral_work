@@ -1,12 +1,12 @@
 #include "Engine/Components/point_light.h"
 #include "Engine/Core/game_object.h"
 
-PointLight::PointLight()
+sukkryst::PointLight::PointLight()
 {
 	type = 1;
 }
 
-void PointLight::ProcessLight(Shader* shader, const std::string& index)
+void sukkryst::PointLight::ProcessLight(Shader* shader, const std::string& index)
 {
 	if (on) {
 		shader->SetFloat3f("poi[" + index + "].diffuse", diffuse * intensity);

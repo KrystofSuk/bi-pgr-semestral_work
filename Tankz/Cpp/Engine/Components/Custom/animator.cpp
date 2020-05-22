@@ -1,12 +1,12 @@
 #include "..\..\..\..\Headers\Engine\Components\Custom\animator.h"
 
-Animator::Animator(Spline* newTrack, const std::string& name) : Component("Animator")
+sukkryst::Animator::Animator(Spline* newTrack, const std::string& name) : Component("Animator")
 {
 	track = newTrack;
 	param = name;
 }
 
-void Animator::Update()
+void sukkryst::Animator::Update()
 {
 	if (!animating)
 		return;
@@ -18,21 +18,21 @@ void Animator::Update()
 		transform->rotation = track->Evaluate(internalTime);
 }
 
-void Animator::OnClick()
+void sukkryst::Animator::OnClick()
 {
 	animating = !animating;
 }
 
-std::string Animator::Print() const
+std::string sukkryst::Animator::Print() const
 {
 	return std::string();
 }
 
-Animator::~Animator()
+sukkryst::Animator::~Animator()
 {
 }
 
-std::ostream& operator<<(std::ostream& out, const Animator& component)
+std::ostream& operator<<(std::ostream& out, const sukkryst::Animator& component)
 {
 	return out << component.Print();
 }

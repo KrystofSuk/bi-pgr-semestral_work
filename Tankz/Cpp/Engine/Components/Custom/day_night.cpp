@@ -4,11 +4,11 @@ float clip(float n, float lower, float upper) {
 	return std::max(lower, std::min(n, upper));
 }
 
-DayNight::DayNight(Scene& scene) : Component("DayNight"), scene(scene)
+sukkryst::DayNight::DayNight(Scene& scene) : Component("DayNight"), scene(scene)
 {
 }
 
-void DayNight::Update()
+void sukkryst::DayNight::Update()
 {
 	if (!use)
 		return;
@@ -43,17 +43,17 @@ void DayNight::Update()
 	scene.lightData.fogColor = glm::mix(scene.lightData.fogDefaultColor, nightFogColor, blend);
 }
 
-std::string DayNight::Print() const
+std::string sukkryst::DayNight::Print() const
 {
 	return "";
 }
 
-DayNight::~DayNight()
+sukkryst::DayNight::~DayNight()
 {
 
 }
 
-std::ostream& operator<<(std::ostream& out, const DayNight& component)
+std::ostream& operator<<(std::ostream& out, const sukkryst::DayNight& component)
 {
 	return out;
 }

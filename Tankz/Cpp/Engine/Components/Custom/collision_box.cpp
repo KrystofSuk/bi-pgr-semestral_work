@@ -1,11 +1,11 @@
 #include "..\..\..\..\Headers\Engine\Components\Custom\collision_box.h"
 
-CollisionBox::CollisionBox(const glm::vec3& box) : Component("CollisionBox")
+sukkryst::CollisionBox::CollisionBox(const glm::vec3& box) : Component("CollisionBox")
 {
 	size = box;
 }
 
-void CollisionBox::Update()
+void sukkryst::CollisionBox::Update()
 {
 	if (transform->position.x > size.x) {
 		transform->position.x = size.x;
@@ -28,16 +28,16 @@ void CollisionBox::Update()
 }
 
 
-std::string CollisionBox::Print() const
+std::string sukkryst::CollisionBox::Print() const
 {
 	return std::string();
 }
 
-CollisionBox::~CollisionBox()
+sukkryst::CollisionBox::~CollisionBox()
 {
 }
 
-std::ostream& operator<<(std::ostream& out, const CollisionBox& component)
+std::ostream& operator<<(std::ostream& out, const sukkryst::CollisionBox& component)
 {
 	return out << component.Print();
 }

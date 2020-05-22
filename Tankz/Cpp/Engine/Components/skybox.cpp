@@ -1,6 +1,6 @@
 #include "Engine/Components/skybox.h"
 
-Skybox::Skybox(const std::string filePath, Shader* shader) : Component("Skybox"), shader(shader)
+sukkryst::Skybox::Skybox(const std::string filePath, Shader* shader) : Component("Skybox"), shader(shader)
 {
 	float skyboxVertices[] = {      
 		-1.0f,  1.0f, -1.0f,
@@ -90,7 +90,7 @@ Skybox::Skybox(const std::string filePath, Shader* shader) : Component("Skybox")
 	CHECK_GL_ERROR();
 }
 
-void Skybox::Draw(const glm::mat4& p, const glm::mat4& v, Transform* c)
+void sukkryst::Skybox::Draw(const glm::mat4& p, const glm::mat4& v, Transform* c)
 {
 	glDepthMask(GL_FALSE);
 	shader->Use();
@@ -106,16 +106,16 @@ void Skybox::Draw(const glm::mat4& p, const glm::mat4& v, Transform* c)
 	glDepthMask(GL_TRUE);
 }
 
-std::string Skybox::Print() const
+std::string sukkryst::Skybox::Print() const
 {
 	return std::string();
 }
 
-Skybox::~Skybox()
+sukkryst::Skybox::~Skybox()
 {
 }
 
-std::ostream& operator<<(std::ostream& out, const Skybox& skybox)
+std::ostream& operator<<(std::ostream& out, const sukkryst::Skybox& skybox)
 {
 	return out;
 }

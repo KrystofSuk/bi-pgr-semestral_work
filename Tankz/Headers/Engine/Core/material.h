@@ -4,23 +4,27 @@
 
 #include "Engine/Core/shader.h"
 
-struct Material {
-	std::string name;
+namespace sukkryst {
 
-	Shader* shader;
+	struct Material {
+		std::string name;
 
-	//Properties
-	//Colors
-	glm::vec3 diffuse;
-	glm::vec3 specular;
-	glm::vec3 emission;
+		Shader* shader;
 
-	//Floats
-	float shininess;
+		//Properties
+		//Colors
+		glm::vec3 diffuse;
+		glm::vec3 specular;
+		glm::vec3 emission;
 
-	//Maps
-	bool diffuseMap;
-	
-	Material(const std::string& name, Shader * shader);
-	~Material();
-};
+		//Floats
+		float shininess;
+
+		//Maps
+		bool diffuseMap;
+
+		Material(const std::string& name, Shader* shader);
+		~Material();
+	};
+
+}

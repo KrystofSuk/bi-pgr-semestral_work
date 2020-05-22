@@ -1,22 +1,22 @@
 #include "Engine/Utils/mesh_cache.h"
 
 
-MeshCache::MeshCache()
+sukkryst::MeshCache::MeshCache()
 {
 }
 
-void MeshCache::LoadMesh(const std::string& name, const std::string& filename, Shader* shader)
+void sukkryst::MeshCache::LoadMesh(const std::string& name, const std::string& filename, Shader* shader)
 {
 	Mesh* mesh = new Mesh(filename, shader);
 	_meshCache[name] = mesh;
 }
 
-Mesh* MeshCache::GetMesh(const std::string& name) const
+sukkryst::Mesh* sukkryst::MeshCache::GetMesh(const std::string& name) const
 {
 	return _meshCache.at(name);
 }
 
-MeshCache::~MeshCache()
+sukkryst::MeshCache::~MeshCache()
 {
 	auto it = _meshCache.begin();
 	while (it != _meshCache.end())

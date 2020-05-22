@@ -1,39 +1,39 @@
 #include "Engine/Core/scene.h"
 
-Scene::Scene()
+sukkryst::Scene::Scene()
 {
 
 }
 
-void Scene::AddGameObject(GameObject* gameObject)
+void sukkryst::Scene::AddGameObject(GameObject* gameObject)
 {
 	_gameObjects[gameObject->name] = gameObject;
 	if (gameObject->name == "Camera")
 		camera = gameObject;
 }
 
-void Scene::AddRenderer(MeshRenderer* renderer)
+void sukkryst::Scene::AddRenderer(MeshRenderer* renderer)
 {
 	_renderers.emplace_back(renderer);
 }
 
-void Scene::AddLight(Light* light)
+void sukkryst::Scene::AddLight(Light* light)
 {
 	lightData.lights.emplace_back(light);
 }
 
-void Scene::Click(const unsigned char& id)
+void sukkryst::Scene::Click(const unsigned char& id)
 {
 	for (auto& it : _gameObjects)
 		it.second->OnClick(id);
 }
 
-GameObject* Scene::GetGameObject(const std::string& name) const
+sukkryst::GameObject* sukkryst::Scene::GetGameObject(const std::string& name) const
 {
 	return _gameObjects.at(name);
 }
 
-void Scene::Clear()
+void sukkryst::Scene::Clear()
 {
 	for (auto& it : _gameObjects)
 		delete it.second;
@@ -42,7 +42,7 @@ void Scene::Clear()
 	lightData.lights.clear();
 }
 
-void Scene::Update()
+void sukkryst::Scene::Update()
 {
 	for (auto& go : _gameObjects)
 	{
@@ -50,7 +50,7 @@ void Scene::Update()
 	}
 }
 
-void Scene::Render(const glm::mat4& p, const glm::mat4& v, bool inMode)
+void sukkryst::Scene::Render(const glm::mat4& p, const glm::mat4& v, bool inMode)
 {
 	if (inMode == true) {
 		for (auto& rndr : _renderers)
@@ -73,7 +73,7 @@ void Scene::Render(const glm::mat4& p, const glm::mat4& v, bool inMode)
 	}
 }
 
-Scene::~Scene()
+sukkryst::Scene::~Scene()
 {
 	Clear();
 }

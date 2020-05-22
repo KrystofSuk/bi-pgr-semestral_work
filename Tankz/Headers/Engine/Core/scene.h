@@ -8,24 +8,28 @@
 #include <Engine/Components/light.h>
 #include <Engine\Core\light_data.h>
 
-class Scene {
-	std::unordered_map<std::string, GameObject*> _gameObjects;
-	std::vector<MeshRenderer*> _renderers;
-public:
-	LightData lightData;
+namespace sukkryst {
 
-	GameObject * camera;
+	class Scene {
+		std::unordered_map<std::string, GameObject*> _gameObjects;
+		std::vector<MeshRenderer*> _renderers;
+	public:
+		LightData lightData;
 
-	Scene();
-	void AddGameObject(GameObject* gameObject);
-	void AddRenderer(MeshRenderer* renderer);
-	void AddLight(Light* light);
-	void Click(const unsigned char& id);
+		GameObject* camera;
 
-	GameObject* GetGameObject(const std::string& name) const;
+		Scene();
+		void AddGameObject(GameObject* gameObject);
+		void AddRenderer(MeshRenderer* renderer);
+		void AddLight(Light* light);
+		void Click(const unsigned char& id);
 
-	void Clear();
-	void Update();
-	void Render(const glm::mat4& p, const glm::mat4& v, bool inMode);
-	~Scene();
-};
+		GameObject* GetGameObject(const std::string& name) const;
+
+		void Clear();
+		void Update();
+		void Render(const glm::mat4& p, const glm::mat4& v, bool inMode);
+		~Scene();
+	};
+
+}

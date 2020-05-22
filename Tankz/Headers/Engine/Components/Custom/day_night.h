@@ -2,22 +2,26 @@
 #include "Engine/Core/component.h"
 #include "Engine/Core/scene.h"
 
-struct DayNight : public Component {
+namespace sukkryst {
 
-	bool use = true;
+	struct DayNight : public Component {
 
-	Scene& scene;
-	glm::vec3 speed;
-	glm::vec3 nightFogColor;
-	float intensity = 1.0f;
+		bool use = true;
 
-	DayNight(Scene& scene);
+		Scene& scene;
+		glm::vec3 speed;
+		glm::vec3 nightFogColor;
+		float intensity = 1.0f;
 
-	void Update();
+		DayNight(Scene& scene);
 
-	std::string Print() const;
+		void Update();
 
-	friend std::ostream& operator<<(std::ostream& out, const DayNight& component);
+		std::string Print() const;
 
-	~DayNight();
-};
+		friend std::ostream& operator<<(std::ostream& out, const DayNight& component);
+
+		~DayNight();
+	};
+
+}

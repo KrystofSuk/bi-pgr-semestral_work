@@ -9,24 +9,28 @@
 
 using json = nlohmann::json;
 
-glm::vec3 CreateVec3(const std::string& v) {
-	std::stringstream ss(v);
-	std::string value;
-	float* floats = new float[3];
-	int i = 0;
-	while (std::getline(ss, value, ',')) {
-		floats[i] = atof(value.c_str());
-		i++;
+namespace sukkryst {
+
+	glm::vec3 CreateVec3(const std::string& v) {
+		std::stringstream ss(v);
+		std::string value;
+		float* floats = new float[3];
+		int i = 0;
+		while (std::getline(ss, value, ',')) {
+			floats[i] = atof(value.c_str());
+			i++;
+		}
+
+		return glm::vec3(floats[0], floats[1], floats[2]);
 	}
 
-	return glm::vec3(floats[0], floats[1], floats[2]);
+	float CreateFloat(const std::string& v) {
+		return atof(v.c_str());
+	}
+
 }
 
-float CreateFloat(const std::string& v) {
-	return atof(v.c_str());
-}
-
-void Loader::LoadApp(const std::string& appPath, AppData& data)
+void sukkryst::Loader::LoadApp(const std::string& appPath, AppData& data)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 	std::cout << "---------LOADING APPDATA---------" << std::endl;
@@ -48,7 +52,7 @@ void Loader::LoadApp(const std::string& appPath, AppData& data)
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 }
 
-void Loader::LoadResources(const std::string& configPath, Resources& resources)
+void sukkryst::Loader::LoadResources(const std::string& configPath, Resources& resources)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 	std::cout << "---------LOADING RESOURCES---------" << std::endl;
@@ -99,7 +103,7 @@ void Loader::LoadResources(const std::string& configPath, Resources& resources)
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 }
 
-void Loader::LoadScene(const std::string& scenePath, Scene& scene, Resources& resources)
+void sukkryst::Loader::LoadScene(const std::string& scenePath, Scene& scene, Resources& resources)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 	std::cout << "---------LOADING SCENE---------" << std::endl;

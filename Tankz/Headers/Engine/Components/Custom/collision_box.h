@@ -3,19 +3,23 @@
 #include "Engine/Core/component.h"
 #include "Engine/Core/spline.h"
 
-struct CollisionBox : public Component {
+namespace sukkryst {
 
-	glm::vec3 size;
-	float yMin;
+	struct CollisionBox : public Component {
 
-	CollisionBox(const glm::vec3& box);
+		glm::vec3 size;
+		float yMin;
 
-	void Update();
+		CollisionBox(const glm::vec3& box);
+
+		void Update();
 
 
-	std::string Print() const;
+		std::string Print() const;
 
-	friend std::ostream& operator<<(std::ostream& out, const CollisionBox& component);
+		friend std::ostream& operator<<(std::ostream& out, const CollisionBox& component);
 
-	~CollisionBox();
-};
+		~CollisionBox();
+	};
+
+}

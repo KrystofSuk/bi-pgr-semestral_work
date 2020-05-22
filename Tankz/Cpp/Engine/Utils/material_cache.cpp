@@ -1,22 +1,22 @@
 #include "Engine/Utils/material_cache.h"
 
 
-MaterialCache::MaterialCache()
+sukkryst::MaterialCache::MaterialCache()
 {
 }
 
-void MaterialCache::LoadMaterial(const std::string& name, Shader* shader)
+void sukkryst::MaterialCache::LoadMaterial(const std::string& name, Shader* shader)
 {
 	Material* material = new Material(name, shader);
 	_materialCache[name] = material;
 }
 
-Material* MaterialCache::GetMaterial(const std::string& name) const
+sukkryst::Material* sukkryst::MaterialCache::GetMaterial(const std::string& name) const
 {
 	return _materialCache.at(name);
 }
 
-MaterialCache::~MaterialCache()
+sukkryst::MaterialCache::~MaterialCache()
 {
 	auto it = _materialCache.begin();
 	while (it != _materialCache.end())

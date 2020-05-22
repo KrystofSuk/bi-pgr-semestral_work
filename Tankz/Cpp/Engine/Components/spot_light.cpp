@@ -1,12 +1,12 @@
 #include "Engine/Components/spot_light.h"
 #include "Engine/Core/game_object.h"
 
-SpotLight::SpotLight()
+sukkryst::SpotLight::SpotLight()
 {
 	type = 2;
 }
 
-void SpotLight::ProcessLight(Shader* shader, const std::string& index)
+void sukkryst::SpotLight::ProcessLight(Shader* shader, const std::string& index)
 {
 	glm::vec3 pos = transform->position;//static_cast<GameObject*>(gameObject)->transform->position;
 	glm::vec3 dir = transform->Front();

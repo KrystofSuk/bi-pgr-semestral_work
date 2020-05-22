@@ -5,24 +5,28 @@
 #include "Engine/Core/component.h"
 #include "Engine/Core/shader.h"
 
-struct Light : public Component {
-	unsigned type = 0;
+namespace sukkryst {
 
-	bool on = true;
+	struct Light : public Component {
+		unsigned type = 0;
 
-	glm::vec3 diffuse;
-	glm::vec3 ambient;
-	glm::vec3 specular;
+		bool on = true;
 
-	float intensity;
-	float shininess;
-		
-	Light();
-	void OnClick();
+		glm::vec3 diffuse;
+		glm::vec3 ambient;
+		glm::vec3 specular;
 
-	virtual void ProcessLight(Shader* shader, const std::string& index = "") = 0;
+		float intensity;
+		float shininess;
 
-	virtual std::string Print() const;
-	friend std::ostream& operator<<(std::ostream& out, const Light& light);
-	virtual ~Light();
-};
+		Light();
+		void OnClick();
+
+		virtual void ProcessLight(Shader* shader, const std::string& index = "") = 0;
+
+		virtual std::string Print() const;
+		friend std::ostream& operator<<(std::ostream& out, const Light& light);
+		virtual ~Light();
+	};
+
+}

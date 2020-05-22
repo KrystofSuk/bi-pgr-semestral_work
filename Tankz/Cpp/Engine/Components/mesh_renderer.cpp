@@ -1,58 +1,13 @@
 ﻿#include "Engine/Components/mesh_renderer.h"
 #include "Engine/Core/app_data.h"
-extern float time;
-//**************************************************************************************************
-/// Checks whether vector is zero-length or not.
-bool isVectorNull(const glm::vec3& vect) {
 
-	return !vect.x && !vect.y && !vect.z;
-}
-
-//**************************************************************************************************
-/// Align (rotate and move) current coordinate system to given parameters.
-/**
- This function works similarly to \ref gluLookAt, however it is used for object transform
- rather than view transform. The current coordinate system is moved so that origin is moved
- to the \a position. Object's local front (-Z) direction is rotated to the \a front and
- object's local up (+Y) direction is rotated so that angle between its local up direction and
- \a up vector is minimum.
-
- \param[in]  position           Position of the origin.
- \param[in]  front              Front direction.
- \param[in]  up                 Up vector.
- */
-glm::mat4 alignObject(const glm::vec3& position, const glm::vec3& front, const glm::vec3& up) {
-
-	glm::vec3 z = -glm::normalize(front);
-
-	if (isVectorNull(z))
-		z = glm::vec3(0.0, 0.0, 1.0);
-
-	glm::vec3 x = glm::normalize(glm::cross(up, z));
-
-	if (isVectorNull(x))
-		x = glm::vec3(1.0, 0.0, 0.0);
-
-	glm::vec3 y = glm::cross(z, x);
-	//mat4 matrix = mat4(1.0f);
-	glm::mat4 matrix = glm::mat4(
-		x.x, x.y, x.z, 0.0,
-		y.x, y.y, y.z, 0.0,
-		z.x, z.y, z.z, 0.0,
-		position.x, position.y, position.z, 1.0
-	);
-
-	return matrix;
-}
-
-
-MeshRenderer::MeshRenderer(Mesh* mesh, Material* material) : Component("MeshRenderer")
+sukkryst::MeshRenderer::MeshRenderer(Mesh* mesh, Material* material) : Component("MeshRenderer")
 {
 	_mesh = mesh;
 	_material = material;
 }
 
-void MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, const LightData & lightData)
+void sukkryst::MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, const LightData & lightData)
 {
 	glm::mat4 m = glm::translate(glm::mat4(1.0f), transform->position);
 	m = glm::scale(m, transform->size);
@@ -137,16 +92,16 @@ void MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, const LightData 
 }
 
 
-std::string MeshRenderer::Print() const
+std::string sukkryst::MeshRenderer::Print() const
 {
 	return name;
 }
 
-MeshRenderer::~MeshRenderer()
+sukkryst::MeshRenderer::~MeshRenderer()
 {
 }
 
-std::ostream& operator<<(std::ostream& out, const MeshRenderer& renderer)
+std::ostream& operator<<(std::ostream& out, const sukkryst::MeshRenderer& renderer)
 {
 	out << renderer.Print() << std::endl;
 	return out;

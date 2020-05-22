@@ -1,17 +1,17 @@
 #include "Engine/Core/spline.h"
 #include <iostream>
 
-Spline::Spline(const std::vector<glm::vec3>& points)
+sukkryst::Spline::Spline(const std::vector<glm::vec3>& points)
 {
 	this->points = points;
 }
 
-Spline::Spline()
+sukkryst::Spline::Spline()
 {
 
 }
 
-glm::vec3 Spline::Evaluate(const float& tmain)
+glm::vec3 sukkryst::Spline::Evaluate(const float& tmain)
 {
 	int index = fmod(tmain, points.size());
 	float t = fmod(tmain, points.size()) - floor(fmod(tmain, points.size()));

@@ -2,7 +2,7 @@
 #include "Engine/Core/game_object.h"
 
 
-void DirectionLight::ProcessLight(Shader* shader, const std::string& index)
+void sukkryst::DirectionLight::ProcessLight(Shader* shader, const std::string& index)
 {
 	glm::vec3 pos = transform->position;
 	if (on) {

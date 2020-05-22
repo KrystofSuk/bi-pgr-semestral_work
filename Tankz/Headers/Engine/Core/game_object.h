@@ -7,39 +7,43 @@
 #include "Engine/Core/component.h"
 #include "Engine/Core/transform.h"
 
-class GameObject {
-private:
-	std::unordered_map<std::string, Component*> _components;
-public:
-	Transform * transform;
-	std::string name;
-	unsigned char id;
+namespace sukkryst {
 
-	GameObject(const std::string & name);
+	class GameObject {
+	private:
+		std::unordered_map<std::string, Component*> _components;
+	public:
+		Transform* transform;
+		std::string name;
+		unsigned char id;
 
-	void Update();
+		GameObject(const std::string& name);
 
-	void AddComponent(Component * component);
+		void Update();
 
-	void OnClick(const unsigned char& id);
+		void AddComponent(Component* component);
 
-	template <typename T>
-	T* GetComponent() const;
+		void OnClick(const unsigned char& id);
 
-	~GameObject();
-};
+		template <typename T>
+		T* GetComponent() const;
 
-template<typename T>
-inline T* GameObject::GetComponent() const
-{
-	
-	auto it = _components.begin();
-	while (it != _components.end())
+		~GameObject();
+	};
+
+	template<typename T>
+	inline T* GameObject::GetComponent() const
 	{
-		if (dynamic_cast<T*>(it->second) != nullptr)
-			return dynamic_cast<T*>(it->second);
-		it++;
+
+		auto it = _components.begin();
+		while (it != _components.end())
+		{
+			if (dynamic_cast<T*>(it->second) != nullptr)
+				return dynamic_cast<T*>(it->second);
+			it++;
+		}
+
+		throw ("Component not found!");
 	}
-	
-	throw ("Component not found!");
+
 }

@@ -7,20 +7,24 @@
 #include "Engine/Core/shader.h"
 #include "Engine/Core/transform.h"
 
-class Skybox : public Component {
-public:
-	GLuint vao, vbo, ebo;
-	GLuint texture;
-	Shader * shader;
-	unsigned int faces, vert;
+namespace sukkryst {
 
-	Skybox(const std::string filePath, Shader* shader);
+	class Skybox : public Component {
+	public:
+		GLuint vao, vbo, ebo;
+		GLuint texture;
+		Shader* shader;
+		unsigned int faces, vert;
 
-	void Draw(const glm::mat4& p, const glm::mat4& v, Transform* c);
+		Skybox(const std::string filePath, Shader* shader);
 
-	std::string Print() const;
+		void Draw(const glm::mat4& p, const glm::mat4& v, Transform* c);
 
-	friend std::ostream& operator<<(std::ostream& out, const Skybox& skybox);
+		std::string Print() const;
 
-	~Skybox();
-};
+		friend std::ostream& operator<<(std::ostream& out, const Skybox& skybox);
+
+		~Skybox();
+	};
+
+}

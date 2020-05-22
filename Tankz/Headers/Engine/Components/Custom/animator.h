@@ -3,23 +3,27 @@
 #include "Engine/Core/component.h"
 #include "Engine/Core/spline.h"
 
-struct Animator : public Component {
+namespace sukkryst {
 
-	bool animating = true;
-	float internalTime = 0;
-	float speed = 1.0f;
-	std::string param;
-	Spline * track;
+	struct Animator : public Component {
 
-	Animator(Spline* track, const std::string & name);
+		bool animating = true;
+		float internalTime = 0;
+		float speed = 1.0f;
+		std::string param;
+		Spline* track;
 
-	void Update();
+		Animator(Spline* track, const std::string& name);
 
-	void OnClick();
+		void Update();
 
-	std::string Print() const;
+		void OnClick();
 
-	friend std::ostream& operator<<(std::ostream& out, const Animator& component);
+		std::string Print() const;
 
-	~Animator();
-};
+		friend std::ostream& operator<<(std::ostream& out, const Animator& component);
+
+		~Animator();
+	};
+
+}

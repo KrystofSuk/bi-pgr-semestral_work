@@ -1,7 +1,7 @@
 #include "Engine/Core/mesh.h"
 
 
-Mesh::Mesh(const std::string& filename, Shader* shader)
+sukkryst::Mesh::Mesh(const std::string& filename, Shader* shader)
 {
 	Assimp::Importer imp;
 	imp.SetPropertyInteger(AI_CONFIG_PP_PTV_NORMALIZE, 1);

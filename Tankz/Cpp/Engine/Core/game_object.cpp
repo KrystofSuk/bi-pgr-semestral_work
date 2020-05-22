@@ -1,7 +1,7 @@
 #include "Engine/Core/game_object.h"
 
 
-GameObject::GameObject(const std::string& name) : name(name)
+sukkryst::GameObject::GameObject(const std::string& name) : name(name)
 {
 	std::hash<std::string> hasher;
 	id = hasher(name);
@@ -9,7 +9,7 @@ GameObject::GameObject(const std::string& name) : name(name)
 	transform = new Transform();
 }
 
-void GameObject::Update()
+void sukkryst::GameObject::Update()
 {
 	auto it = _components.begin();
 	while (it != _components.end())
@@ -19,7 +19,7 @@ void GameObject::Update()
 	}
 }
 
-void GameObject::AddComponent(Component* component)
+void sukkryst::GameObject::AddComponent(Component* component)
 {
 	component->gameObject = this;
 	component->transform = transform;
@@ -27,7 +27,7 @@ void GameObject::AddComponent(Component* component)
 	_components[component->name] = component;
 }
 
-void GameObject::OnClick(const unsigned char& id)
+void sukkryst::GameObject::OnClick(const unsigned char& id)
 {
 	if (id == this->id) {
 		for (auto& it : _components)
@@ -35,7 +35,7 @@ void GameObject::OnClick(const unsigned char& id)
 	}
 }
 
-GameObject::~GameObject()
+sukkryst::GameObject::~GameObject()
 {
 	auto it = _components.begin();
 	while (it != _components.end())

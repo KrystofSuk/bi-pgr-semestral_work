@@ -1,39 +1,39 @@
 #include "Engine/Core/resources.h"
 
-Resources::Resources()
+sukkryst::Resources::Resources()
 {
 }
 
-void Resources::AddShader(const std::string& name, const std::string& vertPath, const std::string& fragPath)
+void sukkryst::Resources::AddShader(const std::string& name, const std::string& vertPath, const std::string& fragPath)
 {
 	_shaders.LoadShader(name, vertPath, fragPath);
 }
 
-void Resources::AddMesh(const std::string& name, const std::string& filename, const std::string& shaderName)
+void sukkryst::Resources::AddMesh(const std::string& name, const std::string& filename, const std::string& shaderName)
 {
 	_meshes.LoadMesh(name, filename, _shaders.GetShader(shaderName));
 }
 
-void Resources::AddMaterial(const std::string& name, const std::string& shaderName)
+void sukkryst::Resources::AddMaterial(const std::string& name, const std::string& shaderName)
 {
 	_materials.LoadMaterial(name, _shaders.GetShader(shaderName));
 }
 
-Material* Resources::GetMaterial(const std::string& name) const
+sukkryst::Material* sukkryst::Resources::GetMaterial(const std::string& name) const
 {
 	return _materials.GetMaterial(name);
 }
 
-Mesh* Resources::GetMesh(const std::string& name) const
+sukkryst::Mesh* sukkryst::Resources::GetMesh(const std::string& name) const
 {
 	return _meshes.GetMesh(name);
 }
 
-Shader* Resources::GetShader(const std::string& name) const
+sukkryst::Shader* sukkryst::Resources::GetShader(const std::string& name) const
 {
 	return _shaders.GetShader(name);
 }
 
-Resources::~Resources()
+sukkryst::Resources::~Resources()
 {
 }

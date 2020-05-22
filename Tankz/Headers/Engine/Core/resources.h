@@ -4,21 +4,25 @@
 #include "Engine/Utils/mesh_cache.h"
 #include "Engine/Utils/material_cache.h"
 
-class Resources {
-private:
-	ShaderCache _shaders;
-	MeshCache _meshes;
-	MaterialCache _materials;
-public:
-	Resources();
+namespace sukkryst {
 
-	void AddShader(const std::string& name, const std::string& vertPath, const std::string& fragPath);
-	void AddMesh(const std::string& name, const std::string& filename, const std::string& shaderName);
-	void AddMaterial(const std::string& name, const std::string& shaderName);
+	class Resources {
+	private:
+		ShaderCache _shaders;
+		MeshCache _meshes;
+		MaterialCache _materials;
+	public:
+		Resources();
 
-	Material* GetMaterial(const std::string& name) const;
-	Mesh* GetMesh(const std::string& name) const;
-	Shader* GetShader(const std::string& name) const;
+		void AddShader(const std::string& name, const std::string& vertPath, const std::string& fragPath);
+		void AddMesh(const std::string& name, const std::string& filename, const std::string& shaderName);
+		void AddMaterial(const std::string& name, const std::string& shaderName);
 
-	~Resources();
-};
+		Material* GetMaterial(const std::string& name) const;
+		Mesh* GetMesh(const std::string& name) const;
+		Shader* GetShader(const std::string& name) const;
+
+		~Resources();
+	};
+
+}
