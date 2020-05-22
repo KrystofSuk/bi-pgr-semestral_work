@@ -225,6 +225,10 @@
     <None Include="Data\Shaders\default.vert" />
     <None Include="Data\Shaders\per_fragment_nofog.frag" />
     <None Include="Data\Shaders\per_fragment_nofog.vert" />
+    <None Include="Data\Shaders\per_fragment_nofog_film.frag" />
+    <None Include="Data\Shaders\per_fragment_nofog_film.vert" />
+    <None Include="Data\Shaders\per_fragment_nofog_move.frag" />
+    <None Include="Data\Shaders\per_fragment_nofog_move.vert" />
     <None Include="Data\Shaders\per_fragment_noise_pos.frag" />
     <None Include="Data\Shaders\per_fragment_noise_pos.vert" />
     <None Include="Data\Shaders\skybox.frag" />

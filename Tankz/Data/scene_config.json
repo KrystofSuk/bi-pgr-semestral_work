@@ -203,6 +203,84 @@
 					"material": "ico_material"
 				}
 			]
+		},
+		{
+			"name": "Car1",
+			"position": "3.0, 0.0, 6.0",
+			"rotation": "0.0, 0.0, 0.0",
+			"scale": "1.0, 1.0, 1.0",
+			"components": [
+				{
+					"name": "MeshRenderer",
+					"mesh": "car1",
+					"material": "car1"
+				}
+			]
+		},
+		{
+			"name": "Car2",
+			"position": "4.0, 0.0, 8.0",
+			"rotation": "0.0, 0.0, 0.0",
+			"scale": "1.0, 1.0, 1.0",
+			"components": [
+				{
+					"name": "MeshRenderer",
+					"mesh": "car2",
+					"material": "car2"
+				}
+			]
+		},
+		{
+			"name": "Car3",
+			"position": "5.0, 0.0, 10.0",
+			"rotation": "0.0, 0.0, 0.0",
+			"scale": "1.0, 1.0, 1.0",
+			"components": [
+				{
+					"name": "MeshRenderer",
+					"mesh": "car3",
+					"material": "car3"
+				}
+			]
+		},
+		{
+			"name": "Car4",
+			"position": "6.0, 0.0, 12.0",
+			"rotation": "0.0, 0.0, 0.0",
+			"scale": "1.0, 1.0, 1.0",
+			"components": [
+				{
+					"name": "MeshRenderer",
+					"mesh": "car4",
+					"material": "car4"
+				}
+			]
+		},
+		{
+			"name": "Plane",
+			"position": "0.0, 4.0, 12.0",
+			"rotation": "90.0, 0.0, 0.0",
+			"scale": "1.0, 1.0, 1.0",
+			"components": [
+				{
+					"name": "MeshRenderer",
+					"mesh": "plane",
+					"material": "plane"
+				}
+			]
+		},
+		{
+			"name": "Torus",
+			"position": "0.0, 8.0, 0.0",
+			"rotation": "0.0, 0.0, 0.0",
+			"scale": "1.0, 1.0, 1.0",
+			"components": [
+				{
+					"name": "MeshRenderer",
+					"mesh": "torus",
+					"material": "torus"
+				}
+			]
 		}
 	]
 }
