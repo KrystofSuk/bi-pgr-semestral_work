@@ -5,6 +5,7 @@
 #include "Engine\Components\point_light.h"
 #include "Engine\Components\spot_light.h"
 #include <Engine\Components\Custom\day_night.h>
+#include "Engine\Components\Custom\collision_box.h"
 
 using json = nlohmann::json;
 
@@ -170,6 +171,11 @@ void Loader::LoadScene(const std::string& scenePath, Scene& scene, Resources& re
 				DayNight* c = new DayNight(scene);
 				c->speed = CreateVec3((*it2).at("speed"));
 				c->nightFogColor = CreateVec3((*it2).at("nightFogColor"));
+				gameObject->AddComponent(c);
+			}
+			if (name == "CollisionBox") {
+				CollisionBox* c = new CollisionBox(CreateVec3((*it2).at("size")));
+				c->yMin = CreateFloat((*it2).at("min"));
 				gameObject->AddComponent(c);
 			}
 		}

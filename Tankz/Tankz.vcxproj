@@ -159,6 +159,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cpp\Engine\Components\Custom\animator.cpp" />
+    <ClCompile Include="Cpp\Engine\Components\Custom\collision_box.cpp" />
     <ClCompile Include="Cpp\Engine\Components\Custom\day_night.cpp" />
     <ClCompile Include="Cpp\Engine\Core\component.cpp" />
     <ClCompile Include="Cpp\Engine\Components\direction_light.cpp" />
@@ -183,6 +185,8 @@
     <ClCompile Include="Tankz.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Headers\Engine\Components\Custom\animator.h" />
+    <ClInclude Include="Headers\Engine\Components\Custom\collision_box.h" />
     <ClInclude Include="Headers\Engine\Components\Custom\day_night.h" />
     <ClInclude Include="Headers\Engine\Core\app_data.h" />
     <ClInclude Include="Headers\Engine\Core\component.h" />

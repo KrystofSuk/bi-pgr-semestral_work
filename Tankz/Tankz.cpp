@@ -13,8 +13,9 @@
 #include "Engine/Core/resources.h"
 #include "Engine/Components/point_light.h"
 #include "Engine/Components/spot_light.h"
+#include "Engine/Components/Custom/animator.h"
 #include "Engine/Components/skybox.h"
-#include <Engine\Components\Custom\day_night.h>
+#include "Engine/Components/Custom/day_night.h"
 #include "Engine/Core/spline.h"
 
 const int WIN_WIDTH = 1600;
@@ -28,11 +29,13 @@ AppData appData;
 Skybox* s = nullptr;
 
 Spline* sp;
+Spline* cameraSp;
 
 std::vector<Light*> lights;
 bool pressedKeys[255];
 
 bool inMode = true;
+bool fixedCam = false;
 
 void SceneInit() {
 
@@ -46,7 +49,16 @@ void SceneInit() {
 	v.push_back(glm::vec3(1.0f, 2.0f, -1.0f));
 	v.push_back(glm::vec3(-1.0f, 0.0f, 0.0f));
 
+
+	std::vector<glm::vec3> v2;
+	v2.push_back(glm::vec3(-14.0f, 3.5f, 3.2f));
+	v2.push_back(glm::vec3(-7.4f, 2.8f, -5.9f));
+	v2.push_back(glm::vec3(-1.5f, 4.8f, -13.8f));
+	v2.push_back(glm::vec3(15.5f, 7.3f, -9.9f));
+	v2.push_back(glm::vec3(11.9f, 9.8f, 14.9f));
+
 	sp = new Spline(v);
+	cameraSp = new Spline(v2);
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 	std::cout << "---------SCENE INIT---------" << std::endl;
@@ -64,6 +76,16 @@ void SceneInit() {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
 	std::cout << "---------INIT DONE---------" << std::endl;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+
+
+	//Animations
+	Animator* ico = new Animator(sp, "position");
+	Animator* cam = new Animator(cameraSp, "position");
+	cam->speed = 0.2f;
+	scene.GetGameObject("Ico Sphere")->AddComponent(ico);
+	scene.camera->AddComponent(cam);
+	scene.camera->GetComponent<Animator>()->animating = false;
+
 }
 
 void init() {
@@ -175,8 +197,9 @@ void timerCallback(int) {
 
 	scene.Update();
 
-	scene.GetGameObject("Ico Sphere")->transform->position = sp->Evaluate(0.001f * (float)glutGet(GLUT_ELAPSED_TIME));
-
+	//scene.GetGameObject("Ico Sphere")->transform->position = sp->Evaluate(0.001f * (float)glutGet(GLUT_ELAPSED_TIME));
+	if(fixedCam)
+		scene.camera->transform->position = scene.GetGameObject("Ico Sphere")->transform->position + glm::vec3(0.0f,2.5f,0.0f);
 	glutTimerFunc(8, timerCallback, 0);
 	glutPostRedisplay();
 }
@@ -186,18 +209,34 @@ void glutMotionCallback(int x, int y) {
 
 void MenuProcess(int i) {
 	if (i == 1) {
+		scene.camera->GetComponent<Animator>()->animating = false;
 		glutWarpPointer(appData.width / 2, appData.height / 2);
 		appData.freeCamera = true;
+		fixedCam = false;
 	}
 	if (i == 2) {
+		scene.camera->GetComponent<Animator>()->animating = false;
 		scene.camera->transform->SetPos(scene.GetGameObject("Static Pos 1")->transform->position);
 		scene.camera->transform->SetRot(scene.GetGameObject("Static Pos 1")->transform->rotation);
 		appData.freeCamera = false;
+		fixedCam = false;
 	}
 	if (i == 3) {
+		scene.camera->GetComponent<Animator>()->animating = false;
 		scene.camera->transform->SetPos(scene.GetGameObject("Static Pos 2")->transform->position);
 		scene.camera->transform->SetRot(scene.GetGameObject("Static Pos 2")->transform->rotation);
 		appData.freeCamera = false;
+		fixedCam = false;
+	}
+	if (i == 5) {
+		scene.camera->GetComponent<Animator>()->animating = false;
+		scene.camera->transform->SetPos(scene.GetGameObject("Ico Sphere")->transform->position + glm::vec3(0.0f, 2.5f, 0.0f));
+		fixedCam = true;
+	}
+	if (i == 6) {
+		scene.camera->GetComponent<Animator>()->animating = true;
+		appData.freeCamera = true;
+		fixedCam = false;
 	}
 	if (i == 4) {
 		scene.GetGameObject("Direction Light")->GetComponent<DayNight>()->use = !scene.GetGameObject("Direction Light")->GetComponent<DayNight>()->use;
@@ -215,6 +254,8 @@ void createMenu() {
 	glutAddMenuEntry("Free", 1);
 	glutAddMenuEntry("Static 1.", 2);
 	glutAddMenuEntry("Static 2.", 3);
+	glutAddMenuEntry("Dynamic 1.", 5);
+	glutAddMenuEntry("Dynamic 2.", 6);
 
 	int lightningSub = glutCreateMenu(MenuProcess);
 	glutAddMenuEntry("Day Night Cycle", 4);
