@@ -29,6 +29,7 @@ AppData appData;
 Skybox* s = nullptr;
 
 Spline* sp;
+Spline* sp2;
 Spline* cameraSp;
 
 std::vector<Light*> lights;
@@ -57,7 +58,14 @@ void SceneInit() {
 	v2.push_back(glm::vec3(15.5f, 7.3f, -9.9f));
 	v2.push_back(glm::vec3(11.9f, 9.8f, 14.9f));
 
+	std::vector<glm::vec3> v3;
+	v3.push_back(glm::vec3(0.0f, 0.0f, 0.0f));
+	v3.push_back(glm::vec3(-90.0f, 0.0f, 90.0f));
+	v3.push_back(glm::vec3(-180.0f, 90.0f, -180.0f));
+	v3.push_back(glm::vec3(90.0f, -90.0f, 0.0f));
+
 	sp = new Spline(v);
+	sp2 = new Spline(v3);
 	cameraSp = new Spline(v2);
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
@@ -81,8 +89,10 @@ void SceneInit() {
 	//Animations
 	Animator* ico = new Animator(sp, "position");
 	Animator* cam = new Animator(cameraSp, "position");
+	Animator* tor = new Animator(sp2, "rotation");
 	cam->speed = 0.2f;
 	scene.GetGameObject("Ico Sphere")->AddComponent(ico);
+	scene.GetGameObject("Torus")->AddComponent(tor);
 	scene.camera->AddComponent(cam);
 	scene.camera->GetComponent<Animator>()->animating = false;
 
