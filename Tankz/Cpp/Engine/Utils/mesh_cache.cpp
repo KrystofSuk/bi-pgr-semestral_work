@@ -5,9 +5,9 @@ sukkryst::MeshCache::MeshCache()
 {
 }
 
-void sukkryst::MeshCache::LoadMesh(const std::string& name, const std::string& filename, Shader* shader)
+void sukkryst::MeshCache::LoadMesh(const std::string& name, const std::string& fileName, Shader* shader)
 {
-	Mesh* mesh = new Mesh(filename, shader);
+	Mesh* mesh = new Mesh(fileName, shader);
 	_meshCache[name] = mesh;
 }
 
