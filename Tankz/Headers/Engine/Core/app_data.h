@@ -4,6 +4,10 @@
 
 namespace sukkryst {
 
+	/**
+	 * @brief Basic app data representation for window size...
+	 * 
+	 */
 	struct AppData
 	{
 		int width;
@@ -13,10 +17,5 @@ namespace sukkryst {
 		std::string name;
 
 		bool freeCamera = true;
-		static float time;
-		static float GetTime() {
-			return time;
-		}
 	};
-
 }
