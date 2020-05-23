@@ -9,9 +9,9 @@ void sukkryst::Resources::AddShader(const std::string& name, const std::string& 
 	_shaders.LoadShader(name, vertPath, fragPath);
 }
 
-void sukkryst::Resources::AddMesh(const std::string& name, const std::string& filename, const std::string& shaderName)
+void sukkryst::Resources::AddMesh(const std::string& name, const std::string& fileBame, const std::string& shaderName)
 {
-	_meshes.LoadMesh(name, filename, _shaders.GetShader(shaderName));
+	_meshes.LoadMesh(name, fileBame, _shaders.GetShader(shaderName));
 }
 
 void sukkryst::Resources::AddMaterial(const std::string& name, const std::string& shaderName)
