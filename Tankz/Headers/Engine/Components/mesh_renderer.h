@@ -15,6 +15,10 @@
 namespace sukkryst
 {
 
+	/**
+	 * @brief Mesh renderer component to render meshes with specific materials
+	 * 
+	 */
 	class MeshRenderer : public Component
 	{
 	private:
@@ -22,14 +26,28 @@ namespace sukkryst
 		Mesh *_mesh;
 
 	public:
+		
+		/**
+		 * @brief Construct a new Mesh Renderer
+		 * 
+		 * @param mesh to render
+		 * @param material to render the mesh with
+		 */
 		MeshRenderer(Mesh *mesh, Material *material);
 
+		/**
+		 * @brief Draw the mesh with specific projection and view matrix + lightning
+		 * 
+		 * @param p matrix
+		 * @param v matrix
+		 * @param lightData to send to shader
+		 */
 		void Draw(const glm::mat4 &p, const glm::mat4 &v, const LightData &lightData);
 
-		std::string Print() const;
-
-		friend std::ostream &operator<<(std::ostream &out, const MeshRenderer &renderer);
-
+		/**
+		 * @brief Destroy the Mesh Renderer object
+		 * 
+		 */
 		~MeshRenderer();
 	};
 

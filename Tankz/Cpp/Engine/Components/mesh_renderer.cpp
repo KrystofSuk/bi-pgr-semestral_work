@@ -92,17 +92,6 @@ void sukkryst::MeshRenderer::Draw(const glm::mat4 &p, const glm::mat4 &v, const 
 	glBindVertexArray(0);
 }
 
-std::string sukkryst::MeshRenderer::Print() const
-{
-	return name;
-}
-
 sukkryst::MeshRenderer::~MeshRenderer()
 {
-}
-
-std::ostream &operator<<(std::ostream &out, const sukkryst::MeshRenderer &renderer)
-{
-	out << renderer.Print() << std::endl;
-	return out;
 }
