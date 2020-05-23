@@ -2,7 +2,7 @@
 
 ## Task List
 
-- [ ] Dokumentace
+- [X] Dokumentace
 - [x] Input handeling mouse
 - [x] Input handeling keyboard
 - [x] 10 Ruznych obj + materials
@@ -22,8 +22,8 @@
 - [x] Kolize
 - [x] Interakce
 - [ ] Web
-- [ ] Namespace
-- [ ] Cleanup
+- [X] Namespace
+- [X] Cleanup
 
 ## Check List
 
