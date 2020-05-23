@@ -3,7 +3,7 @@
 sukkryst::Animator::Animator(Spline *newTrack, const std::string &name) : Component("Animator")
 {
 	track = newTrack;
-	param = name;
+	this.param = param;
 }
 
 void sukkryst::Animator::Update()
@@ -23,16 +23,6 @@ void sukkryst::Animator::OnClick()
 	animating = !animating;
 }
 
-std::string sukkryst::Animator::Print() const
-{
-	return std::string();
-}
-
 sukkryst::Animator::~Animator()
 {
-}
-
-std::ostream &operator<<(std::ostream &out, const sukkryst::Animator &component)
-{
-	return out << component.Print();
 }
