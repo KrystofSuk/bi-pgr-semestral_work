@@ -4,13 +4,13 @@ sukkryst::ShaderCache::ShaderCache()
 {
 }
 
-void sukkryst::ShaderCache::LoadShader(const std::string& name, const std::string& vertPath, const std::string& fragPath)
+void sukkryst::ShaderCache::LoadShader(const std::string &name, const std::string &vertPath, const std::string &fragPath)
 {
-	Shader* shr = new Shader(vertPath, fragPath);
+	Shader *shr = new Shader(vertPath, fragPath);
 	_shaderCache[name] = shr;
 }
 
-sukkryst::Shader* sukkryst::ShaderCache::GetShader(const std::string& name) const
+sukkryst::Shader *sukkryst::ShaderCache::GetShader(const std::string &name) const
 {
 	return _shaderCache.at(name);
 }

@@ -6,17 +6,19 @@ sukkryst::SpotLight::SpotLight()
 	type = 2;
 }
 
-void sukkryst::SpotLight::ProcessLight(Shader* shader, const std::string& index)
+void sukkryst::SpotLight::ProcessLight(Shader *shader, const std::string &index)
 {
-	glm::vec3 pos = transform->position;//static_cast<GameObject*>(gameObject)->transform->position;
+	glm::vec3 pos = transform->position; //static_cast<GameObject*>(gameObject)->transform->position;
 	glm::vec3 dir = transform->Front();
 
-	if (on) {
+	if (on)
+	{
 		shader->SetFloat3f("spo[" + index + "].diffuse", diffuse * intensity);
 		shader->SetFloat3f("spo[" + index + "].ambient", ambient * intensity);
 		shader->SetFloat3f("spo[" + index + "].specular", specular * intensity);
 	}
-	if (!on) {
+	if (!on)
+	{
 		shader->SetFloat3f("spo[" + index + "].diffuse", diffuse * 0.0f);
 		shader->SetFloat3f("spo[" + index + "].ambient", ambient * 0.0f);
 		shader->SetFloat3f("spo[" + index + "].specular", specular * 0.0f);

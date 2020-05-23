@@ -4,25 +4,27 @@
 #include <string>
 #include <pgr.h>
 
-namespace sukkryst {
+namespace sukkryst
+{
 
 	/**
 	 * @brief Shader class to represent shader data and set its uniforms and others
 	 * 
 	 */
-	class Shader {
+	class Shader
+	{
 		GLuint _id;
 		std::unordered_map<std::string, int> _locations;
-		
+
 		/**
 		 * @brief Get the the attrib location for specific name 
 		 * 
 		 * @param name of the node
 		 * @return GLuint id of the node
 		 */
-		GLuint GetAttribLocation(const std::string& name);
-	public:
+		GLuint GetAttribLocation(const std::string &name);
 
+	public:
 		/**
 		 * @brief Construct a new Shader
 		 * 
@@ -35,7 +37,7 @@ namespace sukkryst {
 		 * @param vertPath path to vertex shader
 		 * @param fragPath path to fragment shader
 		 */
-		Shader(const std::string& vertPath, const std::string& fragPath);
+		Shader(const std::string &vertPath, const std::string &fragPath);
 
 		/**
 		 * @brief Get the specific location of the node with specific name
@@ -43,7 +45,7 @@ namespace sukkryst {
 		 * @param name of node
 		 * @return GLuint id of the node
 		 */
-		GLuint GetLocation(const std::string& name);
+		GLuint GetLocation(const std::string &name);
 
 		/**
 		 * @brief Method to use this shader in rendering
@@ -57,47 +59,47 @@ namespace sukkryst {
 		 * @param name of node
 		 * @param value of node
 		 */
-		void SetFloat3f(const std::string& name, const glm::vec3& value);
-		
+		void SetFloat3f(const std::string &name, const glm::vec3 &value);
+
 		/**
 		 * @brief Set the 4-float uniform via vec4
 		 * 
 		 * @param name of node
 		 * @param value of node
 		 */
-		void SetFloat4f(const std::string& name, const glm::vec4& value);
-		
+		void SetFloat4f(const std::string &name, const glm::vec4 &value);
+
 		/**
 		 * @brief Set the 4x4float matrix uniform via mat4
 		 * 
 		 * @param name of node
 		 * @param value of node
 		 */
-		void SetFloatMatrix4f(const std::string& name, const glm::mat4& value);
-		
+		void SetFloatMatrix4f(const std::string &name, const glm::mat4 &value);
+
 		/**
 		 * @brief Set the 1-float uniform via float
 		 * 
 		 * @param name of node
 		 * @param value of node
 		 */
-		void SetFloat(const std::string& name, const float& value);
-		
+		void SetFloat(const std::string &name, const float &value);
+
 		/**
 		 * @brief Set the 1-int uniform via int
 		 * 
 		 * @param name of node
 		 * @param value of node
 		 */
-		void SetInt(const std::string& name, const int& value);
-		
+		void SetInt(const std::string &name, const int &value);
+
 		/**
 		 * @brief Set the "bool" representation of int uniform
 		 * 
 		 * @param name of node
 		 * @param value of node
 		 */
-		void SetBool(const std::string& name, const bool& value);
+		void SetBool(const std::string &name, const bool &value);
 
 		/**
 		 * @brief Destroy the Shader object
@@ -106,4 +108,4 @@ namespace sukkryst {
 		virtual ~Shader();
 	};
 
-}
+} // namespace sukkryst

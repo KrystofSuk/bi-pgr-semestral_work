@@ -5,7 +5,8 @@
 #include "Engine/Utils/printable.h"
 #include "Engine/Core/transform.h"
 
-namespace sukkryst {
+namespace sukkryst
+{
 
 	/**
 	 * @brief Basic component with update and click methods
@@ -15,8 +16,8 @@ namespace sukkryst {
 	{
 	public:
 		//Pointer to parent gameobject but need to be casted to GameObject
-		void* gameObject;
-		Transform* transform;
+		void *gameObject;
+		Transform *transform;
 		std::string name;
 
 		/**
@@ -58,7 +59,7 @@ namespace sukkryst {
 		 * @param c specific component
 		 * @return std::ostream& output stream
 		 */
-		friend std::ostream& operator<<(std::ostream& out, const Component& c);
+		friend std::ostream &operator<<(std::ostream &out, const Component &c);
 
 		/**
 		 * @brief Destroy the Component object
@@ -67,4 +68,4 @@ namespace sukkryst {
 		virtual ~Component();
 	};
 
-}
+} // namespace sukkryst

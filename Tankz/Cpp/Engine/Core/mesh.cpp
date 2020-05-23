@@ -1,18 +1,18 @@
 #include "Engine/Core/mesh.h"
 
-
-sukkryst::Mesh::Mesh(const std::string& filename, Shader* shader)
+sukkryst::Mesh::Mesh(const std::string &filename, Shader *shader)
 {
 	Assimp::Importer imp;
 	imp.SetPropertyInteger(AI_CONFIG_PP_PTV_NORMALIZE, 1);
-	const aiScene* scene = imp.ReadFile(filename.c_str(), 0 | aiProcess_Triangulate | aiProcess_PreTransformVertices | aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices);
+	const aiScene *scene = imp.ReadFile(filename.c_str(), 0 | aiProcess_Triangulate | aiProcess_PreTransformVertices | aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices);
 	if (!scene)
 	{
-		std::cout << "Error loading mesh: " << filename << std::endl << "Error: " << imp.GetErrorString() << std::endl;
+		std::cout << "Error loading mesh: " << filename << std::endl
+				  << "Error: " << imp.GetErrorString() << std::endl;
 		return;
 	}
 
-	const aiMesh* loadedMesh = scene->mMeshes[0];
+	const aiMesh *loadedMesh = scene->mMeshes[0];
 
 	faces = loadedMesh->mNumFaces;
 	vert = loadedMesh->mNumVertices;
@@ -37,12 +37,14 @@ sukkryst::Mesh::Mesh(const std::string& filename, Shader* shader)
 	offset *= 2;
 
 	//Texture
-	if (loadedMesh->HasTextureCoords(0)) {
-		float* textureCoords = new float[2 * loadedMesh->mNumVertices];
-		float* currentCoord = textureCoords;
+	if (loadedMesh->HasTextureCoords(0))
+	{
+		float *textureCoords = new float[2 * loadedMesh->mNumVertices];
+		float *currentCoord = textureCoords;
 
 		aiVector3D coord;
-		for (unsigned int i = 0; i < loadedMesh->mNumVertices; i++) {
+		for (unsigned int i = 0; i < loadedMesh->mNumVertices; i++)
+		{
 			coord = (loadedMesh->mTextureCoords[0])[i];
 			*currentCoord++ = coord.x;
 			*currentCoord++ = coord.y;
@@ -52,12 +54,13 @@ sukkryst::Mesh::Mesh(const std::string& filename, Shader* shader)
 	}
 	CHECK_GL_ERROR();
 
-#pragma endregion 
+#pragma endregion
 
 #pragma region EBO
 
-	GLuint* faces = new GLuint[loadedMesh->mNumFaces * 3];
-	for (unsigned int i = 0; i < loadedMesh->mNumFaces; i++) {
+	GLuint *faces = new GLuint[loadedMesh->mNumFaces * 3];
+	for (unsigned int i = 0; i < loadedMesh->mNumFaces; i++)
+	{
 		faces[i * 3 + 0] = loadedMesh->mFaces[i].mIndices[0];
 		faces[i * 3 + 1] = loadedMesh->mFaces[i].mIndices[1];
 		faces[i * 3 + 2] = loadedMesh->mFaces[i].mIndices[2];
@@ -70,7 +73,7 @@ sukkryst::Mesh::Mesh(const std::string& filename, Shader* shader)
 	delete[] faces;
 	CHECK_GL_ERROR();
 
-#pragma endregion 
+#pragma endregion
 
 #pragma region VAO
 
@@ -86,25 +89,26 @@ sukkryst::Mesh::Mesh(const std::string& filename, Shader* shader)
 	CHECK_GL_ERROR();
 
 	glEnableVertexAttribArray(shader->GetLocation("normal"));
-	glVertexAttribPointer(shader->GetLocation("normal"), 3, GL_FLOAT, GL_FALSE, 0, (void*)offset);
+	glVertexAttribPointer(shader->GetLocation("normal"), 3, GL_FLOAT, GL_FALSE, 0, (void *)offset);
 	CHECK_GL_ERROR();
 
-	if (loadedMesh->HasTextureCoords(0)) {
+	if (loadedMesh->HasTextureCoords(0))
+	{
 		offset *= 2;
 		glEnableVertexAttribArray(shader->GetLocation("texCoord"));
-		glVertexAttribPointer(shader->GetLocation("texCoord"), 2, GL_FLOAT, GL_FALSE, 0, (void*)offset);
+		glVertexAttribPointer(shader->GetLocation("texCoord"), 2, GL_FLOAT, GL_FALSE, 0, (void *)offset);
 	}
 
 	CHECK_GL_ERROR();
-
 
 #pragma endregion
 
 #pragma region Tex
 
-	const aiMaterial* materal = scene->mMaterials[scene->mMeshes[0]->mMaterialIndex];
+	const aiMaterial *materal = scene->mMaterials[scene->mMeshes[0]->mMaterialIndex];
 
-	if (materal->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
+	if (materal->GetTextureCount(aiTextureType_DIFFUSE) > 0)
+	{
 		aiString path;
 
 		materal->GetTexture(aiTextureType_DIFFUSE, 0, &path);
@@ -113,7 +117,8 @@ sukkryst::Mesh::Mesh(const std::string& filename, Shader* shader)
 
 		size_t found = filename.find_last_of("/\\");
 
-		if (found != std::string::npos) {
+		if (found != std::string::npos)
+		{
 			name.insert(0, filename.substr(0, found + 1));
 		}
 
@@ -124,4 +129,3 @@ sukkryst::Mesh::Mesh(const std::string& filename, Shader* shader)
 
 #pragma endregion
 }
-

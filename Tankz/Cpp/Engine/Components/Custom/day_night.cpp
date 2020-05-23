@@ -1,10 +1,11 @@
 #include "Engine/Components/Custom/day_night.h"
 
-float clip(float n, float lower, float upper) {
+float clip(float n, float lower, float upper)
+{
 	return std::max(lower, std::min(n, upper));
 }
 
-sukkryst::DayNight::DayNight(Scene& scene) : Component("DayNight"), scene(scene)
+sukkryst::DayNight::DayNight(Scene &scene) : Component("DayNight"), scene(scene)
 {
 }
 
@@ -25,19 +26,22 @@ void sukkryst::DayNight::Update()
 	float fog = 0.8f;
 	float blend = 1.0f;
 	float intensity = 1.0f;
-	if (tod < 90 && tod > 60) {
+	if (tod < 90 && tod > 60)
+	{
 		fog = 1.0 - abs((90.0 - tod) / 30.0 * 0.5 + 0.2);
 		blend = 1.0 - abs((90.0 - tod) / 30.0 * 1.0);
 	}
-	else if (tod < 90 - 30) {
+	else if (tod < 90 - 30)
+	{
 		fog = 0.3f;
 		blend = 0.0f;
 	}
 
-	if (tod < 90) {
+	if (tod < 90)
+	{
 		intensity = 1.0 - abs((90.0 - tod) / 90.0 * 0.5);
 	}
-	scene.lightData.fogAmount = 1-fog;
+	scene.lightData.fogAmount = 1 - fog;
 
 	scene.lightData.dirAmount = intensity;
 	scene.lightData.fogColor = glm::mix(scene.lightData.fogDefaultColor, nightFogColor, blend);
@@ -50,10 +54,9 @@ std::string sukkryst::DayNight::Print() const
 
 sukkryst::DayNight::~DayNight()
 {
-
 }
 
-std::ostream& operator<<(std::ostream& out, const sukkryst::DayNight& component)
+std::ostream &operator<<(std::ostream &out, const sukkryst::DayNight &component)
 {
 	return out;
 }

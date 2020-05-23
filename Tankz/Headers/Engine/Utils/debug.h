@@ -5,27 +5,29 @@
 #include "Engine/Core/component.h"
 #include "Engine/Utils/printable.h"
 
-namespace sukkryst {
+namespace sukkryst
+{
 
 	/**
 	 * @brief Debugging struct for logging
 	 * 
 	 */
-	struct Debug {
+	struct Debug
+	{
 
 		/**
 		 * @brief Logging the string
 		 * 
 		 * @param string to print
 		 */
-		static void Log(const std::string& string);
+		static void Log(const std::string &string);
 
 		/**
 		 * @brief Logging the printable object
 		 * 
 		 * @param printable to print
 		 */
-		static void Log(const Printable& printable);
+		static void Log(const Printable &printable);
 	};
 
-}
+} // namespace sukkryst

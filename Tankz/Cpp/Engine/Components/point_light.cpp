@@ -6,14 +6,16 @@ sukkryst::PointLight::PointLight()
 	type = 1;
 }
 
-void sukkryst::PointLight::ProcessLight(Shader* shader, const std::string& index)
+void sukkryst::PointLight::ProcessLight(Shader *shader, const std::string &index)
 {
-	if (on) {
+	if (on)
+	{
 		shader->SetFloat3f("poi[" + index + "].diffuse", diffuse * intensity);
 		shader->SetFloat3f("poi[" + index + "].ambient", ambient * intensity);
 		shader->SetFloat3f("poi[" + index + "].specular", specular * intensity);
 	}
-	if (!on) {
+	if (!on)
+	{
 		shader->SetFloat3f("poi[" + index + "].diffuse", diffuse * 0.0f);
 		shader->SetFloat3f("poi[" + index + "].ambient", ambient * 0.0f);
 		shader->SetFloat3f("poi[" + index + "].specular", specular * 0.0f);

@@ -1,6 +1,6 @@
 #include "..\..\..\..\Headers\Engine\Components\Custom\animator.h"
 
-sukkryst::Animator::Animator(Spline* newTrack, const std::string& name) : Component("Animator")
+sukkryst::Animator::Animator(Spline *newTrack, const std::string &name) : Component("Animator")
 {
 	track = newTrack;
 	param = name;
@@ -32,7 +32,7 @@ sukkryst::Animator::~Animator()
 {
 }
 
-std::ostream& operator<<(std::ostream& out, const sukkryst::Animator& component)
+std::ostream &operator<<(std::ostream &out, const sukkryst::Animator &component)
 {
 	return out << component.Print();
 }

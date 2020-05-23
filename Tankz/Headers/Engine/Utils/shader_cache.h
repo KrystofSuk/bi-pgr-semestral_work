@@ -5,15 +5,18 @@
 
 #include "Engine/Core/shader.h"
 
-namespace sukkryst {
+namespace sukkryst
+{
 
 	/**
 	 * @brief Shader cache class for storing loaded shaders
 	 * 
 	 */
-	class ShaderCache {
+	class ShaderCache
+	{
 	private:
-		std::unordered_map<std::string, Shader*> _shaderCache;
+		std::unordered_map<std::string, Shader *> _shaderCache;
+
 	public:
 		/**
 		 * @brief Construct a new Shader Cache object
@@ -28,7 +31,7 @@ namespace sukkryst {
 		 * @param vertPath path to vertex part
 		 * @param fragPath path to fragment path
 		 */
-		void LoadShader(const std::string& name, const std::string& vertPath, const std::string& fragPath);
+		void LoadShader(const std::string &name, const std::string &vertPath, const std::string &fragPath);
 
 		/**
 		 * @brief Get the Shader object
@@ -36,7 +39,7 @@ namespace sukkryst {
 		 * @param name of desired shader package
 		 * @return Shader* pointer to shader
 		 */
-		Shader* GetShader(const std::string& name) const;
+		Shader *GetShader(const std::string &name) const;
 
 		/**
 		 * @brief Destroy the Shader Cache object
@@ -45,4 +48,4 @@ namespace sukkryst {
 		~ShaderCache();
 	};
 
-}
+} // namespace sukkryst

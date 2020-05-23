@@ -12,22 +12,25 @@
 #include "Engine/Components/light.h"
 #include <Engine\Core\light_data.h>
 
-namespace sukkryst {
+namespace sukkryst
+{
 
-	class MeshRenderer : public Component {
+	class MeshRenderer : public Component
+	{
 	private:
-		Material* _material;
-		Mesh* _mesh;
-	public:
-		MeshRenderer(Mesh* mesh, Material* material);
+		Material *_material;
+		Mesh *_mesh;
 
-		void Draw(const glm::mat4& p, const glm::mat4& v, const LightData& lightData);
+	public:
+		MeshRenderer(Mesh *mesh, Material *material);
+
+		void Draw(const glm::mat4 &p, const glm::mat4 &v, const LightData &lightData);
 
 		std::string Print() const;
 
-		friend std::ostream& operator<<(std::ostream& out, const MeshRenderer& renderer);
+		friend std::ostream &operator<<(std::ostream &out, const MeshRenderer &renderer);
 
 		~MeshRenderer();
 	};
 
-}
+} // namespace sukkryst

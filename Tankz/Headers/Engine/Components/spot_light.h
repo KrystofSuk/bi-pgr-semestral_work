@@ -2,11 +2,13 @@
 
 #include "Engine/Components/light.h"
 
-namespace sukkryst {
+namespace sukkryst
+{
 
-	struct SpotLight : public Light {
+	struct SpotLight : public Light
+	{
 		SpotLight();
-		void ProcessLight(Shader* shader, const std::string& index = "");
+		void ProcessLight(Shader *shader, const std::string &index = "");
 	};
 
-}
+} // namespace sukkryst

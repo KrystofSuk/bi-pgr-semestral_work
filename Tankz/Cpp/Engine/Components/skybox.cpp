@@ -1,50 +1,49 @@
 #include "Engine/Components/skybox.h"
 
-sukkryst::Skybox::Skybox(const std::string filePath, Shader* shader) : Component("Skybox"), shader(shader)
+sukkryst::Skybox::Skybox(const std::string filePath, Shader *shader) : Component("Skybox"), shader(shader)
 {
-	float skyboxVertices[] = {      
-		-1.0f,  1.0f, -1.0f,
+	float skyboxVertices[] = {
+		-1.0f, 1.0f, -1.0f,
 		-1.0f, -1.0f, -1.0f,
-		 1.0f, -1.0f, -1.0f,
-		 1.0f, -1.0f, -1.0f,
-		 1.0f,  1.0f, -1.0f,
-		-1.0f,  1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+		1.0f, 1.0f, -1.0f,
+		-1.0f, 1.0f, -1.0f,
 
-		-1.0f, -1.0f,  1.0f,
+		-1.0f, -1.0f, 1.0f,
 		-1.0f, -1.0f, -1.0f,
-		-1.0f,  1.0f, -1.0f,
-		-1.0f,  1.0f, -1.0f,
-		-1.0f,  1.0f,  1.0f,
-		-1.0f, -1.0f,  1.0f,
+		-1.0f, 1.0f, -1.0f,
+		-1.0f, 1.0f, -1.0f,
+		-1.0f, 1.0f, 1.0f,
+		-1.0f, -1.0f, 1.0f,
 
-		 1.0f, -1.0f, -1.0f,
-		 1.0f, -1.0f,  1.0f,
-		 1.0f,  1.0f,  1.0f,
-		 1.0f,  1.0f,  1.0f,
-		 1.0f,  1.0f, -1.0f,
-		 1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
 
-		-1.0f, -1.0f,  1.0f,
-		-1.0f,  1.0f,  1.0f,
-		 1.0f,  1.0f,  1.0f,
-		 1.0f,  1.0f,  1.0f,
-		 1.0f, -1.0f,  1.0f,
-		-1.0f, -1.0f,  1.0f,
+		-1.0f, -1.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,
+		1.0f, -1.0f, 1.0f,
+		-1.0f, -1.0f, 1.0f,
 
-		-1.0f,  1.0f, -1.0f,
-		 1.0f,  1.0f, -1.0f,
-		 1.0f,  1.0f,  1.0f,
-		 1.0f,  1.0f,  1.0f,
-		-1.0f,  1.0f,  1.0f,
-		-1.0f,  1.0f, -1.0f,
+		-1.0f, 1.0f, -1.0f,
+		1.0f, 1.0f, -1.0f,
+		1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f, 1.0f,
+		-1.0f, 1.0f, -1.0f,
 
 		-1.0f, -1.0f, -1.0f,
-		-1.0f, -1.0f,  1.0f,
-		 1.0f, -1.0f, -1.0f,
-		 1.0f, -1.0f, -1.0f,
-		-1.0f, -1.0f,  1.0f,
-		 1.0f, -1.0f,  1.0f
-	};
+		-1.0f, -1.0f, 1.0f,
+		1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f,
+		-1.0f, -1.0f, 1.0f,
+		1.0f, -1.0f, 1.0f};
 
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -55,7 +54,7 @@ sukkryst::Skybox::Skybox(const std::string filePath, Shader* shader) : Component
 	glBindVertexArray(vao);
 	glEnableVertexAttribArray(shader->GetLocation("position"));
 	CHECK_GL_ERROR();
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
 	CHECK_GL_ERROR();
 
 	glActiveTexture(GL_TEXTURE0);
@@ -64,17 +63,18 @@ sukkryst::Skybox::Skybox(const std::string filePath, Shader* shader) : Component
 	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
 	CHECK_GL_ERROR();
 
-	const char* suffix[] = { "front", "back", "down", "up", "left", "right" };
+	const char *suffix[] = {"front", "back", "down", "up", "left", "right"};
 	GLuint targets[] = {
 		GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
 		GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
-		GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
-	};
+		GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z};
 
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < 6; i++)
+	{
 		std::string texName = filePath + "_" + suffix[i] + ".png";
 		std::cout << "Loading cube map texture: " << texName << std::endl;
-		if (!pgr::loadTexImage2D(texName, targets[i])) {
+		if (!pgr::loadTexImage2D(texName, targets[i]))
+		{
 			pgr::dieWithError("Skybox cube map loading failed!");
 		}
 	}
@@ -90,7 +90,7 @@ sukkryst::Skybox::Skybox(const std::string filePath, Shader* shader) : Component
 	CHECK_GL_ERROR();
 }
 
-void sukkryst::Skybox::Draw(const glm::mat4& p, const glm::mat4& v, Transform* c)
+void sukkryst::Skybox::Draw(const glm::mat4 &p, const glm::mat4 &v, Transform *c)
 {
 	glDepthMask(GL_FALSE);
 	shader->Use();
@@ -115,7 +115,7 @@ sukkryst::Skybox::~Skybox()
 {
 }
 
-std::ostream& operator<<(std::ostream& out, const sukkryst::Skybox& skybox)
+std::ostream &operator<<(std::ostream &out, const sukkryst::Skybox &skybox)
 {
 	return out;
 }

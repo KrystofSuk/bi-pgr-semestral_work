@@ -4,16 +4,18 @@
 
 #include "Engine/Core/shader.h"
 
-namespace sukkryst {
+namespace sukkryst
+{
 
 	/**
 	 * @brief Material representation
 	 * 
 	 */
-	struct Material {
+	struct Material
+	{
 		std::string name;
 
-		Shader* shader;
+		Shader *shader;
 
 		glm::vec3 diffuse;
 		glm::vec3 specular;
@@ -29,7 +31,7 @@ namespace sukkryst {
 		 * @param name of material
 		 * @param shader used shader
 		 */
-		Material(const std::string& name, Shader* shader);
+		Material(const std::string &name, Shader *shader);
 
 		/**
 		 * @brief Destroy the Material object
@@ -38,4 +40,4 @@ namespace sukkryst {
 		~Material();
 	};
 
-}
+} // namespace sukkryst

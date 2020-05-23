@@ -5,9 +5,11 @@
 #include "Engine/Core/component.h"
 #include "Engine/Core/shader.h"
 
-namespace sukkryst {
+namespace sukkryst
+{
 
-	struct Light : public Component {
+	struct Light : public Component
+	{
 		unsigned type = 0;
 
 		bool on = true;
@@ -22,11 +24,11 @@ namespace sukkryst {
 		Light();
 		void OnClick();
 
-		virtual void ProcessLight(Shader* shader, const std::string& index = "") = 0;
+		virtual void ProcessLight(Shader *shader, const std::string &index = "") = 0;
 
 		virtual std::string Print() const;
-		friend std::ostream& operator<<(std::ostream& out, const Light& light);
+		friend std::ostream &operator<<(std::ostream &out, const Light &light);
 		virtual ~Light();
 	};
 
-}
+} // namespace sukkryst

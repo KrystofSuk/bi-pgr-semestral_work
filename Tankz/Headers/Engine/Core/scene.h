@@ -8,17 +8,19 @@
 #include <Engine/Components/light.h>
 #include <Engine\Core\light_data.h>
 
-namespace sukkryst {
+namespace sukkryst
+{
 
 	/**
 	 * @brief Scene representation class for rendering, gameobjects and lights
 	 * 
 	 */
-	class Scene {
-		std::unordered_map<std::string, GameObject*> _gameObjects;
-		std::vector<MeshRenderer*> _renderers;
-	public:
+	class Scene
+	{
+		std::unordered_map<std::string, GameObject *> _gameObjects;
+		std::vector<MeshRenderer *> _renderers;
 
+	public:
 		/**
 		 * @brief Lightning data for current scene so we can have per scene lightning
 		 * 
@@ -29,7 +31,7 @@ namespace sukkryst {
 		 * @brief Camera pointer for faster camera access
 		 * 
 		 */
-		GameObject* camera;
+		GameObject *camera;
 
 		/**
 		 * @brief Construct a new Scene object
@@ -42,28 +44,28 @@ namespace sukkryst {
 		 * 
 		 * @param gameObject to add
 		 */
-		void AddGameObject(GameObject* gameObject);
+		void AddGameObject(GameObject *gameObject);
 
 		/**
 		 * @brief Add specific meshrenderer to scene to render in Render method
 		 * 
 		 * @param renderer to add
 		 */
-		void AddRenderer(MeshRenderer* renderer);
+		void AddRenderer(MeshRenderer *renderer);
 
 		/**
 		 * @brief Add light to the scene
 		 * 
 		 * @param light to add
 		 */
-		void AddLight(Light* light);
+		void AddLight(Light *light);
 
 		/**
 		 * @brief Process click in gameobject with specific id
 		 * 
 		 * @param id of the gameobject
 		 */
-		void Click(const unsigned char& id);
+		void Click(const unsigned char &id);
 
 		/**
 		 * @brief Get specific gameobject by his name
@@ -71,7 +73,7 @@ namespace sukkryst {
 		 * @param name of desired gameobject
 		 * @return GameObject* pointer to the gameobject
 		 */
-		GameObject* GetGameObject(const std::string& name) const;
+		GameObject *GetGameObject(const std::string &name) const;
 
 		/**
 		 * @brief Clears the scene
@@ -92,7 +94,7 @@ namespace sukkryst {
 		 * @param v matrix
 		 * @param inMode if scene is inside or outside (terrain or indoor)
 		 */
-		void Render(const glm::mat4& p, const glm::mat4& v, bool inMode);
+		void Render(const glm::mat4 &p, const glm::mat4 &v, bool inMode);
 
 		/**
 		 * @brief Destroy the Scene object
@@ -101,4 +103,4 @@ namespace sukkryst {
 		~Scene();
 	};
 
-}
+} // namespace sukkryst

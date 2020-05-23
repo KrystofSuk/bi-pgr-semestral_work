@@ -1,18 +1,20 @@
 #pragma once
 #include "pgr.h"
 
-namespace sukkryst {
+namespace sukkryst
+{
 
 	/**
 	 * @brief Scene lightning representation, holds lights and fog information
 	 * 
 	 */
-	struct LightData {
-		std::vector<Light*> lights;
+	struct LightData
+	{
+		std::vector<Light *> lights;
 
 		glm::vec3 fogDefaultColor;
 		glm::vec3 fogColor;
-		
+
 		float fogIntensity;
 		float fogRamp;
 		float fogHeightIntensity;
@@ -21,4 +23,4 @@ namespace sukkryst {
 		float dirAmount = 1.0f;
 	};
 
-}
+} // namespace sukkryst

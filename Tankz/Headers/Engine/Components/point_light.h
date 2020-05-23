@@ -1,11 +1,13 @@
 #pragma once
 #include "Engine/Components/light.h"
 
-namespace sukkryst {
+namespace sukkryst
+{
 
-	struct PointLight : public Light {
+	struct PointLight : public Light
+	{
 		PointLight();
-		void ProcessLight(Shader* shader, const std::string& index = "");
+		void ProcessLight(Shader *shader, const std::string &index = "");
 	};
 
-}
+} // namespace sukkryst

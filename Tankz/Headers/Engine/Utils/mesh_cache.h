@@ -5,17 +5,19 @@
 
 #include "Engine/Components/mesh_renderer.h"
 
-namespace sukkryst {
+namespace sukkryst
+{
 
 	/**
 	 * @brief Cache of meshes and their names
 	 * 
 	 */
-	class MeshCache {
+	class MeshCache
+	{
 	private:
-		std::unordered_map<std::string, Mesh*> _meshCache;
-	public:
+		std::unordered_map<std::string, Mesh *> _meshCache;
 
+	public:
 		/**
 		 * @brief Construct a new Mesh Cache object
 		 * 
@@ -29,7 +31,7 @@ namespace sukkryst {
 		 * @param fileName file where is .obj located
 		 * @param shader shader to pair the mesh with
 		 */
-		void LoadMesh(const std::string& name, const std::string& fileName, Shader* shader);
+		void LoadMesh(const std::string &name, const std::string &fileName, Shader *shader);
 
 		/**
 		 * @brief Get the Mesh object
@@ -37,7 +39,7 @@ namespace sukkryst {
 		 * @param name saved name in cache
 		 * @return Mesh* pointer to saved mesh
 		 */
-		Mesh* GetMesh(const std::string& name) const;
+		Mesh *GetMesh(const std::string &name) const;
 
 		/**
 		 * @brief Destroy the Mesh Cache object
@@ -46,4 +48,4 @@ namespace sukkryst {
 		~MeshCache();
 	};
 
-}
+} // namespace sukkryst

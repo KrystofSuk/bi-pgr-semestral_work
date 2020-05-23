@@ -2,7 +2,8 @@
 
 #include <string>
 
-namespace sukkryst {
+namespace sukkryst
+{
 
 	/**
 	 * @brief Basic app data representation for window size...
@@ -18,4 +19,4 @@ namespace sukkryst {
 
 		bool freeCamera = true;
 	};
-}
+} // namespace sukkryst

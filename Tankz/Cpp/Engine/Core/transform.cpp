@@ -7,43 +7,42 @@ sukkryst::Transform::Transform()
 	size = glm::vec3(1.0f, 1.0f, 1.0f);
 }
 
-sukkryst::Transform::Transform(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& size)
+sukkryst::Transform::Transform(const glm::vec3 &position, const glm::vec3 &rotation, const glm::vec3 &size)
 {
 	this.position = position;
 	this.rotation = rotation;
 	this.size = size;
 }
 
-void sukkryst::Transform::Scale(const glm::vec3& vector)
+void sukkryst::Transform::Scale(const glm::vec3 &vector)
 {
 	size += vector;
 }
 
-void sukkryst::Transform::Move(const glm::vec3& vector)
+void sukkryst::Transform::Move(const glm::vec3 &vector)
 {
 	position += vector;
 }
 
-void sukkryst::Transform::Rotate(const glm::vec3& vector)
+void sukkryst::Transform::Rotate(const glm::vec3 &vector)
 {
 	rotation += vector;
 }
 
-void sukkryst::Transform::SetSize(const glm::vec3& vector)
+void sukkryst::Transform::SetSize(const glm::vec3 &vector)
 {
 	size = vector;
 }
 
-void sukkryst::Transform::SetPos(const glm::vec3& vector)
+void sukkryst::Transform::SetPos(const glm::vec3 &vector)
 {
 	position = vector;
 }
 
-void sukkryst::Transform::SetRot(const glm::vec3& vector)
+void sukkryst::Transform::SetRot(const glm::vec3 &vector)
 {
 	rotation = vector;
 }
-
 
 glm::vec3 sukkryst::Transform::Front() const
 {
@@ -54,12 +53,10 @@ glm::vec3 sukkryst::Transform::Front() const
 	return glm::normalize(front);
 }
 
-
 glm::vec3 sukkryst::Transform::Up() const
 {
 	return glm::cross(Front(), Right());
 }
-
 
 glm::vec3 sukkryst::Transform::Right() const
 {
@@ -70,4 +67,3 @@ glm::vec3 sukkryst::Transform::Right() const
 sukkryst::Transform::~Transform()
 {
 }
-

@@ -3,7 +3,8 @@
 #include <vector>
 #include <pgr.h>
 
-namespace sukkryst {
+namespace sukkryst
+{
 
 	/**
 	 * @brief Spline struct for catmull-rom 
@@ -24,7 +25,7 @@ namespace sukkryst {
 		 * 
 		 * @param points of the curve
 		 */
-		Spline(const std::vector<glm::vec3>& points);
+		Spline(const std::vector<glm::vec3> &points);
 
 		/**
 		 * @brief Evaluates the animation in desired time
@@ -32,7 +33,7 @@ namespace sukkryst {
 		 * @param t desired time of animation
 		 * @return glm::vec3 result of catmull-rom
 		 */
-		glm::vec3 Evaluate(const float& t);
+		glm::vec3 Evaluate(const float &t);
 	};
 
-}
+} // namespace sukkryst

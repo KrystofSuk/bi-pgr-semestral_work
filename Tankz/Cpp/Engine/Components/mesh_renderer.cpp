@@ -1,13 +1,13 @@
 ﻿#include "Engine/Components/mesh_renderer.h"
 #include "Engine/Core/app_data.h"
 
-sukkryst::MeshRenderer::MeshRenderer(Mesh* mesh, Material* material) : Component("MeshRenderer")
+sukkryst::MeshRenderer::MeshRenderer(Mesh *mesh, Material *material) : Component("MeshRenderer")
 {
 	_mesh = mesh;
 	_material = material;
 }
 
-void sukkryst::MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, const LightData & lightData)
+void sukkryst::MeshRenderer::Draw(const glm::mat4 &p, const glm::mat4 &v, const LightData &lightData)
 {
 	glm::mat4 m = glm::translate(glm::mat4(1.0f), transform->position);
 	m = glm::scale(m, transform->size);
@@ -21,13 +21,11 @@ void sukkryst::MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, const 
 		m[0],
 		m[1],
 		m[2],
-		glm::vec4(0.0f, 0.0f, 0.0f, 1.0f)
-	);
+		glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
 
 	glm::mat4 normalMatrix = glm::transpose(glm::inverse(modelRotationMatrix));
 
-
-	Shader* shader = _material->shader;
+	Shader *shader = _material->shader;
 
 	shader->Use();
 	//shader->SetFloat4f("input_color", glm::vec4(_material->diffuse, 1.0));
@@ -41,19 +39,22 @@ void sukkryst::MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, const 
 	int point = 0;
 	int spot = 0;
 
-	for (auto& l : lightData.lights) {
+	for (auto &l : lightData.lights)
+	{
 		if (l->type == 0)
 			l->ProcessLight(shader);
-		if (l->type == 1) {
+		if (l->type == 1)
+		{
 			l->ProcessLight(shader, std::to_string(point));
 			point++;
 		}
-		if (l->type == 2) {
+		if (l->type == 2)
+		{
 			l->ProcessLight(shader, std::to_string(spot));
 			spot++;
 		}
 	}
-	
+
 	shader->SetInt("point", point);
 	shader->SetInt("spot", spot);
 
@@ -66,7 +67,6 @@ void sukkryst::MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, const 
 	if (!_material->diffuseMap)
 		shader->SetInt("mat.diffTex", 0);
 
-
 	shader->SetFloat3f("fog.color", lightData.fogColor);
 	shader->SetFloat("fog.inte", lightData.fogIntensity);
 	shader->SetFloat("fog.ramp", lightData.fogRamp);
@@ -76,7 +76,8 @@ void sukkryst::MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, const 
 
 	shader->SetFloat("dir_amou", lightData.dirAmount);
 
-	if (_mesh->texture != 0) {
+	if (_mesh->texture != 0)
+	{
 		shader->SetInt("texSampler", 0);
 		glActiveTexture(GL_TEXTURE0 + 0);
 		glBindTexture(GL_TEXTURE_2D, _mesh->texture);
@@ -84,13 +85,12 @@ void sukkryst::MeshRenderer::Draw(const glm::mat4& p, const glm::mat4& v, const 
 
 	glBindVertexArray(_mesh->vao);
 
-	GameObject* go = (GameObject*)(gameObject);
+	GameObject *go = (GameObject *)(gameObject);
 	glStencilFunc(GL_ALWAYS, go->id, -1);
 
 	glDrawElements(GL_TRIANGLES, _mesh->faces * 3, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
-
 
 std::string sukkryst::MeshRenderer::Print() const
 {
@@ -101,12 +101,8 @@ sukkryst::MeshRenderer::~MeshRenderer()
 {
 }
 
-std::ostream& operator<<(std::ostream& out, const sukkryst::MeshRenderer& renderer)
+std::ostream &operator<<(std::ostream &out, const sukkryst::MeshRenderer &renderer)
 {
 	out << renderer.Print() << std::endl;
 	return out;
 }
-
-
-
-

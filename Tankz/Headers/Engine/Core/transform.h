@@ -4,13 +4,15 @@
 
 #include "pgr.h"
 
-namespace sukkryst {
+namespace sukkryst
+{
 
 	/**
 	 * @brief Transform information for gameobjects
 	 * 
 	 */
-	struct Transform {
+	struct Transform
+	{
 		glm::vec3 position;
 		glm::vec3 rotation;
 		glm::vec3 size;
@@ -20,7 +22,7 @@ namespace sukkryst {
 		 * 
 		 */
 		Transform();
-		
+
 		/**
 		 * @brief Construct a new Transform object
 		 * 
@@ -28,49 +30,49 @@ namespace sukkryst {
 		 * @param rotation new rotation
 		 * @param size new size
 		 */
-		Transform(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& size);
+		Transform(const glm::vec3 &position, const glm::vec3 &rotation, const glm::vec3 &size);
 
 		/**
 		 * @brief Adds vector to the size
 		 * 
 		 * @param vector to add
 		 */
-		void Scale(const glm::vec3& vector);
+		void Scale(const glm::vec3 &vector);
 
 		/**
 		 * @brief Moves the position by specific vector
 		 * 
 		 * @param vector to move
 		 */
-		void Move(const glm::vec3& vector);
+		void Move(const glm::vec3 &vector);
 
 		/**
 		 * @brief Rotate by specific vector
 		 * 
 		 * @param vector to rotate
 		 */
-		void Rotate(const glm::vec3& vector);
+		void Rotate(const glm::vec3 &vector);
 
 		/**
 		 * @brief Set the size to specific vector
 		 * 
 		 * @param vector new size
 		 */
-		void SetSize(const glm::vec3& vector);
+		void SetSize(const glm::vec3 &vector);
 
 		/**
 		 * @brief Set the position to specific vector
 		 * 
 		 * @param vector new position
 		 */
-		void SetPos(const glm::vec3& vector);
+		void SetPos(const glm::vec3 &vector);
 
 		/**
 		 * @brief Set the rotation to specific vector
 		 * 
 		 * @param vector new rotation
 		 */
-		void SetRot(const glm::vec3& vector);
+		void SetRot(const glm::vec3 &vector);
 
 		/**
 		 * @brief Calculates the front vector
@@ -100,4 +102,4 @@ namespace sukkryst {
 		~Transform();
 	};
 
-}
+} // namespace sukkryst

@@ -4,19 +4,21 @@
 #include "Engine/Utils/mesh_cache.h"
 #include "Engine/Utils/material_cache.h"
 
-namespace sukkryst {
+namespace sukkryst
+{
 
 	/**
 	 * @brief Resources representation including shader, mesh and material caches
 	 * 
 	 */
-	class Resources {
+	class Resources
+	{
 	private:
 		ShaderCache _shaders;
 		MeshCache _meshes;
 		MaterialCache _materials;
-	public:
 
+	public:
 		/**
 		 * @brief Construct a new Resources
 		 * 
@@ -30,7 +32,7 @@ namespace sukkryst {
 		 * @param vertPath path to vertex shader
 		 * @param fragPath path to fragment shader
 		 */
-		void AddShader(const std::string& name, const std::string& vertPath, const std::string& fragPath);
+		void AddShader(const std::string &name, const std::string &vertPath, const std::string &fragPath);
 
 		/**
 		 * @brief Adds new mesh to resources
@@ -39,7 +41,7 @@ namespace sukkryst {
 		 * @param fileName path to mesh
 		 * @param shaderName name of specific shader
 		 */
-		void AddMesh(const std::string& name, const std::string& fileName, const std::string& shaderName);
+		void AddMesh(const std::string &name, const std::string &fileName, const std::string &shaderName);
 
 		/**
 		 * @brief Adds new material to resources
@@ -47,7 +49,7 @@ namespace sukkryst {
 		 * @param name of material
 		 * @param shaderName name of used shader
 		 */
-		void AddMaterial(const std::string& name, const std::string& shaderName);
+		void AddMaterial(const std::string &name, const std::string &shaderName);
 
 		/**
 		 * @brief Get the specific material
@@ -55,7 +57,7 @@ namespace sukkryst {
 		 * @param name of material
 		 * @return Material* pointer to cached material
 		 */
-		Material* GetMaterial(const std::string& name) const;
+		Material *GetMaterial(const std::string &name) const;
 
 		/**
 		 * @brief Get the specific mesh
@@ -63,7 +65,7 @@ namespace sukkryst {
 		 * @param name of mesh
 		 * @return Mesh* pointer to cached mesh
 		 */
-		Mesh* GetMesh(const std::string& name) const;
+		Mesh *GetMesh(const std::string &name) const;
 
 		/**
 		 * @brief Get the specific shader
@@ -71,7 +73,7 @@ namespace sukkryst {
 		 * @param name of shader
 		 * @return Shader* pointer to cached shader
 		 */
-		Shader* GetShader(const std::string& name) const;
+		Shader *GetShader(const std::string &name) const;
 
 		/**
 		 * @brief Destroy the Resources
@@ -80,4 +82,4 @@ namespace sukkryst {
 		~Resources();
 	};
 
-}
+} // namespace sukkryst

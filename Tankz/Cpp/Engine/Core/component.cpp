@@ -1,6 +1,5 @@
 #include "Engine/Core/component.h"
 
-
 sukkryst::Component::Component() : name("Unnamed")
 {
 }
@@ -21,7 +20,7 @@ sukkryst::Component::~Component()
 {
 }
 
-std::ostream& operator<<(std::ostream& out, const sukkryst::Component& c)
+std::ostream &operator<<(std::ostream &out, const sukkryst::Component &c)
 {
 	return out << c.Print() << std::endl;
 }

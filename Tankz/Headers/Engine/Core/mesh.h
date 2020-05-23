@@ -5,13 +5,15 @@
 
 #include "Engine/Core/shader.h"
 
-namespace sukkryst {
+namespace sukkryst
+{
 
 	/**
 	 * @brief Mesh class representation with its contetns
 	 * 
 	 */
-	struct Mesh {
+	struct Mesh
+	{
 		GLuint vao, vbo, ebo;
 		GLuint texture;
 		unsigned int faces, vert;
@@ -22,7 +24,7 @@ namespace sukkryst {
 		 * @param fileName path to .obj
 		 * @param shader used shader to bind
 		 */
-		Mesh(const std::string& fileName, Shader* shader);
+		Mesh(const std::string &fileName, Shader *shader);
 	};
 
-}
+} // namespace sukkryst

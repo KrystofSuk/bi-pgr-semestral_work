@@ -1,6 +1,6 @@
 #include "Engine/Components/light.h"
 
-sukkryst::Light::Light() :Component("Light")
+sukkryst::Light::Light() : Component("Light")
 {
 	diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
 	specular = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -18,11 +18,12 @@ sukkryst::Light::~Light()
 {
 }
 
-void sukkryst::Light::OnClick() {
+void sukkryst::Light::OnClick()
+{
 	on = !on;
 }
 
-std::ostream& operator<<(std::ostream& out, const sukkryst::Light& light)
+std::ostream &operator<<(std::ostream &out, const sukkryst::Light &light)
 {
 	out << light.Print() << std::endl;
 	return out;
