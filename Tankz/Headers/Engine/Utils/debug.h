@@ -7,9 +7,25 @@
 
 namespace sukkryst {
 
+	/**
+	 * @brief Debugging struct for logging
+	 * 
+	 */
 	struct Debug {
-		static void Log(const std::string& s);
-		static void Log(const Printable& comp);
+
+		/**
+		 * @brief Logging the string
+		 * 
+		 * @param string to print
+		 */
+		static void Log(const std::string& string);
+
+		/**
+		 * @brief Logging the printable object
+		 * 
+		 * @param printable to print
+		 */
+		static void Log(const Printable& printable);
 	};
 
 }

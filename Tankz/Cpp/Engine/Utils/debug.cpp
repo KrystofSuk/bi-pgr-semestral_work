@@ -1,12 +1,12 @@
 #include "Engine/Utils/debug.h"
 
 
-void sukkryst::Debug::Log(const std::string& s)
+void sukkryst::Debug::Log(const std::string& string)
 {
-	std::cout << s << std::endl;
+	std::cout << string << std::endl;
 }
 
-void sukkryst::Debug::Log(const Printable& comp)
+void sukkryst::Debug::Log(const Printable& printable)
 {
-	std::cout << comp.Print() << std::endl;
+	std::cout << printable.Print() << std::endl;
 }
