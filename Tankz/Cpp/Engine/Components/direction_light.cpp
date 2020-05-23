@@ -1,6 +1,11 @@
 #include "Engine/Components/direction_light.h"
 #include "Engine/Core/game_object.h"
 
+sukkryst::DirectionLight::DirectionLight() : Component("DirectionLight")
+{
+	type = 0;
+}
+
 void sukkryst::DirectionLight::ProcessLight(Shader *shader, const std::string &index)
 {
 	glm::vec3 pos = transform->position;

@@ -1,7 +1,7 @@
 #include "Engine/Components/spot_light.h"
 #include "Engine/Core/game_object.h"
 
-sukkryst::SpotLight::SpotLight()
+sukkryst::SpotLight::SpotLight() : Component("Spotlight")
 {
 	type = 2;
 }
