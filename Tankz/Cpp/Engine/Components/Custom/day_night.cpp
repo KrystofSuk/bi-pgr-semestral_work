@@ -47,16 +47,6 @@ void sukkryst::DayNight::Update()
 	scene.lightData.fogColor = glm::mix(scene.lightData.fogDefaultColor, nightFogColor, blend);
 }
 
-std::string sukkryst::DayNight::Print() const
-{
-	return "";
-}
-
 sukkryst::DayNight::~DayNight()
 {
-}
-
-std::ostream &operator<<(std::ostream &out, const sukkryst::DayNight &component)
-{
-	return out;
 }

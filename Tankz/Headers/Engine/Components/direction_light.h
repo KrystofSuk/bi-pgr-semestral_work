@@ -3,6 +3,7 @@
 
 namespace sukkryst
 {
+	
 	/**
 	 * @brief Directon light component
 	 * 
