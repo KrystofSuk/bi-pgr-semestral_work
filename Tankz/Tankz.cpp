@@ -239,46 +239,46 @@ namespace sukkryst {
 	/**
 	 * @brief Processing of the GUI menu 
 	 * 
-	 * @param i pressed button index
+	 * @param id pressed button index
 	 */
-	void MenuProcess(int i) {
-		if (i == 1) {
+	void MenuProcess(int id) {
+		if (id == 1) {
 			scene.camera->GetComponent<Animator>()->animating = false;
 			glutWarpPointer(appData.width / 2, appData.height / 2);
 			appData.freeCamera = true;
 			fixedCam = false;
 		}
-		if (i == 2) {
+		if (id == 2) {
 			scene.camera->GetComponent<Animator>()->animating = false;
 			scene.camera->transform->SetPos(scene.GetGameObject("Static Pos 1")->transform->position);
 			scene.camera->transform->SetRot(scene.GetGameObject("Static Pos 1")->transform->rotation);
 			appData.freeCamera = false;
 			fixedCam = false;
 		}
-		if (i == 3) {
+		if (id == 3) {
 			scene.camera->GetComponent<Animator>()->animating = false;
 			scene.camera->transform->SetPos(scene.GetGameObject("Static Pos 2")->transform->position);
 			scene.camera->transform->SetRot(scene.GetGameObject("Static Pos 2")->transform->rotation);
 			appData.freeCamera = false;
 			fixedCam = false;
 		}
-		if (i == 5) {
+		if (id == 5) {
 			scene.camera->GetComponent<Animator>()->animating = false;
 			scene.camera->transform->SetPos(scene.GetGameObject("Ico Sphere")->transform->position + glm::vec3(0.0f, 2.5f, 0.0f));
 			fixedCam = true;
 		}
-		if (i == 6) {
+		if (id == 6) {
 			scene.camera->GetComponent<Animator>()->animating = true;
 			appData.freeCamera = true;
 			fixedCam = false;
 		}
-		if (i == 4) {
+		if (id == 4) {
 			scene.GetGameObject("Direction Light")->GetComponent<DayNight>()->use = !scene.GetGameObject("Direction Light")->GetComponent<DayNight>()->use;
 		}
-		if (i == 98) {
+		if (id == 98) {
 			inMode = !inMode;
 		}
-		if (i == 99) {
+		if (id == 99) {
 			glutLeaveMainLoop();
 		}
 	}
