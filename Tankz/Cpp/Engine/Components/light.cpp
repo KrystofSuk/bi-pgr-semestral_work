@@ -9,11 +9,6 @@ sukkryst::Light::Light() : Component("Light")
 	intensity = 1.0f;
 }
 
-std::string sukkryst::Light::Print() const
-{
-	return name;
-}
-
 sukkryst::Light::~Light()
 {
 }
@@ -21,10 +16,4 @@ sukkryst::Light::~Light()
 void sukkryst::Light::OnClick()
 {
 	on = !on;
-}
-
-std::ostream &operator<<(std::ostream &out, const sukkryst::Light &light)
-{
-	out << light.Print() << std::endl;
-	return out;
 }
