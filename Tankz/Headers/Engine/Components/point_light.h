@@ -4,9 +4,24 @@
 namespace sukkryst
 {
 
+	/**
+	 * @brief Point light component
+	 * 
+	 */
 	struct PointLight : public Light
 	{
+		/**
+		 * @brief Construct a new Point Light object
+		 * 
+		 */
 		PointLight();
+
+		/**
+		 * @brief Processes the light and adds specific shader the data at specific index
+		 * 
+		 * @param shader to add light data
+		 * @param index to light index in shader
+		 */
 		void ProcessLight(Shader *shader, const std::string &index = "");
 	};
 
