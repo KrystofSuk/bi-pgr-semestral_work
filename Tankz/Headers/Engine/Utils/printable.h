@@ -2,14 +2,16 @@
 
 #include <string>
 
-namespace sukkryst {
+namespace sukkryst
+{
 
 	/**
 	 * @brief Pritable object dependency
 	 * 
 	 */
-	struct Printable {
-		
+	struct Printable
+	{
+
 		/**
 		 * @brief Abstraction of print method for print required objects
 		 * 
@@ -18,4 +20,4 @@ namespace sukkryst {
 		virtual std::string Print() const { return ""; };
 	};
 
-}
+} // namespace sukkryst
