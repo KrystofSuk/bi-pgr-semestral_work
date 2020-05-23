@@ -33,16 +33,6 @@ void sukkryst::CollisionBox::Update()
 	}
 }
 
-std::string sukkryst::CollisionBox::Print() const
-{
-	return std::string();
-}
-
 sukkryst::CollisionBox::~CollisionBox()
 {
-}
-
-std::ostream &operator<<(std::ostream &out, const sukkryst::CollisionBox &component)
-{
-	return out << component.Print();
 }
