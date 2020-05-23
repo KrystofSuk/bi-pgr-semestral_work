@@ -106,16 +106,6 @@ void sukkryst::Skybox::Draw(const glm::mat4 &p, const glm::mat4 &v, Transform *c
 	glDepthMask(GL_TRUE);
 }
 
-std::string sukkryst::Skybox::Print() const
-{
-	return std::string();
-}
-
 sukkryst::Skybox::~Skybox()
 {
-}
-
-std::ostream &operator<<(std::ostream &out, const sukkryst::Skybox &skybox)
-{
-	return out;
 }

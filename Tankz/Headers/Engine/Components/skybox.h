@@ -10,6 +10,10 @@
 namespace sukkryst
 {
 
+	/**
+	 * @brief Skybox component 
+	 * 
+	 */
 	class Skybox : public Component
 	{
 	public:
@@ -18,14 +22,27 @@ namespace sukkryst
 		Shader *shader;
 		unsigned int faces, vert;
 
+		/**
+		 * @brief Construct a new Skybox
+		 * 
+		 * @param filePath to textures of the skybox
+		 * @param shader of skybox
+		 */
 		Skybox(const std::string filePath, Shader *shader);
 
+		/**
+		 * @brief Draws skybox cube with p,v and camera matricies without depth buffer and relative to camera
+		 * 
+		 * @param p matrix
+		 * @param v matrix
+		 * @param c matrix
+		 */
 		void Draw(const glm::mat4 &p, const glm::mat4 &v, Transform *c);
 
-		std::string Print() const;
-
-		friend std::ostream &operator<<(std::ostream &out, const Skybox &skybox);
-
+		/**
+		 * @brief Destroy the Skybox object
+		 * 
+		 */
 		~Skybox();
 	};
 
