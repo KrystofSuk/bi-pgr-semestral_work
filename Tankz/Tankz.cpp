@@ -19,29 +19,42 @@
 #include "Engine/Core/spline.h"
 
 
+/**
+ * @brief My namespace for BI-PGR semestral work 
+ * 
+ */
 namespace sukkryst {
-	const int WIN_WIDTH = 1600;
-	const int WIN_HEIGHT = 900;
-	const char* WIN_TITLE = "Hello World";
 
+	//Helper holders
 	Resources resources;
 	Scene scene;
 	AppData appData;
 
+	//Skybox
 	Skybox* s = nullptr;
 
+	//Animations
 	Spline* sp;
 	Spline* sp2;
 	Spline* cameraSp;
 
+	//Lights
 	std::vector<Light*> lights;
+
+	//Keymap
 	bool pressedKeys[255];
 
+	//Status booleans
 	bool inMode = true;
 	bool fixedCam = false;
 
+	/**
+	 * @brief Procedure for initializing scene, animation curve and calls loaders for configs
+	 * 
+	 */
 	void SceneInit() {
 
+		//Animation curves
 		std::vector<glm::vec3> v;
 		v.push_back(glm::vec3(0.0f, 0.0f, 0.0f));
 		v.push_back(glm::vec3(0.0f, 1.0f, 0.0f));
@@ -88,7 +101,7 @@ namespace sukkryst {
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
 
-		//Animations
+		//Animations appending
 		Animator* ico = new Animator(sp, "position");
 		Animator* cam = new Animator(cameraSp, "position");
 		Animator* tor = new Animator(sp2, "rotation");
@@ -100,7 +113,11 @@ namespace sukkryst {
 
 	}
 
-	void init() {
+	/**
+	 * @brief Init method called after GLUT setup, sets the basic gl properties and loads resources then calls SceneInit
+	 * 
+	 */
+	void Init() {
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 		std::cout << "---------INIT---------" << std::endl;
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 8);
@@ -115,16 +132,23 @@ namespace sukkryst {
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
 		std::cout << "---------INIT DONE---------" << std::endl;
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+
+
 		SceneInit();
 
 		appData.freeCamera = true;
 	}
 
-
-
-	void draw() {
+	/**
+	 * @brief Draw procedure for drawing all drawable elements
+	 * 
+	 */
+	void DrawCallback() {
 		glClearStencil(0);
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+		//Matricies
 		glm::mat4 viewMatrix;
 		glm::mat4 projectionMatrix;
 
@@ -140,14 +164,20 @@ namespace sukkryst {
 
 		glEnable(GL_STENCIL_TEST);
 		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
 		scene.Render(projectionMatrix, viewMatrix, inMode);
-		//std::cout << scene.camera->transform->position.x << " " << scene.camera->transform->position.y << " " << scene.camera->transform->position.z << std::endl;
-		//std::cout << scene.camera->transform->rotation.x << " " << scene.camera->transform->rotation.y << " " << scene.camera->transform->rotation.z << std::endl << std::endl;
+
 		glutSwapBuffers();
 	}
 
-	void keyboardCallback(unsigned char keyPressed, int mouseX, int mouseY) {
-		//std::cout << tolower(keyPressed) << std::endl;
+	/**
+	 * @brief On key reaction for movement and exitin app
+	 * 
+	 * @param keyPressed which key was pressed
+	 * @param mouseX x position of mouse
+	 * @param mouseY y position of mouse
+	 */
+	void KeyboardCallback(unsigned char keyPressed, int mouseX, int mouseY) {
 		pressedKeys[tolower(keyPressed)] = true;
 
 		switch (keyPressed) {
@@ -157,41 +187,30 @@ namespace sukkryst {
 		}
 	}
 
-	void keyboardSpecialCallback(int keyPressed, int mouseX, int mouseY) {
-
-	}
-
-	void keyboardSpecialUpCallback(int keyReleased, int mouseX, int mouseY) {
-		pressedKeys[keyReleased] = false;
-
-		if (keyReleased == 1) {
-			glutWarpPointer(appData.width / 2, appData.height / 2);
-			appData.freeCamera = true;
-		}
-		if (keyReleased == 2) {
-			scene.camera->transform->SetPos(scene.GetGameObject("Static Pos 1")->transform->position);
-			scene.camera->transform->SetRot(scene.GetGameObject("Static Pos 1")->transform->rotation);
-			appData.freeCamera = false;
-		}
-		if (keyReleased == 3) {
-			scene.camera->transform->SetPos(scene.GetGameObject("Static Pos 2")->transform->position);
-			scene.camera->transform->SetRot(scene.GetGameObject("Static Pos 2")->transform->rotation);
-			appData.freeCamera = false;
-		}
-	}
-
-	void keyboardUpCallback(unsigned char keyReleased, int mouseX, int mouseY) {
+	/**
+	 * @brief On key up reaction for removing key from keymap
+	 * 
+	 * @param keyPressed which key was pressed
+	 * @param mouseX x position of mouse
+	 * @param mouseY y position of mouse
+	 */
+	void KeyboardUpCallback(unsigned char keyReleased, int mouseX, int mouseY) {
 
 		pressedKeys[tolower(keyReleased)] = false;
 	}
 
-
-	void timerCallback(int) {
+	/**
+	 * @brief Basic update callback, which updates the scene, movement and animations and calls redisplay
+	 * 
+	 */
+	void TimerCallback(int) {
 
 		if (pressedKeys['r'] == true) {
+			//Scene reload
 			SceneInit();
 		}
 
+		//Movement
 		if (appData.freeCamera) {
 			if (pressedKeys['a'] == true)
 				scene.camera->transform->Move(scene.camera->transform->Right() * 0.1f);
@@ -209,16 +228,19 @@ namespace sukkryst {
 
 		scene.Update();
 
-		//scene.GetGameObject("Ico Sphere")->transform->position = sp->Evaluate(0.001f * (float)glutGet(GLUT_ELAPSED_TIME));
 		if (fixedCam)
 			scene.camera->transform->position = scene.GetGameObject("Ico Sphere")->transform->position + glm::vec3(0.0f, 2.5f, 0.0f);
-		glutTimerFunc(8, timerCallback, 0);
+
+		glutTimerFunc(8, TimerCallback, 0);
+
 		glutPostRedisplay();
 	}
 
-	void glutMotionCallback(int x, int y) {
-	}
-
+	/**
+	 * @brief Processing of the GUI menu 
+	 * 
+	 * @param i pressed button index
+	 */
 	void MenuProcess(int i) {
 		if (i == 1) {
 			scene.camera->GetComponent<Animator>()->animating = false;
@@ -261,7 +283,11 @@ namespace sukkryst {
 		}
 	}
 
-	void createMenu() {
+	/**
+	 * @brief Create a GUI menu
+	 * 
+	 */
+	void CreateMenu() {
 		int cameraSub = glutCreateMenu(MenuProcess);
 		glutAddMenuEntry("Free", 1);
 		glutAddMenuEntry("Static 1.", 2);
@@ -280,8 +306,13 @@ namespace sukkryst {
 		glutAttachMenu(GLUT_RIGHT_BUTTON);
 	}
 
-
-	void glutPassiveMotionCallback(int x, int y) {
+	/**
+	 * @brief Movement of mouse processing
+	 * 
+	 * @param x position of mouse
+	 * @param y position of mouse
+	 */
+	void PassiveMotionCallback(int x, int y) {
 
 		float deltaX = 0.1f * (x - appData.width / 2);
 		float deltaY = 0.1f * (y - appData.height / 2);
@@ -305,7 +336,15 @@ namespace sukkryst {
 		glutPostRedisplay();
 	}
 
-	void mouseCallback(int button, int state, int x, int y) {
+	/**
+	 * @brief Mouse click reaction 
+	 * 
+	 * @param button id of mouse button
+	 * @param state state of click
+	 * @param x position
+	 * @param y position
+	 */
+	void MouseCallback(int button, int state, int x, int y) {
 
 		if (state != GLUT_DOWN)
 			return;
@@ -324,14 +363,27 @@ namespace sukkryst {
 		scene.Click(index);
 	}
 
-	void OnReshape(GLint newWidth, GLint newHeight) {
+	/**
+	 * @brief Reshape reaction on window reshape
+	 * 
+	 * @param newWidth new x in pixels 
+	 * @param newHeight new y in pixels
+	 */
+	void ReshapeCallback(GLint newWidth, GLint newHeight) {
 		appData.width = newWidth;
 		appData.height = newHeight;
 		glViewport(0, 0, (GLsizei)appData.width, (GLsizei)appData.height);
 		glutPostRedisplay();
 	}
-
-	int main(int argc, char** argv) {
+	
+	/**
+	 * @brief Pseudo main for initialization of glut callbacks and initializations
+	 * 
+	 * @param argc argument count
+	 * @param argv arguments
+	 * @return int status
+	 */
+	int Main(int argc, char** argv) {
 		Loader::LoadApp("./Data/app_config.json", appData);
 
 		glutInit(&argc, argv);
@@ -341,22 +393,19 @@ namespace sukkryst {
 		glutInitWindowSize(appData.width, appData.height);
 		glutCreateWindow(appData.name.c_str());
 
-		glutReshapeFunc(OnReshape);
-		glutKeyboardFunc(keyboardCallback);
-		glutMouseFunc(mouseCallback);
-		glutKeyboardUpFunc(keyboardUpCallback);
-		glutSpecialFunc(keyboardSpecialCallback);
-		glutSpecialFunc(keyboardSpecialUpCallback);
-		glutDisplayFunc(draw);
-		glutMotionFunc(glutMotionCallback);
-		glutPassiveMotionFunc(glutPassiveMotionCallback);
-		glutTimerFunc(8, timerCallback, 0);
+		glutReshapeFunc(ReshapeCallback);
+		glutKeyboardFunc(KeyboardCallback);
+		glutMouseFunc(MouseCallback);
+		glutKeyboardUpFunc(KeyboardUpCallback);
+		glutDisplayFunc(DrawCallback);
+		glutPassiveMotionFunc(PassiveMotionCallback);
+		glutTimerFunc(8, TimerCallback, 0);
 
 		if (!pgr::initialize(pgr::OGL_VER_MAJOR, pgr::OGL_VER_MINOR))
 			pgr::dieWithError("pgr init failed, required OpenGL not supported?");
 
-		init();
-		createMenu();
+		Init();
+		CreateMenu();
 
 
 		glutMainLoop();
@@ -365,7 +414,6 @@ namespace sukkryst {
 }
 
 int main(int argc, char** argv) {
-
-	return sukkryst::main(argc, argv);
+	return sukkryst::Main(argc, argv);
 }
 
