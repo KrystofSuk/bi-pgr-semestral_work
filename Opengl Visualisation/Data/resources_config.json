@@ -1,0 +1,192 @@
+{
+	"Shaders": {
+		"debug": {
+			"name": "debug",
+			"vert": "./Data/Shaders/default.vert",
+			"frag": "./Data/Shaders/default.frag"
+		},
+		"per_fragment": {
+			"name": "per_fragment",
+			"vert": "./Data/Shaders/per_fragment.vert",
+			"frag": "./Data/Shaders/per_fragment.frag"
+		},
+		"per_fragment_nofog": {
+			"name": "per_fragment_nofog",
+			"vert": "./Data/Shaders/per_fragment_nofog.vert",
+			"frag": "./Data/Shaders/per_fragment_nofog.frag"
+		},
+		"per_fragment_nofog_film": {
+			"name": "per_fragment_nofog_film",
+			"vert": "./Data/Shaders/per_fragment_nofog_film.vert",
+			"frag": "./Data/Shaders/per_fragment_nofog_film.frag"
+		},
+		"per_fragment_nofog_move": {
+			"name": "per_fragment_nofog_move",
+			"vert": "./Data/Shaders/per_fragment_nofog_move.vert",
+			"frag": "./Data/Shaders/per_fragment_nofog_move.frag"
+		},
+		"per_fragment_noise_pos": {
+			"name": "per_fragment_noise_pos",
+			"vert": "./Data/Shaders/per_fragment_noise_pos.vert",
+			"frag": "./Data/Shaders/per_fragment_noise_pos.frag"
+		},
+		"skybox": {
+			"name": "skybox",
+			"vert": "./Data/Shaders/skybox.vert",
+			"frag": "./Data/Shaders/skybox.frag"
+		}
+	},
+	"Materials": {
+		"test_material": {
+			"name": "test_material",
+			"shader": "per_fragment",
+			"diffuse": "0.07, 0.47, 0.08",
+			"specular": "0.07, 0.47, 0.08",
+			"emission": "0.0, 0.0, 0.0",
+			"shininess": "1.0",
+			"diffuseMap": "false"
+		},
+		"tank_material": {
+			"name": "tank_material",
+			"shader": "per_fragment",
+			"diffuse": "1.0, 1.0, 1.0",
+			"specular": "1.0, 1.0, 1.0",
+			"emission": "0.0, 0.0, 0.0",
+			"shininess": "100.0",
+			"diffuseMap": "true"
+		},
+		"room_material": {
+			"name": "room_material",
+			"shader": "per_fragment_nofog",
+			"diffuse": "1.0, 1.0, 1.0",
+			"specular": "1.0, 1.0, 1.0",
+			"emission": "0.0, 0.0, 0.0",
+			"shininess": "100.0",
+			"diffuseMap": "true"
+		},
+		"car1": {
+			"name": "car1",
+			"shader": "per_fragment_nofog",
+			"diffuse": "1.0, 0.0, 1.0",
+			"specular": "1.0, 0.0, 1.0",
+			"emission": "0.0, 0.0, 0.0",
+			"shininess": "1.0",
+			"diffuseMap": "true"
+		},
+		"car2": {
+			"name": "car2",
+			"shader": "per_fragment_nofog",
+			"diffuse": "0.0, 0.0, 1.0",
+			"specular": "0.0, 0.0, 1.0",
+			"emission": "0.1, 0.3, 0.5",
+			"shininess": "180.0",
+			"diffuseMap": "true"
+		},
+		"car3": {
+			"name": "car3",
+			"shader": "per_fragment_nofog",
+			"diffuse": "1.0, 0.0, 1.0",
+			"specular": "0.0, 0.0, 1.0",
+			"emission": "0.0, 0.0, 0.0",
+			"shininess": "50.0",
+			"diffuseMap": "true"
+		},
+		"car4": {
+			"name": "car4",
+			"shader": "per_fragment_nofog",
+			"diffuse": "0.0, 1.0, 1.0",
+			"specular": "0.0, 1.0, 1.0",
+			"emission": "0.0, 0.0, 0.0",
+			"shininess": "2.0",
+			"diffuseMap": "true"
+		},
+		"plane": {
+			"name": "plane",
+			"shader": "per_fragment_nofog_film",
+			"diffuse": "1.0, 1.0, 1.0",
+			"specular": "0.0, 1.0, 1.0",
+			"emission": "0.7, 0.7, 0.7",
+			"shininess": "2.0",
+			"diffuseMap": "true"
+		},
+		"torus": {
+			"name": "torus",
+			"shader": "per_fragment_nofog_move",
+			"diffuse": "1.0, 1.0, 1.0",
+			"specular": "0.0, 1.0, 1.0",
+			"emission": "0.2, 0.2, 0.2",
+			"shininess": "2.0",
+			"diffuseMap": "true"
+		},
+		"ico_material": {
+			"name": "ico_material",
+			"shader": "per_fragment_noise_pos",
+			"diffuse": "0.5, 0.5, 0.8",
+			"specular": "1.0, 1.0, 1.0",
+			"emission": "0.05, 0.05, 0.1",
+			"shininess": "100.0",
+			"diffuseMap": "false"
+		},
+		"light_material": {
+			"name": "light_material",
+			"shader": "per_fragment_nofog",
+			"diffuse": "1.0, 1.0, 1.0",
+			"specular": "1.0, 1.0, 1.0",
+			"emission": "1.0, 1.0, 1.0",
+			"shininess": "0.0",
+			"diffuseMap": "false"
+		}
+	},
+	"Meshes": {
+		"light_sphere": {
+			"name": "light_sphere",
+			"path": "./Data/Models/sphere.obj",
+			"shader": "debug"
+		},
+		"room": {
+			"name": "room",
+			"path": "./Data/Models/room.obj",
+			"shader": "per_fragment_nofog"
+		},
+		"terrain": {
+			"name": "terrain",
+			"path": "./Data/Models/Terrain_Grass.obj",
+			"shader": "per_fragment"
+		},
+		"ico": {
+			"name": "ico",
+			"path": "./Data/Models/icosphere.obj",
+			"shader": "per_fragment_noise_pos"
+		},
+		"car1": {
+			"name": "car1",
+			"path": "./Data/Models/car1.obj",
+			"shader": "per_fragment_nofog"
+		},
+		"car2": {
+			"name": "car2",
+			"path": "./Data/Models/car2.obj",
+			"shader": "per_fragment_nofog"
+		},
+		"car3": {
+			"name": "car3",
+			"path": "./Data/Models/car3.obj",
+			"shader": "per_fragment_nofog"
+		},
+		"car4": {
+			"name": "car4",
+			"path": "./Data/Models/car4.obj",
+			"shader": "per_fragment_nofog"
+		},
+		"torus": {
+			"name": "torus",
+			"path": "./Data/Models/torus.obj",
+			"shader": "per_fragment"
+		},
+		"plane": {
+			"name": "plane",
+			"path": "./Data/Models/pseudo_plane.obj",
+			"shader": "per_fragment"
+		}
+	}
+}
