@@ -1,9 +1,9 @@
 #include "..\..\..\..\Headers\Engine\Components\Custom\animator.h"
 
-sukkryst::Animator::Animator(Spline *newTrack, const std::string &name) : Component("Animator")
+sukkryst::Animator::Animator(Spline *newTrack, const std::string & param) : Component("Animator")
 {
 	track = newTrack;
-	this.param = param;
+	this->param = param;
 }
 
 void sukkryst::Animator::Update()

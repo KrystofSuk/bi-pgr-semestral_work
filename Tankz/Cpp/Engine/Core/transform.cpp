@@ -9,9 +9,9 @@ sukkryst::Transform::Transform()
 
 sukkryst::Transform::Transform(const glm::vec3 &position, const glm::vec3 &rotation, const glm::vec3 &size)
 {
-	this.position = position;
-	this.rotation = rotation;
-	this.size = size;
+	this->position = position;
+	this->rotation = rotation;
+	this->size = size;
 }
 
 void sukkryst::Transform::Scale(const glm::vec3 &vector)

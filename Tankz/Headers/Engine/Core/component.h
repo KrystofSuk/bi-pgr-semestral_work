@@ -2,7 +2,6 @@
 #include <string>
 #include <iostream>
 
-#include "Engine/Utils/printable.h"
 #include "Engine/Core/transform.h"
 
 namespace sukkryst
@@ -12,7 +11,7 @@ namespace sukkryst
 	 * @brief Basic component with update and click methods
 	 * 
 	 */
-	class Component : public Printable
+	class Component
 	{
 	public:
 		//Pointer to parent gameobject but need to be casted to GameObject
@@ -44,22 +43,6 @@ namespace sukkryst
 		 * 
 		 */
 		virtual void Update();
-
-		/**
-		 * @brief Abstract method for printing the component
-		 * 
-		 * @return std::string representation of component
-		 */
-		virtual std::string Print() const = 0;
-
-		/**
-		 * @brief Method to call print when component is used in << stream
-		 * 
-		 * @param out output stream
-		 * @param c specific component
-		 * @return std::ostream& output stream
-		 */
-		friend std::ostream &operator<<(std::ostream &out, const Component &c);
 
 		/**
 		 * @brief Destroy the Component object

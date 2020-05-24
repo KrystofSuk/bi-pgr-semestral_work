@@ -19,8 +19,3 @@ void sukkryst::Component::Update()
 sukkryst::Component::~Component()
 {
 }
-
-std::ostream &operator<<(std::ostream &out, const sukkryst::Component &c)
-{
-	return out << c.Print() << std::endl;
-}

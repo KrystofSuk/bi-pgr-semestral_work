@@ -128,9 +128,6 @@
     <ClInclude Include="Headers\Engine\Utils\mesh_cache.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\Engine\Utils\printable.h">
-      <Filter>Hlavičkové soubory</Filter>
-    </ClInclude>
     <ClInclude Include="Headers\Engine\Core\resources.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>

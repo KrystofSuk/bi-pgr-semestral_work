@@ -1,8 +1,9 @@
 #include "Engine/Components/point_light.h"
 #include "Engine/Core/game_object.h"
 
-sukkryst::PointLight::PointLight() : Component("PointLight")
+sukkryst::PointLight::PointLight()
 {
+	name = "PointLight";
 	type = 1;
 }
 

@@ -1,8 +1,9 @@
 #include "Engine/Components/direction_light.h"
 #include "Engine/Core/game_object.h"
 
-sukkryst::DirectionLight::DirectionLight() : Component("DirectionLight")
+sukkryst::DirectionLight::DirectionLight()
 {
+	name = "DirectionLight";
 	type = 0;
 }
 

@@ -207,7 +207,6 @@
     <ClInclude Include="Headers\Engine\Utils\material_cache.h" />
     <ClInclude Include="Headers\Engine\Core\mesh.h" />
     <ClInclude Include="Headers\Engine\Utils\mesh_cache.h" />
-    <ClInclude Include="Headers\Engine\Utils\printable.h" />
     <ClInclude Include="Headers\Engine\Core\resources.h" />
     <ClInclude Include="Headers\Engine\Core\shader.h" />
     <ClInclude Include="Headers\Engine\Utils\shader_cache.h" />
