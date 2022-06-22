@@ -1,4 +1,6 @@
-# CVUT-PGR
+# BI-PGR
+
+Semestral work for university opengl course. Sadly it has dependencies on the pgr framework which you'll need to install and link. You can find it here: https://cent.felk.cvut.cz/courses/PGR/framework.html.
 
 ## Task List
 
